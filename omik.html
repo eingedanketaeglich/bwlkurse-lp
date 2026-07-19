@@ -1383,5 +1383,53 @@ h1,h2{letter-spacing:-.015em}
   ['klausurcheck','gratis','weiter','sofunktionierts','stimmen','autor','preise','faq','app-holen'].forEach(function(id){var s=document.getElementById(id);if(!s)return;apply(s.querySelector(':scope > .wrap')||s);});
 })();
 </script>
+<style id="v43-burger-css">
+.v43-burger{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:var(--text-2);cursor:pointer;border-radius:12px;flex:0 0 auto}
+.v43-burger:hover{background:var(--bg-2)}
+.v43-navwrap{position:fixed;inset:0;z-index:300;display:none}
+.v43-navwrap.open{display:block}
+.v43-navback{position:absolute;inset:0;background:rgba(15,17,20,.46)}
+.v43-nav{position:absolute;top:0;right:0;height:100%;width:min(87vw,344px);background:var(--surface);box-shadow:-10px 0 34px rgba(0,0,0,.24);padding:20px;overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+.v43-navwrap.open .v43-nav{transform:none}
+.v43-navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.v43-navhead strong{font-family:var(--serif);font-size:18px;color:var(--text)}
+.v43-navclose{width:40px;height:40px;border:0;background:transparent;cursor:pointer;border-radius:10px;color:var(--text-2)}
+.v43-navclose:hover{background:var(--bg-2)}
+.v43-nav h3{font-size:11.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--text-3);margin:20px 0 6px}
+.v43-nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--text);font-weight:500;font-size:15.5px}
+.v43-nav a:hover{background:var(--bg-2)}
+.v43-nav a .nk{font-family:var(--serif);font-weight:600;color:var(--accent);min-width:52px}
+.v43-navcta{margin-top:22px !important;justify-content:center !important;background:var(--accent);color:#fff !important;font-weight:600;border-radius:999px !important}
+.v43-navcta:hover{background:var(--accent-deep) !important;color:#fff !important}
+</style>
+<script id="v43-burger-js">
+(function(){
+  var wrap=document.querySelector('.appbar .wrap'); if(!wrap||document.getElementById('v43NavWrap'))return;
+  var SEC=[['klausurcheck','Klausur-Check'],['gratis','Gratis-Lektion'],['sofunktionierts',"So funktioniert’s"],['stimmen','Stimmen'],['preise','Preise'],['faq','Fragen & Antworten'],['app-holen','App holen']];
+  var sl='';SEC.forEach(function(x){if(document.getElementById(x[0]))sl+='<a href="#'+x[0]+'" data-close>'+x[1]+'</a>';});
+  var nav=document.createElement('div');nav.className='v43-navwrap';nav.id='v43NavWrap';nav.setAttribute('aria-hidden','true');
+  nav.innerHTML='<div class="v43-navback" data-close></div><nav class="v43-nav" aria-label="Menü">'
+   +'<div class="v43-navhead"><strong>Menü</strong><button type="button" class="v43-navclose" data-close aria-label="Menü schließen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'
+   +'<h3>Auf dieser Seite</h3>'+sl
+   +'<h3>Kurse</h3>'
+   +'<a href="index.html"><span class="nk">⌂</span> Alle Kurse</a>'
+   +'<a href="osta.html"><span class="nk">OSTA</span> Statistik&nbsp;1</a>'
+   +'<a href="omik.html"><span class="nk">OMIK</span> Mikroökonomik&nbsp;1</a>'
+   +'<a href="ofin.html"><span class="nk">OFIN</span> Finanzen&nbsp;1</a>'
+   +'<h3>Rechtliches</h3><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>'
+   +(document.getElementById('preise')?'<a class="v43-navcta" href="#preise" data-close>Zu den Preisen</a>':'')
+   +'</nav>';
+  document.body.appendChild(nav);
+  var b=document.createElement('button');b.type='button';b.className='v43-burger';
+  b.setAttribute('aria-label','Menü öffnen');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','v43NavWrap');
+  b.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  wrap.appendChild(b);
+  function op(){nav.classList.add('open');nav.setAttribute('aria-hidden','false');b.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function cl(){nav.classList.remove('open');nav.setAttribute('aria-hidden','true');b.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  b.addEventListener('click',op);
+  nav.addEventListener('click',function(e){var t=e.target;if(t.hasAttribute('data-close')||(t.closest&&t.closest('[data-close]')))cl();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open'))cl();});
+})();
+</script>
 </body>
 </html>

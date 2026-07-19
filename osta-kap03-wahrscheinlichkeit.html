@@ -23,6 +23,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" type="image/png" href="bwlkurse-mark.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
 <title>BWL Kurse · Statistik · Kapitel 3: Wahrscheinlichkeitsrechnung</title>
 <style>
 :root{
@@ -404,6 +405,69 @@ ul.check li.off:before{content:"\2013";color:var(--grey, #586a80)}
 </head>
 <body data-fach="OSTA" data-kapitel-slug="osta-kap03-wahrscheinlichkeit">
 
+<style id="redesign-override">
+:root{--navy:#20232A;--navy2:#2A2E36;--blue:#E8760A;--blue-d:#B85E00;--grey:#5F6169;--line:#DEDCD4;--bg:#EAE9E5;--card:#F8F7F4;--ink:#1B1D21;--gold:#E8760A;--gold-bg:#FBEAD4;--accent:#E8760A;--se:"Fraunces",Georgia,serif;--sa:"Inter",system-ui,-apple-system,sans-serif}
+body{font-family:var(--sa)}
+h1,h2,h3,h4{font-family:var(--se);color:var(--ink);letter-spacing:-.01em}
+h2{border-bottom:0;padding-bottom:0;margin:2.1rem 0 .7rem;font-size:1.5rem;font-weight:600}
+h3{font-weight:600}
+a{color:var(--blue-d)}
+.btn{background:linear-gradient(180deg,#F59440,#E8760A);color:#2A1500;border-radius:11px;font-weight:600}
+.btn:hover{filter:brightness(1.05);background:linear-gradient(180deg,#F59440,#E8760A)}
+.btn.alt{background:linear-gradient(180deg,#F59440,#E8760A);color:#2A1500}
+.btn.alt:hover{filter:brightness(1.05)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{background:#EFECE4;color:var(--ink)}
+.topbar{background:var(--card);color:var(--ink);border-bottom:1px solid var(--line)}
+.topbar .wrap{height:auto;min-height:62px;padding:10px 0;gap:12px}
+.topbar img{height:40px;width:40px;border-radius:9px;background:transparent}
+.topbar .brand{font-weight:600;color:var(--ink)}
+.topbar .brand small{color:var(--grey)}
+.pill{background:linear-gradient(180deg,#F59440,#E8760A);color:#2A1500;font-weight:600;font-size:1rem;padding:.5rem 1rem;border-radius:10px}
+.hero{background:var(--bg);color:var(--ink);border-bottom:1px solid var(--line);padding:2.2rem 0 2rem}
+.hero h1{color:var(--ink);font-size:2rem;font-weight:600}
+.hero p.lead{color:var(--grey)}
+.hero .badge,.hero .profbadge{background:var(--card);border:1px solid var(--line);color:var(--grey)}
+.hero .tagline{color:var(--ink);border-left:4px solid var(--accent)}
+.freebar{background:var(--gold-bg);border-top:1px solid #F0D6AE;border-bottom:1px solid #F0D6AE;color:#8A4A06}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:none}
+.callout{background:var(--card);border-left:4px solid var(--accent);border-radius:0 12px 12px 0}
+.callout.birken{border-left-color:#7B5CC2}
+.formula{background:var(--bg);border:1px solid var(--line);border-radius:10px;font-family:"Fraunces",Georgia,serif;color:var(--ink)}
+.tw{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table.mx{margin:0;border:0}
+table.mx th,table.mx td{border-color:var(--line)}
+table.mx th{background:var(--navy);color:#ECEBE7}
+table.mx td.rowlab,table.mx th.rowlab{background:var(--bg);color:var(--ink)}
+table.mx td.hi{background:#FBE1C4;color:#8A4A06}
+table.mx td.himax{background:var(--navy);color:#fff}
+#quiz{background:var(--card);border:1px solid var(--line);border-radius:14px}
+.qhead .score{background:var(--bg);color:var(--ink)}
+.progress{background:#DEDCD4}.progress>i{background:var(--accent)}
+.q{background:var(--bg);border:1px solid var(--line);border-radius:12px}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:10px}
+.opt:hover{background:#EFECE4}
+.modebtn{background:var(--card);color:var(--grey);border:1px solid var(--line)}
+.modebtn.active{border-color:var(--accent);background:var(--bg);color:var(--ink)}
+input.num,textarea.live{border:1px solid var(--line);background:var(--card);border-radius:10px}
+.stat{background:var(--bg);border:1px solid var(--line)}
+.stat b{color:var(--accent)}
+.offer{background:var(--card);border:1px solid var(--line);border-radius:16px}
+.price .now{color:var(--ink)}
+.price .save{background:var(--gold-bg);color:#8A4A06}
+footer{background:var(--navy);color:#B9BDC4}
+footer a{color:#E9E7E1}
+#lernpfad{margin-top:1.3rem}
+.baustein{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden}
+.baustein .bh{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:16px;cursor:pointer;font-family:inherit}
+.baustein .bnum{width:27px;height:27px;flex:none;border-radius:8px;background:var(--bg);color:var(--accent);font-weight:600;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:var(--sa)}
+.baustein .bt{flex:1;font-family:var(--se);font-weight:600;font-size:1.12rem;color:var(--ink);line-height:1.25}
+.baustein .bchev{color:var(--grey);transition:transform .2s;flex:none;font-size:.9rem}
+.baustein.op .bchev{transform:rotate(180deg)}
+.baustein .bb{display:none;padding:2px 16px 16px;border-top:1px solid var(--line)}
+.baustein.op .bb{display:block}
+.baustein .bb>*:first-child{margin-top:.9rem}
+</style>
 <div class="topbar"><div class="wrap">
   <img src="bwlkurse-mark.png" alt="BWL Kurse">
   <div class="brand">BWL Kurse<small>Statistik (OSTA) · Goethe-Uni Frankfurt · Kapitel 3</small></div>
@@ -419,7 +483,7 @@ ul.check li.off:before{content:"\2013";color:var(--grey, #586a80)}
   <p class="tagline">Deine Klausurvorbereitung an der Goethe-Uni – seit 1999, passgenau zu deiner Vorlesung.</p>
   <div class="cta">
     <a class="btn alt" href="#angebot">Jetzt vormerken</a>
-    <a class="btn ghost" style="color:#fff;border-color:#fff" href="#einstieg">Jetzt Lektion starten</a>
+    <a class="btn ghost" href="#einstieg">Jetzt Lektion starten</a>
   </div>
 </div></section>
 <!-- PREISMODUL · BLOCK C (Freebar, optional): schmaler Hinweisstreifen direkt unter dem Hero.
@@ -431,6 +495,7 @@ ul.check li.off:before{content:"\2013";color:var(--grey, #586a80)}
 <div class="wrap">
 
   <!-- EINSTIEG -->
+  <div id="lernpfad">
   <h2 id="einstieg">Einstieg</h2>
   <div class="callout birken">
     <p>Ein Arzt sagt dir: Du hast einen Test auf eine <b>seltene</b> Krankheit gemacht – und er ist <b>positiv</b>. Der Test gilt als &bdquo;sehr zuverlässig&ldquo;. Wie sicher bist du jetzt wirklich krank? Die meisten schätzen &bdquo;fast sicher&ldquo;. Die überraschende Antwort: oft nur rund <b>ein Viertel</b>. Der Grund steckt nicht im Test, sondern darin, wie <i>selten</i> die Krankheit von vornherein ist.</p>
@@ -490,6 +555,8 @@ ul.check li.off:before{content:"\2013";color:var(--grey, #586a80)}
   </div>
 
   <!-- FAQ -->
+  </div>
+
   <h2>Häufige Fragen (kurz &amp; klar)</h2>
   <details class="faq"><summary>Wann darf ich einfach multiplizieren – P(A&cap;B) = P(A)·P(B)?</summary><p>Nur wenn A und B <b>stochastisch unabhängig</b> sind. Im Allgemeinen gilt stattdessen der Multiplikationssatz P(A&cap;B) = P(A|B)·P(B). Die kurze Produktform ist also ein Sonderfall – prüfe in der Klausur meist zuerst, ob Unabhängigkeit wirklich gegeben ist.</p></details>
   <details class="faq"><summary>Ist der Unterschied zwischen P(A|B) und P(B|A) wirklich so wichtig?</summary><p>Ja, sehr. Beide haben denselben Zähler P(A&cap;B), aber verschiedene Nenner (P(B) bzw. P(A)) und sind daher in der Regel verschieden. Das Vertauschen dieser beiden ist einer der häufigsten Klausurfehler – der Satz von Bayes ist genau das Werkzeug, um sauber von der einen auf die andere Richtung umzurechnen.</p></details>
@@ -605,7 +672,7 @@ document.getElementById('liveQbtn').addEventListener('click', function(){
   /* GRAFIK_JS: Baumdiagramm Krankheitstest (Pfadwahrscheinlichkeiten + Bayes) */
   (function buildChart(){
     var svg=document.getElementById('chart'); if(!svg) return;
-    var GREEN='#1c8c5a', NAVY='#3a4a5e', BLUE='#2f6db5', GREY='#8a95a3', INK='#1b2733';
+    var GREEN='#1c8c5a', NAVY='#20232A', BLUE='#E8760A', GREY='#8a95a3', INK='#1B1D21';
     var s="";
     /* Legende OBERHALB der Zeichnung (keine Ueberlappung mit dem Baum) */
     s+='<rect x="70" y="12" width="18" height="10" rx="2" fill="'+GREEN+'"/>';
@@ -1156,6 +1223,32 @@ function vmClose(){var o=document.getElementById('vmOv');if(o){o.classList.remov
         ok.style.display='block';
       })
       .catch(function(){ document.getElementById('vmErr').style.display='block'; });
+  });
+})();
+</script>
+<script>
+(function(){
+  var lp=document.getElementById("lernpfad"); if(!lp) return;
+  var nodes=[].slice.call(lp.childNodes), groups=[], cur=null;
+  nodes.forEach(function(n){
+    if(n.nodeType===1 && n.tagName==="H2"){ cur={h:n,body:[]}; groups.push(cur); }
+    else if(cur){ cur.body.push(n); }
+  });
+  if(!groups.length) return;
+  lp.innerHTML="";
+  groups.forEach(function(g,i){
+    var title=(g.h.textContent||"").replace(/^[\s①②③④⑤⑥]+/,"").trim();
+    var sec=document.createElement("div"); sec.className="baustein"+(i===0?" op":"");
+    var bh=document.createElement("button"); bh.type="button"; bh.className="bh";
+    bh.setAttribute("aria-expanded", i===0?"true":"false");
+    var num=document.createElement("span"); num.className="bnum"; num.textContent=(i+1);
+    var t=document.createElement("span"); t.className="bt"; t.textContent=title;
+    var ch=document.createElement("span"); ch.className="bchev"; ch.innerHTML="&#9662;";
+    bh.appendChild(num); bh.appendChild(t); bh.appendChild(ch);
+    var bb=document.createElement("div"); bb.className="bb";
+    g.body.forEach(function(x){ bb.appendChild(x); });
+    bh.addEventListener("click",function(){ var o=sec.classList.toggle("op"); bh.setAttribute("aria-expanded", o?"true":"false"); });
+    sec.appendChild(bh); sec.appendChild(bb); lp.appendChild(sec);
   });
 })();
 </script>

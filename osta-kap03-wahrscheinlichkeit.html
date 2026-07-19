@@ -683,7 +683,7 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
     <div class="pgroup">Pakete &middot; das Rundum-Sorglos</div>
     <div class="pk"><h4>OSTA Klausur-Check</h4><small>Alle 10 Kapitel + 1&times; Live-Q&amp;A</small><div class="pkpr">39,90 €<s>statt 69,00 €</s></div></div>
     <div class="pk feat"><span class="pkrb">Beliebteste Wahl</span><h4>Klausur-Check + alle Handouts</h4><small>Alles oben + Handout-PDFs mit Aufgaben &amp; Musterlösungen</small><div class="pkpr">69,90 €</div></div>
-    <div class="pk"><h4>Mehrere Kurse parallel</h4><small>OMIK &middot; OSTA &middot; OFIN &middot; BFIN</small><div class="pkpr">ab 69,90 €</div><div class="pksub">Klausur-Check: 2 Kurse <b>69,90 €</b> &middot; 3 Kurse <b>89,90 €</b><br>+ Handouts: 2 Kurse <b>99,80 €</b> &middot; 3 Kurse <b>129,70 €</b></div><button type="button" class="bk-btn pkbtn" onclick="openBk('faecher')">Fächer wählen</button></div>
+    <div class="pk"><h4>Mehrere Kurse parallel</h4><small>OMIK &middot; OSTA &middot; OFIN</small><div class="pkpr">ab 69,90 €</div><div class="pksub">Klausur-Check: 2 Kurse <b>69,90 €</b> &middot; 3 Kurse <b>89,90 €</b><br>+ Handouts: 2 Kurse <b>99,80 €</b> &middot; 3 Kurse <b>129,70 €</b></div><button type="button" class="bk-btn pkbtn" onclick="openBk('faecher')">Fächer wählen</button></div>
     <div class="pgroup k2">Einzeln buchbar</div>
     <div class="ez"><span class="ezn">Einzelne Lektion<small>wird voll auf den Klausur-Check angerechnet</small></span><span class="ezr"><span class="ezp">6,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('lektionen')">wählen</button></span></div>
     <div class="ez"><span class="ezn">Live-Online-Q&amp;A<small>1× gratis im Klausur-Check &middot; 3er-Ticket 24,90 €</small></span><span class="ezr"><span class="ezp">9,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('termine')">wählen</button></span></div>
@@ -952,7 +952,7 @@ window.BK_DATA = {
     { nr:9, thema:'Testen I: Testprinzip & Gauß-Test', slug:'osta-kap09-testen1', gratis:false, keywords:['Hypothesenpaar','Fehler 1. & 2. Art','Gauß-Test','p-Wert','Signifikanzniveau'] },
     { nr:10, thema:'Testen II: t-Test & Chi-Quadrat', slug:'osta-kap10-testen2', gratis:false, keywords:['t-Test','Chi-Quadrat-Anpassungstest','Unabhängigkeitstest','Testauswahl'] }
   ],
-  faecher: [ {k:'OMIK',n:'Mikroökonomik 1'}, {k:'OSTA',n:'Statistik'}, {k:'OFIN',n:'Finanzen 1'}, {k:'BFIN',n:'Finanzen 2'} ],
+  faecher: [ {k:'OMIK',n:'Mikroökonomik 1'}, {k:'OSTA',n:'Statistik'}, {k:'OFIN',n:'Finanzen 1'} ],
   termine: [
     {tag:'Fr 24.07.2026', zeit:'10:00', block:'Vormittag'}, {tag:'Sa 25.07.2026', zeit:'10:00', block:'Vormittag'}, {tag:'So 26.07.2026', zeit:'10:00', block:'Vormittag'},
     {tag:'Fr 24.07.2026', zeit:'19:00', block:'Abend'}, {tag:'Sa 25.07.2026', zeit:'19:00', block:'Abend'}, {tag:'So 26.07.2026', zeit:'19:00', block:'Abend'}
@@ -1023,7 +1023,7 @@ window.BK_DATA = {
   function renderFaecher(d){
     var pr = prices(d);
     var rows = (d.faecher || []).map(function(f){
-      var merk = esc("Fach-Bundle: " + f.k + " – " + f.n);
+      var merk = esc("Klausur-Check: " + f.k + " – " + f.n);
       return '<li class="bk-fach">' +
                '<span class="bk-fach-t">' +
                  '<span class="bk-fach-k">' + esc(f.k) + '</span>' +
@@ -1032,9 +1032,7 @@ window.BK_DATA = {
                '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">einzeln buchen</button>' +
              '</li>';
     }).join("");
-    var hinweis = '<p class="bk-hint">Das Paket „2–3 Kurse parallel“ (' +
-                  esc(pr.multi || "") + ') kombiniert 2–3 dieser Fächer – jedes ist ' +
-                  'auch einzeln als Fach-Bundle (' + esc(pr.bundle || "") + ') buchbar.</p>';
+    var hinweis = '<p class="bk-hint">Mehrere Kurse parallel (Klausur-Check): 2 Kurse 69,90 € · 3 Kurse 89,90 €. Mit allen Handouts: 2 Kurse 99,80 € · 3 Kurse 129,70 €. Jedes Fach auch einzeln als Klausur-Check (39,90 €) buchbar.</p>';
     return '<h2 id="bkTitle" class="bk-h">Diese Fächer bieten wir dieses Semester an</h2>' +
            '<ul class="bk-list">' + rows + '</ul>' + hinweis;
   }

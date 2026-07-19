@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OSTA · Landing-Politur (V43-Mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#EAE9E5;--paper:#F5F4F1;--ink:#20232A;--ink2:#3b414d;--muted:#71767f;--orange:#E8760A;--orange-d:#c96406;--line:rgba(32,35,42,.12);--line2:rgba(32,35,42,.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.12;letter-spacing:-.01em}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+section{padding:60px 0}
+.band-dark{background:var(--ink);color:#fff}.band-dark h2,.band-dark h3{color:#fff}
+.band-paper{background:var(--paper)}
+.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--orange)}
+.appbar{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line)}
+.appbar .r{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:40px;height:40px;border-radius:9px;object-fit:cover;display:block}
+.brand b{font-family:'Fraunces',serif;font-size:18px;font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:600;font-size:16px;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;will-change:transform}
+.btn:hover{transform:translateY(-2px);background:var(--orange-d);box-shadow:0 10px 24px rgba(232,118,10,.28)}
+.btn:active{transform:translateY(0)}
+.btn-sm{padding:9px 17px;font-size:14px}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line2)}
+.btn-ghost:hover{background:rgba(32,35,42,.05);box-shadow:none;transform:translateY(-1px)}
+.hero{padding:52px 0 40px}
+.hero h1{font-size:clamp(30px,7.2vw,46px);margin:14px 0 16px}
+.uln{box-shadow:inset 0 -.32em 0 rgba(232,118,10,.26)}
+.hero .sub{font-size:18px;color:var(--ink2);max-width:36ch}
+.hero .ctr{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.hero .trust{margin-top:16px;font-size:14px;color:var(--muted);display:flex;gap:8px 18px;flex-wrap:wrap}
+.hero .trust b{color:var(--ink);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:center}
+.stat .num{font-family:'Fraunces',serif;font-size:clamp(26px,6.4vw,40px);font-weight:600;color:var(--ink)}
+.stat .lab{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+.lead{font-size:19px;color:var(--ink2);max-width:40ch;margin-top:12px}
+.band-dark .lead{color:rgba(255,255,255,.74)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:30px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+.card .k{width:38px;height:38px;border-radius:10px;background:rgba(232,118,10,.12);color:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;margin-bottom:14px}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{font-size:15px;color:var(--ink2)}
+.tblock{max-width:620px}
+.tstars{color:var(--orange);letter-spacing:4px;font-size:15px}
+.tquote{font-family:'Fraunces',serif;font-size:clamp(21px,4.6vw,30px);font-weight:500;line-height:1.36;margin:16px 0 22px;color:#fff}
+.tby{display:flex;align-items:center;gap:14px}
+.tav{width:46px;height:46px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+.tby b{display:block}.tby span{color:rgba(255,255,255,.6);font-size:14px}
+.plist{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:30px}
+.pk{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px;position:relative}
+.pk.feat{border:2px solid var(--orange)}
+.pk .pname{font-weight:600;font-size:16px}
+.pk .pprice{font-family:'Fraunces',serif;font-size:34px;font-weight:600;margin:8px 0 4px}
+.pk .pdesc{font-size:14px;color:var(--ink2)}
+.pk .ptag{position:absolute;top:-11px;left:22px;background:var(--orange);color:#fff;font-size:12px;font-weight:600;padding:3px 12px;border-radius:999px}
+.pnote{margin-top:18px;font-size:14.5px;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 17px;line-height:1.6}
+.pnote b{color:var(--ink)}
+.pill-live{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:rgba(232,118,10,.1);color:var(--orange-d);font-weight:600;font-size:14px;padding:8px 15px;border-radius:999px}
+.final{text-align:center}
+.final h2{font-size:clamp(26px,5.4vw,38px)}
+.final p{color:rgba(255,255,255,.74);margin:12px auto 26px;max-width:42ch}
+.foot{padding:28px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.foot a{color:var(--muted);text-decoration:none}
+.note{background:#fff;border:1px dashed var(--line2);border-radius:12px;padding:12px 15px;font-size:12.5px;color:var(--muted);margin:0 0 4px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="wrap r">
+    <div class="brand"><img src="data:image/png;base64,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" alt="BWL Kurse"><b>BWL&nbsp;Kurse</b></div>
+    <a href="#start" class="btn btn-sm">Wer besteht?</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-d="0">Statistik · OSTA</div>
+    <h1 class="reveal" data-d="100">Bereit für die <span class="uln">Statistik-Klausur</span>?</h1>
+    <p class="sub reveal" data-d="240">Steig kostenlos mit einer Gratis-Lektion ein. Alles Weitere wartet in der BWL-Kurse-App.</p>
+    <div class="ctr reveal" data-d="380">
+      <a href="#start" class="btn">Kostenlos starten</a>
+      <a href="#preise" class="btn btn-ghost">Preise ansehen</a>
+    </div>
+    <div class="trust reveal" data-d="520"><span><b>0&nbsp;€</b> Einstieg</span><span>Keine Kreditkarte</span><span>Jederzeit kündbar</span></div>
+  </div>
+</section>
+
+<section class="band-paper" style="padding:34px 0">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><div class="num">0&nbsp;€</div><div class="lab">Kostenlos einsteigen</div></div>
+      <div class="stat"><div class="num"><span data-to="3">0</span></div><div class="lab">Fächer · OMIK · OSTA · OFIN</div></div>
+      <div class="stat"><div class="num">ab <span data-to="39.9" data-dec="2" data-suf="&nbsp;€">0</span></div><div class="lab">Klausur-Check je Fach</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-d="0">So läuft&rsquo;s</div>
+    <h2 class="reveal" data-d="90" style="font-size:clamp(24px,5.2vw,34px);margin-top:8px">In drei Schritten in die Vorbereitung</h2>
+    <div class="cards">
+      <div class="card reveal" data-d="120"><div class="k">1</div><h3>Kostenlos einsteigen</h3><p>Starte hier mit einer Gratis-Lektion &ndash; ganz ohne Kosten.</p></div>
+      <div class="card reveal" data-d="380"><div class="k">2</div><h3>In der App weiterlernen</h3><p>Alles Weitere und eine zweite Gratis-Lektion deiner Wahl erwartet dich in der BWL-Kurse-App.</p></div>
+      <div class="card reveal" data-d="640"><div class="k">3</div><h3>Klausur-Check holen</h3><p>Wenn du so weit bist: Klausur-Check und Handouts zur gezielten Vorbereitung.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-dark">
+  <div class="wrap tblock">
+    <div class="tstars reveal" data-d="0">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <p class="tquote reveal" data-d="120">&bdquo;Ren&eacute; geht weit &uuml;ber den Lehrplan hinaus. Er hat mir nicht nur Fachwissen vermittelt, sondern beigebracht, Zusammenh&auml;nge zu erkennen.&ldquo;</p>
+    <div class="tby reveal" data-d="300"><span class="tav">MS</span><div><b>Matteo Seth</b><span>Wirtschaftsstudent</span></div></div>
+  </div>
+</section>
+
+<section id="preise">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-d="0">Preise</div>
+    <h2 class="reveal" data-d="90" style="font-size:clamp(24px,5.2vw,34px);margin-top:8px">Klar und ohne Abo</h2>
+    <p class="lead reveal" data-d="180">Freigeschaltet wird in der BWL-Kurse-App &ndash; du zahlst nur, was du wirklich brauchst.</p>
+    <div class="plist">
+      <div class="pk reveal" data-d="140"><div class="pname">Klausur-Check</div><div class="pprice">39,90&nbsp;&euro;</div><div class="pdesc">Der ganze Kurs eines Fachs &ndash; Lektionen und Klausur-Check.</div></div>
+      <div class="pk feat reveal" data-d="380"><div class="ptag">Beliebt</div><div class="pname">Klausur-Check + alle Handouts</div><div class="pprice">69,90&nbsp;&euro;</div><div class="pdesc">Alles aus dem Klausur-Check plus s&auml;mtliche Handout-PDFs je Kapitel.</div></div>
+    </div>
+    <div class="pnote reveal" data-d="200"><b>Mehrere Kurse parallel</b> (Klausur-Check): 2 Kurse 69,90&nbsp;&euro; &middot; 3 Kurse 89,90&nbsp;&euro;. Mit allen Handouts: 2 Kurse 99,80&nbsp;&euro; &middot; 3 Kurse 129,70&nbsp;&euro;.</div>
+    <span class="pill-live reveal" data-d="260">Live-Klausurtraining &middot; 19&nbsp;&euro;</span>
+  </div>
+</section>
+
+<section class="band-dark final">
+  <div class="wrap">
+    <h2 class="reveal" data-d="0">Wer besteht?</h2>
+    <p class="reveal" data-d="120">Fang kostenlos an. Den Rest entscheidest du in der App.</p>
+    <div class="reveal" data-d="240"><a href="#start" class="btn">Kostenlos starten</a></div>
+  </div>
+</section>
+
+<div class="wrap foot">
+  <span>&copy; 2026 BWL Kurse</span>
+  <span><a href="#">Impressum</a> &nbsp;&middot;&nbsp; <a href="#">Datenschutz</a></span>
+</div>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if(e.isIntersecting){var el=e.target;el.style.transitionDelay=(el.getAttribute('data-d')||0)+'ms';el.classList.add('in');io.unobserve(el);}
+    });
+  },{threshold:.14,rootMargin:'0px 0px -7% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  function countUp(el){
+    var to=parseFloat(el.getAttribute('data-to')),dec=parseInt(el.getAttribute('data-dec')||0,10),suf=el.getAttribute('data-suf')||'',t0=null,dur=1100;
+    function fmt(v){return dec?v.toFixed(dec).replace('.',','):String(Math.round(v));}
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);el.innerHTML=fmt(to*e)+suf;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+  var sO=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.querySelectorAll('[data-to]').forEach(countUp);sO.unobserve(e.target);}});
+  },{threshold:.45});
+  var sr=document.querySelector('.stats');if(sr)sO.observe(sr);
+})();
+</script>
+</body>
+</html>

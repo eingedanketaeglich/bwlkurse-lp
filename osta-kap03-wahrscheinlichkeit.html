@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+  OSTA · Kapitel 3 – Wahrscheinlichkeitsrechnung (GRATIS-Probe-Lektion) · Struktur v2 (10 Kapitel)
+  Gebaut aus _KURSSYSTEM/vorlagen/Lektion_VORLAGE.html (CSS/Quiz-Engine/Tooltip-JS
+  und Preismodul BLOCK A–E wörtlich übernommen).
+--------------------------------------------------------------------------------
+  Eingesetzte Platzhalter:
+    MARKE=BWL Kurse · FARBE_NAVY=#3a4a5e · FARBE_AKZENT=#4e769c · FARBE_GOLD=#ffc041 ·
+    LOGO_PFAD=bwlkurse-mark.png · LOGO_ALT=BWL Kurse · FACH_NAME=Statistik ·
+    FACH_KUERZEL=OSTA · VORLESUNGSTEIL=Statistik (OSTA) Goethe-Uni Frankfurt ·
+    KAPITEL_NR=3 · KAPITEL_THEMA=Wahrscheinlichkeitsrechnung ·
+    KAPITEL_SLUG=osta-kap03-wahrscheinlichkeit · LIVEQ_KEY=liveQ_osta-kap03-wahrscheinlichkeit ·
+    PREIS_KOMPLETT=39,90 € · PREIS_STREICH=69,00 € (Einzelkauf 10 × 6,90 €) · PREIS_FRUEHBUCHER=39,90 € ·
+    FRUEHBUCHER_FRIST=2026-07-27 · FRUEHBUCHER_FRIST_TEXT=27. Juli 2026 ·
+    CTA_TEXT=Jetzt vormerken · PERSON_NAME=René Flé · PERSON_FOTO=rene-2026.jpg.
+  Prof-USP (Verkaufsargument, faktisch belegt): "Passgenau zur Vorlesung von Prof. Hassler · SoSe 2026".
+================================================================================
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="bwlkurse-mark.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BWL Kurse · Statistik · Kapitel 3: Wahrscheinlichkeitsrechnung</title>
+<style>
+:root{
+  --navy:#3a4a5e; --navy2:#4e769c; --blue:#4e769c; --blue-d:#3d5d7d;
+  --grey:#586a80; --line:#d9e1ec; --bg:#eef2f7; --card:#fff; --ink:#1b2733;
+  --ok:#1c8c5a; --ok-bg:#e7f6ef; --bad:#cf4b34; --bad-bg:#fceae6; --gold:#ffc041; --gold-bg:#fff6e0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:0 18px}
+h1,h2,h3,h4{line-height:1.25;color:var(--navy)}
+h2{font-size:1.5rem;margin:2.4rem 0 .8rem;padding-bottom:.4rem;border-bottom:2px solid var(--line)}
+h3{font-size:1.15rem;margin:1.4rem 0 .5rem}
+a{color:var(--blue-d)}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;padding:.8rem 1.4rem;border-radius:8px;font-weight:700;border:0;cursor:pointer;font-size:1rem;transition:.15s}
+.btn:hover{background:var(--blue-d)}
+.btn.alt{background:var(--gold)} .btn.alt:hover{background:#b8740f}
+.btn.ghost{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+.topbar{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20}
+.topbar .wrap{display:flex;align-items:center;gap:14px;height:100px}
+.topbar img{height:84px;width:84px;border-radius:50%;background:#fff;object-fit:contain}
+.topbar .brand{font-weight:800;letter-spacing:.3px}
+.topbar .brand small{display:block;font-weight:500;color:#9fc0e6;font-size:.7rem;letter-spacing:.6px}
+.topbar .spacer{flex:1}
+.pill{background:var(--gold);color:#3a2700;font-weight:800;font-size:1.55rem;padding:.75rem 1.5rem;border-radius:999px;text-decoration:none}
+.hero{background:linear-gradient(160deg,var(--navy),var(--navy2));color:#eaf1fb;padding:2.6rem 0 2.2rem}
+.badge{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#cfe0f5;padding:.25rem .7rem;border-radius:999px;font-size:.8rem;font-weight:600;margin-bottom:.8rem}
+.hero h1{color:#fff;font-size:2.1rem;margin:.2rem 0 .6rem}
+.hero p.lead{font-size:1.12rem;color:#d6e3f4;max-width:42rem}
+.hero .tagline{margin-top:.8rem;font-weight:700;color:#fff;border-left:4px solid var(--gold);padding-left:.8rem}
+.hero .cta{margin-top:1.4rem;display:flex;gap:.7rem;flex-wrap:wrap}
+.freebar{background:var(--gold-bg);border-top:1px solid #f0dcb6;border-bottom:1px solid #f0dcb6;color:#6b4708;text-align:center;padding:.6rem;font-weight:600;font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem;margin:1rem 0;box-shadow:0 1px 3px rgba(20,40,70,.05)}
+.callout{background:#eef5fc;border-left:5px solid var(--blue);border-radius:8px;padding:1rem 1.2rem;margin:1rem 0}
+.callout.birken{background:#f4f0fb;border-left-color:#7b5cc2}
+.muted{color:var(--grey);font-size:.92rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--blue-d);background:#e7f0fa;padding:.15rem .5rem;border-radius:5px}
+table.mx{border-collapse:collapse;margin:.6rem 0;font-variant-numeric:tabular-nums}
+table.mx th,table.mx td{border:1px solid var(--line);padding:.45rem .75rem;text-align:center;min-width:48px}
+table.mx th{background:#f3f6fb;color:var(--navy)}
+table.mx td.rowlab,table.mx th.rowlab{background:#eef2f7;font-weight:700}
+table.mx td.hi{background:var(--ok);color:#fff;font-weight:800}
+table.mx td.himax{background:var(--blue);color:#fff;font-weight:800}
+table.mx td.txt{text-align:left}
+.win{color:var(--ok);font-weight:800}
+.formula{background:#f6f8fb;border:1px solid var(--line);border-radius:8px;padding:.5rem .8rem;display:inline-block;font-family:"Cambria Math",Georgia,serif;font-size:1.05rem;margin:.3rem 0}
+.fblock{display:block;text-align:center;margin:.6rem auto}
+.rulegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.rulecard{background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:10px;padding:.9rem 1rem}
+.rulecard h4{margin:.1rem 0 .4rem} .rulecard .res{margin-top:.5rem;font-weight:700}
+#quiz{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.2rem;margin:1rem 0}
+.qhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.qhead .score{background:#eaf1fb;color:var(--navy);font-weight:700;padding:.2rem .6rem;border-radius:6px;font-size:.9rem}
+.progress{height:8px;background:#e6ecf4;border-radius:99px;overflow:hidden;margin:.7rem 0 1.1rem}
+.progress>i{display:block;height:100%;background:var(--blue);width:0;transition:width .4s}
+.q{border:1px solid var(--line);border-radius:10px;padding:1rem;margin:.8rem 0;background:#fff}
+.q .stem{font-weight:600;margin-bottom:.6rem}
+.opt{display:block;border:1px solid var(--line);border-radius:8px;padding:.55rem .8rem;margin:.35rem 0;cursor:pointer}
+.opt:hover{background:#f4f8fd} .opt input{margin-right:.5rem}
+input.num{font-size:1rem;padding:.5rem;border:1px solid #b9c6d8;border-radius:8px;width:150px}
+.fb{margin-top:.7rem;padding:.6rem .8rem;border-radius:8px;font-size:.95rem;display:none}
+.fb.ok{background:var(--ok-bg);border:1px solid #b8e3cd;color:#13633f}
+.fb.bad{background:var(--bad-bg);border:1px solid #f0c4ba;color:#8c2c19}
+.q.locked .opt{cursor:default;opacity:.92}
+textarea.live{width:100%;border:1px solid #b9c6d8;border-radius:8px;padding:.6rem;font-family:inherit;font-size:.95rem;resize:vertical}
+details.faq{background:#fff;border:1px solid var(--line);border-radius:8px;margin:.5rem 0;padding:.2rem .9rem}
+details.faq summary{cursor:pointer;font-weight:600;color:var(--navy);padding:.6rem 0}
+details.faq p{margin:.2rem 0 .8rem}
+#angebot{scroll-margin-top:110px} #einstieg{scroll-margin-top:110px}
+.offer{background:linear-gradient(160deg,#fff,#eef4fb);border:1px solid var(--line);border-radius:14px;padding:1.4rem;margin:1.4rem 0}
+.modebtns{display:flex;gap:.5rem;flex-wrap:wrap;margin:.2rem 0 1rem}
+.modebtn{border:2px solid var(--line);background:#fff;border-radius:8px;padding:.5rem .9rem;cursor:pointer;font-weight:700;color:var(--grey)}
+.modebtn.active{border-color:var(--blue);background:#eaf1fb;color:var(--navy)}
+.price{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:.6rem 0}
+.price .now{font-size:2rem;font-weight:800;color:var(--navy)}
+.price .old{text-decoration:line-through;color:var(--grey)}
+.price .save{background:var(--gold-bg);color:#6b4708;font-weight:700;padding:.25rem .6rem;border-radius:6px}
+ul.check{list-style:none;padding:0}
+ul.check li{padding:.25rem 0 .25rem 1.7rem;position:relative}
+ul.check li:before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+ul.check li.off{color:var(--grey)} ul.check li.off:before{content:"–";color:var(--grey)}
+.person{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.mono{width:92px;height:92px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 32% 28%,#4e769c,#3a4a5e 70%);border:2px solid #ffc041;
+  font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:700;font-size:2.1rem;color:#f0d9a3;
+  letter-spacing:1px;box-shadow:0 2px 8px rgba(20,40,70,.25);object-fit:cover}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin:.6rem 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.6rem .9rem;text-align:center;min-width:120px}
+.stat b{display:block;font-size:1.4rem;color:var(--blue-d)}
+footer{background:var(--navy);color:#b9cbe2;font-size:.85rem;padding:1.4rem 0;margin-top:2rem}
+footer a{color:#cfe0f5}
+.note{font-size:.8rem;color:var(--grey)}
+@media(max-width:560px){.hero h1{font-size:1.7rem}.topbar .brand{font-size:.92rem}}
+
+/* ===== Responsive / Mobile (verbindlich fuer alle Lektionen) ===== */
+html{overflow-x:hidden}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin:.6rem 0}
+.tw table.mx{margin:0}
+.formula{max-width:100%;overflow-x:auto}
+img,svg{max-width:100%}
+.btn,.modebtn{max-width:100%;white-space:normal}
+input.num{max-width:100%}
+@media(max-width:600px){
+  body{overflow-x:hidden}
+  .wrap{padding:0 14px}
+  .topbar .wrap{height:auto;min-height:60px;gap:10px;padding:7px 0}
+  .topbar img{height:50px;width:50px}
+  .topbar .brand{font-size:.88rem;min-width:0;line-height:1.15}
+  .topbar .brand small{font-size:.58rem;letter-spacing:.2px}
+  .pill{font-size:.9rem;padding:.45rem .85rem}
+  .hero{padding:1.8rem 0 1.6rem}
+  .hero h1{font-size:1.6rem}
+  .hero p.lead{font-size:1rem}
+  .hero .cta{flex-direction:column;align-items:stretch}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  .modebtns{flex-direction:column}
+  .modebtn{width:100%;text-align:center}
+  .price .now{font-size:1.6rem}
+  .rulegrid{grid-template-columns:1fr}
+  .stat{min-width:0;flex:1 1 40%}
+}
+/* ===== Fachbegriff-Tooltips (v2) ===== */
+.term{color:var(--blue-d);font-weight:600;border-bottom:1px dotted var(--blue-d);cursor:help}
+.term:focus{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
+.term>.tip{display:none;position:fixed;z-index:60;max-width:280px;background:var(--navy);color:#fff;
+  font-weight:400;font-size:.82rem;line-height:1.45;padding:.55rem .75rem;border-radius:8px;
+  box-shadow:0 8px 20px rgba(20,40,70,.32);white-space:normal;text-align:left;pointer-events:none}
+/* Roter Faden (Fahrplan) + Neugier-Fragen: Unterpunkte/Fragen IMMER linksbuendig in eigener Zeile (alle Endgeraete) */
+.fahrplan>b{display:block;margin-bottom:.2rem}
+.fahrplan .fp-step{display:block;text-align:left;margin:.3rem 0 0;padding-left:1.5rem;text-indent:-1.5rem}
+.neugier-list{list-style:none;margin:.5rem 0 0;padding:0}
+.neugier-list li{display:block;text-align:left;margin:.34rem 0 0;padding-left:1.15rem;position:relative}
+.neugier-list li::before{content:"•";position:absolute;left:.1rem;color:var(--blue);font-weight:700}
+
+/* ===== PREISMODUL · BLOCK E (nur preisspezifische Regeln) =====
+   Host-Design gewinnt: var(--x, <fallback>). Fallback = FARBE_*-Markenwerte.
+   Reaktiviert Modus-Umschalter + Frühbucher-/Streichpreis-Mechanik. */
+/* --- Header-Preis-Pill (Block A) --- */
+.pill{
+  background:var(--gold, #ffc041);
+  color:#3a2700;
+  font-weight:800;
+  font-size:1.05rem;
+  padding:.6rem 1.1rem;
+  border-radius:999px;
+  text-decoration:none;
+  cursor:pointer;
+  border:0;
+  white-space:nowrap;
+}
+.pill:hover{filter:brightness(.96)}
+/* --- Freebar (Block C) --- */
+.freebar{
+  background:var(--gold-bg, #fdf3e2);
+  border-top:1px solid #f0dcb6;
+  border-bottom:1px solid #f0dcb6;
+  color:#6b4708;
+  text-align:center;
+  padding:.6rem;
+  font-weight:600;
+  font-size:.95rem;
+}
+/* --- Angebots-Sektion (Block B) --- */
+#angebot{scroll-margin-top:110px}
+.offer{
+  background:linear-gradient(160deg,#fff,#eef4fb);
+  border:1px solid var(--line, #d9e1ec);
+  border-radius:14px;
+  padding:1.4rem;
+  margin:1.4rem 0;
+}
+/* Modus-Umschalter */
+.modebtns{display:flex;gap:.5rem;flex-wrap:wrap;margin:.2rem 0 1rem}
+.modebtn{
+  border:2px solid var(--line, #d9e1ec);
+  background:#fff;
+  border-radius:8px;
+  padding:.5rem .9rem;
+  cursor:pointer;
+  font-weight:700;
+  color:var(--grey, #586a80);
+  font-family:inherit;
+  font-size:1rem;
+}
+.modebtn.active{
+  border-color:var(--blue, #4e769c);
+  background:#eaf1fb;
+  color:var(--navy, #3a4a5e);
+}
+/* Preisanzeige */
+.price{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:.6rem 0}
+.price .now{font-size:2rem;font-weight:800;color:var(--navy, #3a4a5e)}
+.price .old{text-decoration:line-through;color:var(--grey, #586a80)}
+.price .save{
+  background:var(--gold-bg, #fdf3e2);
+  color:#6b4708;
+  font-weight:700;
+  padding:.25rem .6rem;
+  border-radius:6px;
+}
+/* Leistungs-Checkliste */
+ul.check{list-style:none;padding:0}
+ul.check li{padding:.25rem 0 .25rem 1.7rem;position:relative}
+ul.check li:before{content:"\2713";position:absolute;left:0;color:var(--ok, #1c8c5a);font-weight:800}
+ul.check li.off{color:var(--grey, #586a80)}
+ul.check li.off:before{content:"\2013";color:var(--grey, #586a80)}
+.offer .note{color:var(--grey, #586a80);font-size:.85rem}
+/* Vollbreiter CTA-Button in der Sektion */
+.offer .cta-wide{display:block;width:100%;text-align:center;font-size:1.1rem}
+/* --- Mobile: Buttons vollbreit gestapelt, kein Überlauf (verbindlich) --- */
+.btn,.modebtn{max-width:100%;white-space:normal}
+@media(max-width:600px){
+  .modebtns{flex-direction:column}
+  .modebtn{width:100%;text-align:center}
+  .price .now{font-size:1.6rem}
+  .pill{font-size:.9rem;padding:.45rem .85rem}
+}
+/* Prof-USP-Badge (dezente Zeile, faktisch belegt) */
+.profbadge{display:inline-block;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#e7d7a6;padding:.2rem .6rem;border-radius:999px;font-size:.76rem;font-weight:600;margin:0 0 .2rem .4rem}
+
+/* ===== Vormerk-Modal (öffentliches Probepaket) ===== */
+.vm-ov{display:none;position:fixed;inset:0;background:rgba(15,25,40,.6);z-index:1000;padding:16px;overflow:auto}
+.vm-ov.open{display:flex;align-items:flex-start;justify-content:center}
+.vm-box{background:#fff;max-width:520px;width:100%;margin:auto;border-radius:14px;padding:1.3rem 1.4rem;box-shadow:0 20px 60px rgba(15,25,40,.45);position:relative}
+.vm-box h3{margin:.1rem 2rem .3rem 0;color:var(--navy,#16273f);font-size:1.3rem}
+.vm-box label.f{display:block;font-weight:700;margin:.8rem 0 .25rem;font-size:.92rem;color:#1b2733}
+.vm-box input[type=text],.vm-box input[type=email],.vm-box input[type=tel]{width:100%;padding:.6rem .7rem;border:1px solid #b9c6d8;border-radius:8px;font-size:1rem;font-family:inherit}
+.vm-box input:focus{outline:2px solid var(--blue,#2f6db5);outline-offset:1px;border-color:var(--blue,#2f6db5)}
+.vm-chk{display:flex;gap:.55rem;align-items:flex-start;margin:.8rem 0 0;font-size:.86rem;font-weight:400;line-height:1.45;color:#1b2733}
+.vm-chk input{margin-top:.2rem;flex:0 0 auto;width:18px;height:18px}
+.vm-intro{font-size:.9rem;color:#42536a;margin:.2rem 0 .2rem}
+.vm-note{font-size:.78rem;color:#6b7a90;margin:.7rem 0 0}
+.vm-fnote{font-size:.78rem;color:#6b7a90;margin:.3rem 0 .2rem;line-height:1.4}
+.vm-opt{font-weight:400;color:#6b7a90;font-size:.85rem}
+.vm-x{position:absolute;top:.6rem;right:.7rem;background:transparent;border:0;font-size:1.7rem;line-height:1;cursor:pointer;color:#8194ab}
+.vm-act{margin-top:1.1rem;display:flex;gap:.6rem;flex-wrap:wrap}
+.vm-btn{display:inline-block;background:var(--blue,#2f6db5);color:#fff;border:0;border-radius:8px;padding:.7rem 1.3rem;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none}
+.vm-btn:hover{filter:brightness(.95)}.vm-btn.gold{background:var(--gold,#d98a1f)}
+.vm-btn.gh{background:transparent;color:var(--navy,#16273f);border:2px solid var(--navy,#16273f)}
+.vm-ok{display:none;background:#e7f6ef;border:1px solid #b8e3cd;color:#13633f;padding:.9rem;border-radius:8px;margin-top:.4rem;line-height:1.5}
+.vm-err{display:none;background:#fceae6;border:1px solid #f0c4ba;color:#8c2c19;padding:.6rem .8rem;border-radius:8px;margin-top:.7rem;font-size:.9rem}
+</style>
+
+<!-- ============================================================ -->
+<!-- BUCHUNGSMODUL · BLOCK A · CSS (Overlay / Modal / Chips)      -->
+<!-- Host-Design gewinnt: var(--x, <fallback>). Marke/Navy #3a4a5e -->
+<!-- bleibt ueber die Host-Variablen unveraendert.                -->
+<!-- ============================================================ -->
+<style id="buchungsmodul-css">
+/* --- Overlay/Backdrop --- */
+.bk-modal{
+  position:fixed; inset:0; z-index:1000;
+  display:flex; align-items:center; justify-content:center;
+  padding:1.2rem;
+  background:rgba(20,30,50,.55);
+  -webkit-overflow-scrolling:touch;
+}
+.bk-modal[hidden]{ display:none; }
+/* --- Dialog-Karte --- */
+.bk-dialog{
+  position:relative;
+  background:var(--card, #fff);
+  color:var(--ink, #2b3440);
+  border:1px solid var(--line, #dde3ea);
+  border-radius:14px;
+  box-shadow:0 12px 40px rgba(20,40,70,.28);
+  width:100%;
+  max-width:560px;
+  max-height:88vh;
+  overflow-y:auto;
+  padding:1.4rem 1.4rem 1.6rem;
+}
+/* --- Schliessen-Button (×) --- */
+.bk-close{
+  position:absolute; top:.5rem; right:.6rem;
+  width:2.2rem; height:2.2rem;
+  border:0; border-radius:999px;
+  background:transparent; cursor:pointer;
+  font-size:1.7rem; line-height:1; color:var(--grey, #586a80);
+  font-family:inherit;
+}
+.bk-close:hover{ background:var(--bg, #eef1f5); color:var(--navy, #3a4a5e); }
+.bk-close:focus-visible{ outline:3px solid var(--blue, #4e769c); outline-offset:2px; }
+/* --- Ueberschriften/Texte im Modal --- */
+.bk-h{
+  margin:.1rem 2rem .9rem 0;
+  color:var(--navy, #3a4a5e);
+  font-size:1.3rem; line-height:1.25;
+}
+.bk-hint, .bk-foot{
+  color:var(--grey, #586a80); font-size:.86rem; margin-top:1rem;
+}
+/* --- Liste (Lektionen / Handouts) --- */
+.bk-list{ list-style:none; margin:0; padding:0; }
+.bk-row{
+  display:flex; align-items:center; gap:.8rem; flex-wrap:wrap;
+  padding:.7rem 0; border-bottom:1px solid var(--line, #dde3ea);
+}
+.bk-row:last-child{ border-bottom:0; }
+.bk-row-t{ flex:1 1 60%; min-width:0; font-weight:600; color:var(--navy, #3a4a5e); }
+.bk-row-r{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; margin-left:auto; }
+.bk-preis{ font-weight:800; color:var(--navy, #3a4a5e); white-space:nowrap; }
+/* Gratis-Badge (verlinkt auf slug.html) */
+.bk-badge{
+  display:inline-block; text-decoration:none; white-space:nowrap;
+  background:var(--gold, #ffc041); color:#3a2700;
+  font-weight:800; font-size:.85rem;
+  padding:.35rem .7rem; border-radius:999px;
+}
+.bk-badge:hover{ filter:brightness(.96); }
+/* --- Generischer Button im Modul --- */
+.bk-btn{
+  display:inline-block; cursor:pointer; font-family:inherit;
+  border:2px solid var(--blue, #4e769c);
+  background:var(--blue, #4e769c); color:#fff;
+  font-weight:700; font-size:.95rem;
+  padding:.5rem .9rem; border-radius:8px;
+  max-width:100%; white-space:normal; text-align:center;
+}
+.bk-btn:hover{ filter:brightness(.96); }
+.bk-btn:focus-visible{ outline:3px solid var(--gold, #ffc041); outline-offset:2px; }
+.bk-btn.ghost{ background:#fff; color:var(--navy, #3a4a5e); }
+/* --- Faecher-Liste --- */
+.bk-fach{
+  display:flex; align-items:center; gap:.9rem; flex-wrap:wrap;
+  padding:.75rem 0; border-bottom:1px solid var(--line, #dde3ea);
+}
+.bk-fach:last-child{ border-bottom:0; }
+.bk-fach-t{ display:flex; flex-direction:column; gap:.1rem; flex:1 1 auto; min-width:0; }
+.bk-fach-k{ font-size:1.6rem; font-weight:800; color:var(--navy, #3a4a5e); line-height:1; }
+.bk-fach-n{ font-size:.9rem; color:var(--grey, #586a80); }
+/* --- Termine (radio-artige Optionen) --- */
+.bk-tgroup{ margin:.4rem 0 1rem; }
+.bk-tgroup-h{
+  font-size:.8rem; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--grey, #586a80); margin:.6rem 0 .4rem;
+}
+.bk-opt{
+  display:flex; align-items:center; gap:.7rem;
+  border:2px solid var(--line, #dde3ea); border-radius:10px;
+  padding:.6rem .8rem; margin:.4rem 0; cursor:pointer;
+  font-weight:600; color:var(--navy, #3a4a5e);
+}
+.bk-opt:hover{ border-color:var(--blue, #4e769c); }
+.bk-opt input{ accent-color:var(--blue, #4e769c); width:1.1rem; height:1.1rem; }
+.bk-opt.bk-sel{ border-color:var(--blue, #4e769c); background:#eef4fb; }
+.bk-need{ color:#b23b3b; font-size:.85rem; font-weight:600; margin:.2rem 0 .6rem; }
+/* --- Handout-Inhalt (aufklappbar) + Chips --- */
+.bk-details{ margin:.3rem 0 0; }
+.bk-details > summary{
+  cursor:pointer; font-size:.85rem; color:var(--blue, #4e769c); font-weight:600;
+  list-style:revert;
+}
+.bk-chips{ display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0 .2rem; }
+.bk-chip{
+  background:var(--gold-bg, #fff6e0); color:#6b4708;
+  border:1px solid #f0dcb6; border-radius:999px;
+  font-size:.78rem; font-weight:600; padding:.2rem .6rem;
+}
+/* Vollbreite Aktions-Zeile (z. B. "Diesen Termin vormerken") */
+.bk-actionrow{ margin-top:.6rem; }
+.bk-actionrow .bk-btn{ display:block; width:100%; font-size:1.05rem; }
+/* --- Mobil: Dialog vollbreit, scrollbar, kein Overflow --- */
+@media (max-width:600px){
+  .bk-modal{ padding:0; align-items:stretch; }
+  .bk-dialog{
+    max-width:100%; width:100%;
+    min-height:100%; max-height:100%;
+    border-radius:0; border:0;
+  }
+  .bk-h{ font-size:1.15rem; }
+  .bk-fach-k{ font-size:1.35rem; }
+  .bk-row-r{ margin-left:0; }
+}
+</style>
+</head>
+<body data-fach="OSTA" data-kapitel-slug="osta-kap03-wahrscheinlichkeit">
+
+<div class="topbar"><div class="wrap">
+  <img src="bwlkurse-mark.png" alt="BWL Kurse">
+  <div class="brand">BWL Kurse<small>Statistik (OSTA) · Goethe-Uni Frankfurt · Kapitel 3</small></div>
+  <div class="spacer"></div>
+  <!-- PREISMODUL · BLOCK A (Header-Preis-Pill): führt per Anker zur Angebots-Sektion #angebot -->
+  <a class="pill" href="#angebot">Jetzt vormerken</a>
+</div></div>
+
+<section class="hero"><div class="wrap">
+  <span class="badge">Statistik (OSTA) · Goethe-Uni Frankfurt · Kapitel 3</span><span class="profbadge">Passgenau zur Vorlesung von Prof. Hassler · SoSe 2026</span>
+  <h1>Wahrscheinlichkeitsrechnung</h1>
+  <p class="lead">Wie wahrscheinlich ist das wirklich? Hier lernst du, mit Wahrscheinlichkeiten sauber zu rechnen – von Laplace und den Ereignisoperationen über die bedingte Wahrscheinlichkeit bis zum Satz von Bayes und der Vierfeldertafel. Ein klarer Rechenweg für einen klausurtypischen Aufgabentyp.</p>
+  <p class="tagline">Deine Klausurvorbereitung an der Goethe-Uni – seit 1999, passgenau zu deiner Vorlesung.</p>
+  <div class="cta">
+    <a class="btn alt" href="#angebot">Jetzt vormerken</a>
+    <a class="btn ghost" style="color:#fff;border-color:#fff" href="#einstieg">Jetzt Lektion starten</a>
+  </div>
+</div></section>
+<!-- PREISMODUL · BLOCK C (Freebar, optional): schmaler Hinweisstreifen direkt unter dem Hero.
+     Wird bei Fristablauf per Block-D-JS ausgeblendet. -->
+<div class="freebar" id="freebar">
+  ★ Frühbucher-Vorteil bis 27. Juli 2026 – sichere dir jetzt den vergünstigten Preis.
+</div>
+
+<div class="wrap">
+
+  <!-- EINSTIEG -->
+  <h2 id="einstieg">Einstieg</h2>
+  <div class="callout birken">
+    <p>Ein Arzt sagt dir: Du hast einen Test auf eine <b>seltene</b> Krankheit gemacht – und er ist <b>positiv</b>. Der Test gilt als &bdquo;sehr zuverlässig&ldquo;. Wie sicher bist du jetzt wirklich krank? Die meisten schätzen &bdquo;fast sicher&ldquo;. Die überraschende Antwort: oft nur rund <b>ein Viertel</b>. Der Grund steckt nicht im Test, sondern darin, wie <i>selten</i> die Krankheit von vornherein ist.</p>
+    <p>Genau dasselbe Muster steckt hinter Spamfiltern, Qualitätskontrollen und jedem Glücksspiel: Man muss <b>Wahrscheinlichkeiten richtig verknüpfen</b>. In diesem Kapitel bekommst du dafür das Werkzeug – von der einfachen Laplace-Formel bis zum Satz von Bayes, mit dem sich das Test-Rätsel oben in zwei Zeilen auflöst.</p>
+    <p class="muted" style="margin:.6rem 0 0"><b>Kurz erklärt – „Neugier-Fragen":</b> kleine Fragen, die du dir <i>selbst</i> stellst, um aktiv mitzudenken – nicht zum Googeln, sondern zum inneren Beantworten, während die Lektion läuft. <b>So funktioniert's</b> – an einer Frage einmal vorgemacht (Frage → Denk-Schritt → Antwort, die du gleich prüfst):</p>
+  <ul class="neugier-list muted"><li><b>Frage:</b> Warum kann ein positiver Test bei einer seltenen Krankheit trotzdem nur mit rund 25 % bedeuten, dass man krank ist? <b>→ Denk-Schritt:</b> Rechne nicht mit dem Test allein, sondern denk an 10.000 Menschen: wenige echte Kranke, aber viele Gesunde, von denen ein kleiner Anteil fälschlich positiv testet. <b>→ Antwort:</b> Die vielen falsch-positiven Gesunden überwiegen die wenigen echten Kranken – das rechnen wir gleich mit Bayes nach.</li><li>Zwei Ereignisse schließen sich gegenseitig aus – sind sie deshalb auch stochastisch unabhängig?</li><li>Ist P(A|B) immer gleich P(B|A) – oder kann derselbe Zusammenhang &bdquo;von der anderen Seite&ldquo; ganz anders aussehen?</li></ul>
+  </div>
+
+  <!-- FAHRPLAN (Roter Faden) -->
+  <div class="callout fahrplan" style="border-left-color:var(--gold);background:#fbf6ee;margin-top:1.2rem"><b>Dein Fahrplan durch dieses Thema:</b><div class="fp-step">① Grundbegriffe klären und mit der Laplace-Formel einfache Wahrscheinlichkeiten berechnen.</div><div class="fp-step">② Ereignisse verknüpfen: Vereinigung, Schnitt, Komplement, Differenz – mit Additionssatz und De Morgan.</div><div class="fp-step">③ Bedingte Wahrscheinlichkeit, Multiplikationssatz und stochastische Unabhängigkeit unterscheiden.</div><div class="fp-step">④ Alles zusammenführen: Satz der totalen Wahrscheinlichkeit, Satz von Bayes und die Vierfeldertafel.</div></div>
+
+  <p>Wir gehen den Fahrplan Schritt für Schritt entlang und lösen am Ende an einem einzigen durchgerechneten Beispiel das Test-Rätsel aus dem Einstieg – so siehst du, wie die Bausteine ineinandergreifen.</p>
+
+  <!-- ===================== LERNINHALT ===================== -->
+  <h2>① Grundbegriffe und Laplace-Wahrscheinlichkeit</h2>
+  <p>Ein Zufallsvorgang hat mehrere mögliche <b>Ergebnisse</b>; die Menge aller Ergebnisse ist der <span class="term" tabindex="0">Ergebnisraum<span class="tip">Ω (Omega): die Menge aller möglichen Ergebnisse eines Zufallsvorgangs. Beim Würfel Ω = {1, 2, 3, 4, 5, 6}. Es gilt stets P(Ω) = 1.</span></span> &Omega;. Ein <b>Ereignis</b> A ist eine Teilmenge davon – z.&nbsp;B. beim Würfel A = &bdquo;gerade Augenzahl&ldquo; = {2, 4, 6}. Sind alle Ergebnisse gleich wahrscheinlich, greift die <span class="term" tabindex="0">Laplace-Wahrscheinlichkeit<span class="tip">P(A) = Anzahl der für A günstigen Ergebnisse / Anzahl aller möglichen Ergebnisse. Setzt gleich wahrscheinliche Ergebnisse voraus (fairer Würfel, faire Münze).</span></span>:</p>
+  <p class="fblock"><span class="formula">P(A) = günstige Ergebnisse / mögliche Ergebnisse = |A| / |&Omega;|</span></p>
+  <p>Beispiel Würfel: P(gerade) = 3/6 = 1/2. Jede Wahrscheinlichkeit liegt zwischen 0 (unmögliches Ereignis) und 1 (sicheres Ereignis, P(&Omega;) = 1). Beim mehrstufigen Vorgang gilt die Merkregel: <b>&bdquo;UND&ldquo; heißt multiplizieren, &bdquo;ODER&ldquo; heißt addieren</b> – dazu gleich mehr.</p>
+
+  <h2>② Ereignisse verknüpfen</h2>
+  <p>Aus zwei Ereignissen A und B bildet man neue. Das <b>Venn-Diagramm</b> macht sie anschaulich: der Schnitt A&cap;B (&bdquo;A und B&ldquo;), die Vereinigung A&cup;B (&bdquo;A oder B oder beides&ldquo;) und das <span class="term" tabindex="0">Komplement<span class="tip">A&#772; (&bdquo;nicht A&ldquo;) = Gegenereignis. Es gilt P(A&#772;) = 1 − P(A), denn A und A&#772; füllen zusammen den ganzen Ergebnisraum.</span></span> A&#772;. Für die Vereinigung gilt der <span class="term" tabindex="0">Additionssatz<span class="tip">P(A&cup;B) = P(A) + P(B) − P(A&cap;B). Der Schnitt wird abgezogen, weil er sonst doppelt gezählt würde.</span></span>:</p>
+  <p class="fblock"><span class="formula">P(A&cup;B) = P(A) + P(B) &minus; P(A&cap;B)</span> &nbsp;&nbsp; <span class="formula">P(A&#772;) = 1 &minus; P(A)</span></p>
+  <p>Zwei weitere nützliche Bausteine: die Differenz P(A&#92;B) = P(A) &minus; P(A&cap;B) (&bdquo;A ohne B&ldquo;) und die Regeln von <span class="term" tabindex="0">De Morgan<span class="tip">&bdquo;Weder A noch B&ldquo;: P(A&#772;&cap;B&#772;) = 1 − P(A&cup;B). &bdquo;Nicht beide gleichzeitig&ldquo;: P(A&#772;&cup;B&#772;) = 1 − P(A&cap;B).</span></span>, mit denen sich &bdquo;weder noch&ldquo; sauber umformen lässt: P(A&#772;&cap;B&#772;) = 1 &minus; P(A&cup;B).</p>
+
+  <h2>③ Bedingte Wahrscheinlichkeit und Unabhängigkeit</h2>
+  <p>Oft weiß man schon, dass ein Ereignis B eingetreten ist, und fragt nach A <i>unter dieser Bedingung</i>. Das ist die <span class="term" tabindex="0">bedingte Wahrscheinlichkeit<span class="tip">P(A|B) = P(A&cap;B) / P(B): die Wahrscheinlichkeit von A, wenn bekannt ist, dass B eingetreten ist. Der Ergebnisraum &bdquo;schrumpft&ldquo; auf B.</span></span> P(A|B). Stellt man diese Formel um, erhält man den <span class="term" tabindex="0">Multiplikationssatz<span class="tip">P(A&cap;B) = P(A|B)·P(B) = P(B|A)·P(A). Gilt immer – auch bei abhängigen Ereignissen.</span></span>:</p>
+  <p class="fblock"><span class="formula">P(A|B) = P(A&cap;B) / P(B)</span> &nbsp;&nbsp; <span class="formula">P(A&cap;B) = P(A|B) &middot; P(B) = P(B|A) &middot; P(A)</span></p>
+  <p>Wichtig: P(A|B) und P(B|A) sind im Allgemeinen <b>verschieden</b> – gleicher Zähler P(A&cap;B), aber verschiedene Nenner. Ein Sonderfall ist die <span class="term" tabindex="0">stochastische Unabhängigkeit<span class="tip">A und B sind unabhängig, wenn P(A|B) = P(A), gleichbedeutend mit P(A&cap;B) = P(A)·P(B). Achtung: „unabhängig" ist NICHT dasselbe wie „schließt sich aus".</span></span>: Weiß man über A nichts Neues, wenn B eingetreten ist, dann gilt der einfache Produktsatz P(A&cap;B) = P(A) &middot; P(B).</p>
+
+  <h2>④ Totale Wahrscheinlichkeit und Satz von Bayes</h2>
+  <p>Zerlegt man den Ergebnisraum in disjunkte Fälle A&#8321;, A&#8322;, …, liefert der <span class="term" tabindex="0">Satz der totalen Wahrscheinlichkeit<span class="tip">P(B) = Σ P(B|Aᵢ)·P(Aᵢ): die Gesamtwahrscheinlichkeit von B als gewichtete Summe über alle Fälle Aᵢ.</span></span> die Gesamtwahrscheinlichkeit eines Ereignisses B. Dreht man die Bedingung um – von P(B|A) zu P(A|B) –, hilft der <span class="term" tabindex="0">Satz von Bayes<span class="tip">P(A|B) = P(B|A)·P(A) / P(B). Rechnet von der bekannten Richtung P(B|A) auf die gesuchte P(A|B) zurück.</span></span>:</p>
+  <p class="fblock"><span class="formula">P(B) = Σ P(B|Aᵢ) &middot; P(Aᵢ)</span> &nbsp;&nbsp; <span class="formula">P(A|B) = P(B|A) &middot; P(A) / P(B)</span></p>
+  <p>Bei genau zwei Fällen (A und A&#772;) lässt sich alles bequem in einer <b>Vierfeldertafel</b> anordnen: die vier gemeinsamen Wahrscheinlichkeiten P(A&cap;B), P(A&cap;B&#772;), P(A&#772;&cap;B), P(A&#772;&cap;B&#772;) im Inneren, die Rand­summen außen. Genau das nutzen wir jetzt.</p>
+
+  <div class="card">
+    <h3 style="margin-top:.2rem">Durchgerechnetes Lehrbeispiel: der positive Krankheitstest</h3>
+    <p>Eine Krankheit tritt bei <b>2&nbsp;%</b> der Bevölkerung auf: P(K) = 0,02. Ein Test erkennt Kranke mit Wahrscheinlichkeit <b>0,90</b> (Sensitivität P(T|K) = 0,90). Bei Gesunden schlägt er fälschlich mit <b>0,05</b> an (P(T|K&#772;) = 0,05). Gesucht: Wie wahrscheinlich ist man wirklich krank, wenn der Test positiv ist – also P(K|T)?</p>
+    <p><b>Schritt 1 – Vierfeldertafel füllen</b> (gemeinsame Wahrscheinlichkeiten über den Multiplikationssatz P(K&cap;T) = P(T|K)&middot;P(K), Rest analog; P(K&#772;) = 0,98):</p>
+    <div class="tw"><table class="mx">
+      <tr><th class="rowlab"></th><th>Test&nbsp;+ (T)</th><th>Test&nbsp;− (T&#772;)</th><th>Rand</th></tr>
+      <tr><td class="rowlab">krank (K)</td><td class="hi">0,018</td><td>0,002</td><td>0,020</td></tr>
+      <tr><td class="rowlab">gesund (K&#772;)</td><td>0,049</td><td>0,931</td><td>0,980</td></tr>
+      <tr><td class="rowlab">Rand</td><td class="himax">0,067</td><td>0,933</td><td>1,000</td></tr>
+    </table></div>
+    <p><b>Schritt 2 – totale Wahrscheinlichkeit eines positiven Tests</b> (Randsumme der Spalte T):</p>
+    <p class="fblock"><span class="formula">P(T) = P(T|K)&middot;P(K) + P(T|K&#772;)&middot;P(K&#772;) = 0,90&middot;0,02 + 0,05&middot;0,98 = 0,018 + 0,049 = <b>0,067</b></span></p>
+    <p><b>Schritt 3 – Satz von Bayes:</b></p>
+    <p class="fblock"><span class="formula">P(K|T) = P(K&cap;T) / P(T) = 0,018 / 0,067 &asymp; <b>0,2687</b> (26,87&nbsp;%)</span></p>
+    <p class="muted">Lies die Kernaussage ab: Trotz positivem Test ist man mit rund <b>73&nbsp;%</b> gesund. Der positive Test hebt die Wahrscheinlichkeit zwar von 2&nbsp;% auf knapp 27&nbsp;% – aber die niedrige Basisrate lässt sie klein bleiben. Genau das ist die Bayes-Pointe aus dem Einstieg.</p>
+  </div>
+
+  <p>Das Baumdiagramm zeigt denselben Sachverhalt: Die zwei Äste mit positivem Test (grün markiert) führen zu den Wahrscheinlichkeiten 0,018 (krank) und 0,049 (gesund). Ihre Summe ist P(T) = 0,067; der Anteil des krank-Astes daran ist der gesuchte Bayes-Wert.</p>
+  <svg id="chart" viewBox="0 0 640 356" role="img" aria-label="Baumdiagramm des Krankheitstests mit den vier Pfadwahrscheinlichkeiten und markierten positiven Testästen" style="width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:10px"></svg>
+
+  <div class="callout" style="border-left-color:var(--ok)">
+    <b>Kern-Erkenntnis:</b> Der Satz von Bayes verknüpft <b>Basisrate</b> und <b>Testgüte</b> – und die Vierfeldertafel ist dabei dein sicherstes Werkzeug. Das baut direkt auf der <b>bedingten Häufigkeit</b> aus der deskriptiven Statistik (Kapitel 1 und 2) auf und liefert die Grundlage für <b>Zufallsvariablen und Verteilungen</b> (ab Kapitel 4). Wer P(A&cap;B), P(A|B) und P(B|A) sauber trennt, hat den halben Aufgabentyp schon gelöst.
+  </div>
+
+  <!-- FAQ -->
+  <h2>Häufige Fragen (kurz &amp; klar)</h2>
+  <details class="faq"><summary>Wann darf ich einfach multiplizieren – P(A&cap;B) = P(A)·P(B)?</summary><p>Nur wenn A und B <b>stochastisch unabhängig</b> sind. Im Allgemeinen gilt stattdessen der Multiplikationssatz P(A&cap;B) = P(A|B)·P(B). Die kurze Produktform ist also ein Sonderfall – prüfe in der Klausur meist zuerst, ob Unabhängigkeit wirklich gegeben ist.</p></details>
+  <details class="faq"><summary>Ist der Unterschied zwischen P(A|B) und P(B|A) wirklich so wichtig?</summary><p>Ja, sehr. Beide haben denselben Zähler P(A&cap;B), aber verschiedene Nenner (P(B) bzw. P(A)) und sind daher in der Regel verschieden. Das Vertauschen dieser beiden ist einer der häufigsten Klausurfehler – der Satz von Bayes ist genau das Werkzeug, um sauber von der einen auf die andere Richtung umzurechnen.</p></details>
+  <details class="faq"><summary>Muss ich immer eine Vierfeldertafel zeichnen?</summary><p>Nicht zwingend, aber bei zwei Ereignissen ist sie meist der sicherste Weg: Du trägst die gemeinsamen Wahrscheinlichkeiten ein, die Ränder ergeben sich durch Zeilen- und Spaltensummen, und bedingte Wahrscheinlichkeiten liest du direkt als Anteil ab. Gerade unter Zeitdruck vermeidet die Tafel viele Flüchtigkeitsfehler.</p></details>
+  <details class="faq"><summary>&bdquo;Disjunkt&ldquo; und &bdquo;unabhängig&ldquo; – ist das dasselbe?</summary><p>Nein, das wird oft verwechselt. Disjunkt (unvereinbar) heißt P(A&cap;B) = 0 – die Ereignisse können nicht zusammen eintreten. Unabhängig heißt P(A&cap;B) = P(A)·P(B). Zwei Ereignisse mit positiver Wahrscheinlichkeit, die disjunkt sind, sind sogar immer <i>abhängig</i>, weil das Eintreten des einen das andere ausschließt.</p></details>
+  <details class="faq"><summary>Ich habe eine konkrete inhaltliche Rückfrage – wohin damit?</summary><p>Bring sie ins <b>Live-Q&amp;A</b> ein: Dort besprechen wir deine Fragen gemeinsam in kleiner Gruppe, und im <b>Live-Klausurtraining</b> vertiefen wir die kniffligen Aufgabentypen. Tipp weiter unten das Eingabefeld nutzen – dann geht deine Frage nicht verloren und wird in der nächsten Live-Session aufgegriffen.</p></details>
+
+  <div class="card">
+    <h3 style="margin-top:.2rem">Gib deine komplexeste aktuelle Frage direkt hier ein – bring sie in die nächste Live-Q&amp;A mit.</h3>
+    <textarea class="live" id="liveQ" rows="3" placeholder="Deine Frage zu &bdquo;Wahrscheinlichkeitsrechnung&ldquo; &hellip;"></textarea>
+    <div style="margin-top:.6rem"><button class="btn" id="liveQbtn">Frage für die Live-Session notieren</button>
+      <span id="liveQok" class="muted" style="margin-left:.6rem;display:none;color:var(--ok)">✓ Notiert – bring sie ins nächste Live-Q&amp;A mit.</span></div>
+    <p class="note" style="margin-top:.5rem">Wird lokal auf deinem Gerät gespeichert – keine automatische Antwort auf dieser Seite.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <h2>Teste dich – adaptive Fragerunde</h2>
+  <p>Starte mit 5 Fragen. <b>3 oder mehr richtig</b> → es geht schwerer weiter, sonst bekommst du Festigungsfragen. Danach kannst du beliebig oft <b>weitere Fragen</b> anfordern – dein Gesamtergebnis bleibt immer sichtbar.</p>
+  <div id="quiz">
+    <div class="qhead">
+      <b id="roundTitle">Runde 1</b>
+      <span class="score" id="scoreTag">Gesamt: 0 / 0 richtig</span>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <div id="qarea"></div>
+    <div id="qactions" style="margin-top:1rem"></div>
+  </div>
+
+  <!-- PERSON -->
+  <h2>Wer dich begleitet</h2>
+  <div class="card person">
+    <img class="mono" src="rene-2026.jpg" alt="René Flé">
+    <div style="flex:1;min-width:240px">
+      <h3 style="margin:.1rem 0">René Flé</h3>
+      <p>René Flé (Dipl.-Kfm.) bereitet seit 1999 Frankfurter Studierende gezielt auf ihre Klausuren vor – passgenau zur jeweiligen Vorlesung.</p><div class="stats"><div class="stat"><b>seit 1999</b>Frankfurter Examens-Repetitorien</div><div class="stat"><b>~12.000</b>vorbereitete Studierende</div><div class="stat"><b>25.000+ Std.</b>universitäre Lehre</div><div class="stat"><b>seit 2012</b>Honorardozent (CBS)</div></div>
+      <p class="muted">Ich zeige dir Kapitel für Kapitel genau das, was in der OSTA-Klausur bei Prof. Hassler wirklich zählt – mit klaren Rechenwegen und ehrlichem Blick auf typische Fehler. Kein Marketing-Zauber, sondern solide Vorbereitung, die dich sicher durch die Klausur bringt.</p>
+    </div>
+  </div>
+
+  <!-- ANGEBOT · BWL Kurse (Online-Value-Ladder) -->
+  <h2 id="angebot">Dein Weg durch die Klausur &ndash; mit BWL Kurse</h2>
+  <div class="offer">
+    <p>Diese Probe-Lektion ist ein Ausschnitt. <b>BWL Kurse</b> bringt dich Kapitel
+       für Kapitel durch den gesamten OSTA-Stoff &ndash; mit geprüften Lösungen,
+       Live-Q&amp;A in kleiner Gruppe und einem <b>Live-Klausurtraining</b> kurz vor der Klausur.</p>
+
+    <ul class="check">
+      <li>Alle Themen als interaktive <b>Kursmodule</b> (wie diese Probe-Lektion)</li>
+      <li>Original-nahe Aufgaben mit geprüften Lösungen &amp; Rechenwegen</li>
+      <li><b>Live-Online-Q&amp;A</b> in kleiner Gruppe, freigeschaltet nach Lernfortschritt</li>
+      <li><b>Live-Klausurtraining</b> kurz vor der Klausur: die kniffligsten Aufgabentypen live vorgerechnet</li>
+    </ul>
+
+    <div class="price">
+      <span class="now"  id="priceNow">39,90 €</span>
+      <span class="old"  id="priceOld">69,00 €</span>
+      <span class="save" id="saveTag">Frühbucher bis 27. Juli 2026</span>
+    </div>
+    <p class="note" style="margin:.2rem 0 1rem">OSTA komplett &ndash; alle 10 Kapitel + 3&times; Live-Online-Q&amp;A. Preis inkl. USt. Statt 69,00&nbsp;€ im Einzelkauf (10 &times; 6,90&nbsp;€).</p>
+
+    <a class="btn alt cta-wide" id="offerCta" href="#" onclick="vmOpen();return false;">Jetzt vormerken</a>
+
+    <h3 style="margin-top:1.4rem">Alle Preise im Überblick</h3>
+    <ul class="check" style="list-style:none;padding-left:0">
+      <li>Diese Probe-Lektion &ndash; <b>gratis</b></li>
+      <li>Einzelne Lektion &ndash; <b>6,90 €</b>
+        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('lektionen')">Lektion wählen</button></li>
+      <li>OSTA komplett (alle 10 Kapitel + Live-Q&amp;A) &ndash; <b>39,90 €</b> statt 69,00 € im Einzelkauf (10 &times; 6,90 €)</li>
+      <li>OSTA komplett <b>+ Handouts &amp; Musterlösungen</b> (alles aus &bdquo;OSTA komplett&ldquo; + Handout-PDFs mit Aufgaben &amp; Musterlösungen zu allen Kapiteln) &ndash; <b>49,90 €</b> statt 94,80 €
+        <span class="save" style="margin-left:.4rem;font-size:.82rem;vertical-align:middle">Beliebteste Wahl &middot; &minus;&nbsp;47&nbsp;%</span>
+        <span class="muted" style="display:block;margin-top:.25rem">nur 10 € mehr als &bdquo;OSTA komplett&ldquo;</span></li>
+      <li>2&ndash;3 Kurse parallel &ndash; <b>69,90 €</b> statt <span style="text-decoration:line-through;color:#586a80">79,80&ndash;119,70 €</span>
+        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('faecher')">Fächer wählen</button>
+        <span class="muted" style="margin-left:.4rem">OMIK &middot; OSTA &middot; OFIN &middot; BFIN</span></li>
+      <li>Live-Online-Q&amp;A &ndash; <b>9,90 €</b> einzeln / <b>24,90 €</b> im 3er-Ticket
+        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('termine')">Termin wählen</button></li>
+      <li>Live-Klausurtraining &ndash; <b>19,90 €</b>
+        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('termine')">Termin wählen</button></li>
+      <li>Handout-PDF (Zusammenfassung + Aufgaben mit Lösungen) &ndash; <b>8,90 €</b>
+        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('handouts')">Handout wählen</button></li>
+    </ul>
+    <p class="note">Alle Preise inkl. USt. Buchung über die Vormerkung &ndash; die Bezahlung schalten wir in Kürze frei.</p>
+  </div>
+
+</div>
+
+<footer><div class="wrap">
+  <b>BWL Kurse</b> · Examensvorbereitung · René Flé<br>
+  <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+  <p class="note" style="color:#8fa6c2;margin-top:.6rem">Unabhängiges Vorbereitungsangebot, nicht von der jeweiligen Hochschule herausgegeben. Aufgaben sind eigenständig formuliert/abgewandelt.</p>
+</div></footer>
+
+<!-- FRAGENBANK: wird von build/_inject_qbank.py ersetzt. -->
+<script id="qbank" type="application/json">{"topic": "Statistik (OSTA) · Kapitel 3 – Wahrscheinlichkeitsrechnung", "engine": {"startDifficulty": "mittel", "startCount": 5, "passThreshold": 3, "onPass": "schwer", "onFail": "leicht", "followupCount": 2, "moreCount": 3}, "questions": [{"id": "m1", "difficulty": "mittel", "subtopic": "Laplace-Wahrscheinlichkeit", "type": "single", "stem": "Ein Laplace-Experiment hat lauter gleich wahrscheinliche Ergebnisse. Wie berechnet man dort die Wahrscheinlichkeit eines Ereignisses A?", "options": ["Anzahl der für A günstigen Ergebnisse geteilt durch die Anzahl aller möglichen Ergebnisse", "Anzahl der für A günstigen Ergebnisse geteilt durch die Anzahl der ungünstigen Ergebnisse", "Summe der für A günstigen Ergebnisse, ganz ohne Bezug zur Anzahl aller Ergebnisse", "Anzahl aller möglichen Ergebnisse geteilt durch die Anzahl der für A günstigen Ergebnisse"], "answer": "Anzahl der für A günstigen Ergebnisse geteilt durch die Anzahl aller möglichen Ergebnisse", "feedback": "Laplace: P(A) = <b>günstige / mögliche</b> Ergebnisse = |A| / |&Omega;|. Setzt voraus, dass alle Ergebnisse gleich wahrscheinlich sind."}, {"id": "m2", "difficulty": "mittel", "subtopic": "Bedingte Wahrscheinlichkeit", "type": "single", "stem": "Wie ist die bedingte Wahrscheinlichkeit P(A|B) definiert (mit P(B) &gt; 0)?", "options": ["P(A&cap;B) geteilt durch P(A)", "P(A) multipliziert mit P(B), ganz ohne den Schnitt der Ereignisse", "P(A) geteilt durch P(A&cap;B)", "P(A&cap;B) geteilt durch P(B)"], "answer": "P(A&cap;B) geteilt durch P(B)", "feedback": "Definition: P(A|B) = <b>P(A&cap;B) / P(B)</b> &ndash; der gemeinsame Fall, relativ zur eingehaltenen Bedingung B."}, {"id": "m3", "difficulty": "mittel", "subtopic": "Additionssatz", "type": "numeric", "stem": "Für zwei Ereignisse gilt P(A) = 0,5, P(B) = 0,3 und P(A&cap;B) = 0,2. Wie groß ist P(A&cup;B)?", "answer": 0.6, "tolerance": 0.01, "feedback": "Additionssatz: P(A&cup;B) = P(A) + P(B) &minus; P(A&cap;B) = 0,5 + 0,3 &minus; 0,2 = <b>0,6</b>."}, {"id": "m4", "difficulty": "mittel", "subtopic": "Gegenereignis", "type": "single", "stem": "Ereignis A tritt mit Wahrscheinlichkeit P(A) ein. Wie groß ist die Wahrscheinlichkeit des Gegenereignisses A&#772; (&bdquo;nicht A&ldquo;)?", "options": ["1 &minus; P(A)", "P(A) &minus; 1", "1 &minus; P(A&cap;B)", "1 geteilt durch den Wert von P(A)"], "answer": "1 &minus; P(A)", "feedback": "Gegenereignis: P(A&#772;) = <b>1 &minus; P(A)</b>, denn P(A) + P(A&#772;) = P(&Omega;) = 1."}, {"id": "m5", "difficulty": "mittel", "subtopic": "Bedingte Wahrscheinlichkeit berechnen", "type": "numeric", "stem": "Gegeben sind P(A&cap;B) = 0,12 und P(B) = 0,3. Wie groß ist die bedingte Wahrscheinlichkeit P(A|B)?", "answer": 0.4, "tolerance": 0.01, "feedback": "P(A|B) = P(A&cap;B) / P(B) = 0,12 / 0,3 = <b>0,4</b>."}, {"id": "s1", "difficulty": "schwer", "subtopic": "Totale Wahrscheinlichkeit", "type": "numeric", "stem": "Zwei Zulieferer liefern Bauteile: A1 mit Anteil 0,7 und A2 mit Anteil 0,3. Die Ausschussquoten sind P(B|A1) = 0,2 und P(B|A2) = 0,5. Wie groß ist die Gesamt-Ausschusswahrscheinlichkeit P(B)?", "answer": 0.29, "tolerance": 0.01, "feedback": "Satz der totalen Wahrscheinlichkeit: P(B) = P(B|A1)&middot;P(A1) + P(B|A2)&middot;P(A2) = 0,2&middot;0,7 + 0,5&middot;0,3 = 0,14 + 0,15 = <b>0,29</b>."}, {"id": "s2", "difficulty": "schwer", "subtopic": "Satz von Bayes", "type": "numeric", "stem": "Ein Spamfilter: P(Spam) = 0,4 und P(Wort|Spam) = 0,8. Über beide Fälle ergibt sich die Gesamtwahrscheinlichkeit des Wortes zu P(Wort) = 0,38. Wie groß ist P(Spam|Wort)?", "answer": 0.8421, "tolerance": 0.01, "feedback": "Bayes: P(Spam|Wort) = P(Wort|Spam)&middot;P(Spam) / P(Wort) = 0,8&middot;0,4 / 0,38 = 0,32 / 0,38 &asymp; <b>0,8421</b>."}, {"id": "s3", "difficulty": "schwer", "subtopic": "Stochastische Unabhängigkeit", "type": "numeric", "stem": "Zwei Ereignisse sind stochastisch unabhängig mit P(A) = 0,25 und P(B) = 0,4. Wie groß ist P(A&cap;B)?", "answer": 0.1, "tolerance": 0.01, "feedback": "Bei Unabhängigkeit gilt der Produktsatz: P(A&cap;B) = P(A)&middot;P(B) = 0,25&middot;0,4 = <b>0,1</b>."}, {"id": "s4", "difficulty": "schwer", "subtopic": "De Morgan", "type": "single", "stem": "Wie groß ist die Wahrscheinlichkeit, dass &bdquo;weder A noch B&ldquo; eintritt?", "options": ["1 &minus; P(A) &minus; P(B), ganz unabhängig vom Schnitt der beiden Ereignisse", "1 &minus; P(A&cap;B), gleichbedeutend mit P(A&#772;&cup;B&#772;)", "1 &minus; P(A&cup;B), gleichbedeutend mit P(A&#772;&cap;B&#772;)", "P(A) + P(B), also die schlichte Summe der beiden Einzelwahrscheinlichkeiten"], "answer": "1 &minus; P(A&cup;B), gleichbedeutend mit P(A&#772;&cap;B&#772;)", "feedback": "&bdquo;Weder noch&ldquo; = Komplement der Vereinigung: P(A&#772;&cap;B&#772;) = <b>1 &minus; P(A&cup;B)</b> (Regel von De Morgan)."}, {"id": "s5", "difficulty": "schwer", "subtopic": "Multiplikationssatz", "type": "single", "stem": "Zwei Ereignisse A, B sind voneinander abhängig. Wie berechnet man dann P(A&cap;B) korrekt?", "options": ["P(A) + P(B) &minus; P(A&cup;B), gemittelt über beide möglichen Bedingungen", "P(A) &middot; P(B), also schlicht das Produkt der beiden Einzelwahrscheinlichkeiten", "P(A|B) + P(B), also die Summe aus bedingter und einfacher Wahrscheinlichkeit", "P(A|B) &middot; P(B), gleichwertig auch P(B|A) &middot; P(A)"], "answer": "P(A|B) &middot; P(B), gleichwertig auch P(B|A) &middot; P(A)", "feedback": "Multiplikationssatz (allgemein gültig): P(A&cap;B) = <b>P(A|B)&middot;P(B) = P(B|A)&middot;P(A)</b>. Nur bei Unabhängigkeit vereinfacht sich das zu P(A)&middot;P(B)."}, {"id": "s6", "difficulty": "schwer", "subtopic": "Bayes deuten (Basisrate)", "type": "single", "stem": "Ein sehr treffsicherer Test schlägt bei einer seltenen Krankheit an. Warum kann P(krank | Test positiv) trotzdem klein sein?", "options": ["Weil ein einzelner positiver Test die Wahrscheinlichkeit der Krankheit grundsätzlich völlig unverändert bestehen lässt", "Weil bei niedriger Basisrate die vielen falsch-positiven Gesunden die wenigen echten Kranken zahlenmäßig überwiegen", "Weil die Sensitivität eines jeden Tests bei sehr seltenen Krankheiten automatisch immer gegen den Wert null geht", "Weil der Satz von Bayes bei sehr seltenen Krankheiten grundsätzlich seine gesamte Gültigkeit vollständig einbüßt und versagt"], "answer": "Weil bei niedriger Basisrate die vielen falsch-positiven Gesunden die wenigen echten Kranken zahlenmäßig überwiegen", "feedback": "Basisraten-Effekt: Ist P(K) winzig, erzeugen die vielen Gesunden trotz kleiner Falsch-Positiv-Rate mehr positive Tests als die wenigen Kranken &ndash; darum bleibt P(K|T) klein."}, {"id": "l1", "difficulty": "leicht", "subtopic": "Sicheres Ereignis", "type": "single", "stem": "Was gilt für das sichere Ereignis, also den gesamten Ergebnisraum &Omega;?", "options": ["P(&Omega;) hängt allein von der Anzahl der Ergebnisse ab", "P(&Omega;) = 0,5", "P(&Omega;) = 1", "P(&Omega;) = 0"], "answer": "P(&Omega;) = 1", "feedback": "Das sichere Ereignis hat Wahrscheinlichkeit <b>P(&Omega;) = 1</b> (100 %) &ndash; irgendein Ergebnis tritt garantiert ein."}, {"id": "l2", "difficulty": "leicht", "subtopic": "Laplace-Annahme", "type": "single", "stem": "Bei einem fairen Würfel &ndash; was besagt die Laplace-Annahme?", "options": ["Die Augenzahl 6 ist am wahrscheinlichsten, weil sie den größten Zahlenwert trägt", "Nur die geraden Augenzahlen sind überhaupt möglich, jede mit Wahrscheinlichkeit 1/3", "Die höheren Augenzahlen sind etwas wahrscheinlicher als die niedrigeren Augenzahlen", "Alle sechs Augenzahlen sind gleich wahrscheinlich, jede mit Wahrscheinlichkeit 1/6"], "answer": "Alle sechs Augenzahlen sind gleich wahrscheinlich, jede mit Wahrscheinlichkeit 1/6", "feedback": "Laplace-Annahme: alle Ergebnisse <b>gleich wahrscheinlich</b> &ndash; beim Würfel je 1/6."}, {"id": "l3", "difficulty": "leicht", "subtopic": "Laplace berechnen", "type": "numeric", "stem": "Eine faire Münze wird zweimal geworfen. Wie groß ist die Wahrscheinlichkeit, zweimal Kopf zu werfen?", "answer": 0.25, "tolerance": 0.01, "feedback": "Beide Würfe unabhängig: P(2&times;Kopf) = 1/2 &middot; 1/2 = 1/4 = <b>0,25</b>."}, {"id": "l4", "difficulty": "leicht", "subtopic": "P(A|B) vs. P(B|A)", "type": "single", "stem": "Warum darf man P(A|B) und P(B|A) im Allgemeinen nicht gleichsetzen?", "options": ["Weil beide immer denselben Zahlenwert liefern &ndash; die Reihenfolge spielt dabei gar keine Rolle", "Weil P(B|A) nur bei stochastisch unabhängigen Ereignissen überhaupt sinnvoll definiert ist", "Weil beide durch unterschiedliche Nenner geteilt werden &ndash; P(B) beim einen, P(A) beim anderen", "Weil P(A|B) grundsätzlich stets größer ausfällt als P(B|A), egal um welche Ereignisse es geht"], "answer": "Weil beide durch unterschiedliche Nenner geteilt werden &ndash; P(B) beim einen, P(A) beim anderen", "feedback": "P(A|B) = P(A&cap;B)/P(B) und P(B|A) = P(A&cap;B)/P(A) haben denselben Zähler, aber <b>verschiedene Nenner</b> &ndash; deshalb im Allgemeinen ungleich."}, {"id": "l5", "difficulty": "leicht", "subtopic": "Vereinigung", "type": "single", "stem": "Das Ereignis A&cup;B beschreibt, dass &hellip;", "options": ["beide Ereignisse A und B stets zwingend gleichzeitig miteinander gemeinsam eintreten müssen", "genau eines der beiden Ereignisse A oder B eintritt, aber niemals beide davon gemeinsam", "keines der beiden Ereignisse A oder B unter irgendwelchen denkbaren Umständen eintreten darf", "mindestens eines der beiden Ereignisse A oder B eintritt, also gerne auch beide zusammen"], "answer": "mindestens eines der beiden Ereignisse A oder B eintritt, also gerne auch beide zusammen", "feedback": "Vereinigung A&cup;B = &bdquo;A oder B oder beides&ldquo; = <b>mindestens eines</b> der Ereignisse tritt ein."}]}</script>
+
+<script>
+/* Frage für Live-Session lokal vormerken */
+document.getElementById('liveQbtn').addEventListener('click', function(){
+  var t=document.getElementById('liveQ').value.trim();
+  if(!t) return;
+  try{ var k='liveQ_osta-kap03-wahrscheinlichkeit'; var arr=JSON.parse(localStorage.getItem(k)||'[]'); arr.push(t); localStorage.setItem(k, JSON.stringify(arr)); }catch(e){}
+  document.getElementById('liveQok').style.display='inline';
+});
+
+/* Lernteil-Grafik + adaptive Fragerunde */
+(function(){
+  "use strict";
+  var bank = JSON.parse(document.getElementById('qbank').textContent);
+  var cfg = bank.engine;
+  var pools = {mittel:[],schwer:[],leicht:[]};
+  bank.questions.forEach(function(q){ if(pools[q.difficulty]) pools[q.difficulty].push(q); });
+
+  /* GRAFIK_JS: Baumdiagramm Krankheitstest (Pfadwahrscheinlichkeiten + Bayes) */
+  (function buildChart(){
+    var svg=document.getElementById('chart'); if(!svg) return;
+    var GREEN='#1c8c5a', NAVY='#3a4a5e', BLUE='#2f6db5', GREY='#8a95a3', INK='#1b2733';
+    var s="";
+    /* Legende OBERHALB der Zeichnung (keine Ueberlappung mit dem Baum) */
+    s+='<rect x="70" y="12" width="18" height="10" rx="2" fill="'+GREEN+'"/>';
+    s+='<text x="94" y="21" font-size="12" fill="'+INK+'">positiver Test (T): 0,018 + 0,049 = P(T) = 0,067</text>';
+    s+='<text x="70" y="40" font-size="12" fill="'+INK+'">Satz von Bayes: P(krank | T) = 0,018 / 0,067 &#8776; 0,2687</text>';
+    /* Knoten-Koordinaten */
+    var rootX=64, rootY=185;
+    var kX=286,  kY=104,  kqX=286, kqY=266;
+    var lx=486;
+    var t1Y=70, t1qY=138, t2Y=232, t2qY=300;
+    function edge(x1,y1,x2,y2,col,w){ return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+col+'" stroke-width="'+w+'"/>'; }
+    function dot(x,y,c){ return '<circle cx="'+x+'" cy="'+y+'" r="5" fill="'+c+'"/>'; }
+    /* Stufe 1: Start -> krank / gesund */
+    s+=edge(rootX,rootY,kX,kY,NAVY,2)+edge(rootX,rootY,kqX,kqY,NAVY,2);
+    s+='<text x="150" y="132" font-size="11" fill="'+NAVY+'">P(krank)=0,02</text>';
+    s+='<text x="150" y="243" font-size="11" fill="'+NAVY+'">P(gesund)=0,98</text>';
+    /* Stufe 2: von krank */
+    s+=edge(kX,kY,lx,t1Y,GREEN,2.4)+edge(kX,kY,lx,t1qY,GREY,1.4);
+    s+='<text x="360" y="80" font-size="11" fill="'+NAVY+'">0,90</text>';
+    s+='<text x="360" y="128" font-size="11" fill="'+NAVY+'">0,10</text>';
+    /* Stufe 2: von gesund */
+    s+=edge(kqX,kqY,lx,t2Y,GREEN,2.4)+edge(kqX,kqY,lx,t2qY,GREY,1.4);
+    s+='<text x="360" y="242" font-size="11" fill="'+NAVY+'">0,05</text>';
+    s+='<text x="360" y="292" font-size="11" fill="'+NAVY+'">0,95</text>';
+    /* Knotenpunkte */
+    s+=dot(rootX,rootY,BLUE)+dot(kX,kY,BLUE)+dot(kqX,kqY,BLUE);
+    s+='<text x="'+(rootX)+'" y="'+(rootY-12)+'" font-size="11" text-anchor="middle" fill="'+INK+'">Start</text>';
+    s+='<text x="'+(kX-10)+'" y="'+(kY+4)+'" font-size="12" text-anchor="end" fill="'+INK+'">krank</text>';
+    s+='<text x="'+(kqX-10)+'" y="'+(kqY+4)+'" font-size="12" text-anchor="end" fill="'+INK+'">gesund</text>';
+    /* Blaetter mit Pfadwahrscheinlichkeiten */
+    s+=dot(lx,t1Y,GREEN)+dot(lx,t2Y,GREEN)+dot(lx,t1qY,GREY)+dot(lx,t2qY,GREY);
+    s+='<text x="'+(lx+10)+'" y="'+(t1Y+4)+'" font-size="11" fill="'+GREEN+'" font-weight="700">krank | T+ = 0,018</text>';
+    s+='<text x="'+(lx+10)+'" y="'+(t1qY+4)+'" font-size="11" fill="'+GREY+'">krank | T&#8722; = 0,002</text>';
+    s+='<text x="'+(lx+10)+'" y="'+(t2Y+4)+'" font-size="11" fill="'+GREEN+'" font-weight="700">gesund | T+ = 0,049</text>';
+    s+='<text x="'+(lx+10)+'" y="'+(t2qY+4)+'" font-size="11" fill="'+GREY+'">gesund | T&#8722; = 0,931</text>';
+    svg.innerHTML=s;
+  })();
+
+  var used={}, totalCorrect=0, totalAnswered=0, roundIndex=0, lastBatch={correct:0,n:1};
+  var qarea=document.getElementById('qarea'), actions=document.getElementById('qactions'),
+      bar=document.getElementById('bar'), roundTitle=document.getElementById('roundTitle'), scoreTag=document.getElementById('scoreTag');
+
+  function remaining(){ return bank.questions.length - Object.keys(used).length; }
+  function take(diff,n){
+    var out=[], order=[diff].concat(['mittel','schwer','leicht'].filter(function(d){return d!==diff;}));
+    order.forEach(function(d){ (pools[d]||[]).forEach(function(q){ if(out.length<n && !used[q.id]){ used[q.id]=true; out.push(q); } }); });
+    return out;
+  }
+  function miniMatrix(q){
+    if(!q.matrix) return "";
+    var h="<div class='tw'><table class='mx'><tr><th class='rowlab'></th>"; q.colLabels.forEach(function(c){h+="<th>"+c+"</th>";}); h+="</tr>";
+    q.matrix.forEach(function(row,i){ h+="<tr><td class='rowlab'>"+q.rowLabels[i]+"</td>"; row.forEach(function(v){h+="<td>"+v+"</td>";}); h+="</tr>"; });
+    return h+"</table></div>";
+  }
+  function setBar(){ bar.style.width = Math.min(100, 25 + roundIndex*18) + '%'; }
+  function renderSet(set,title,intro){
+    roundTitle.textContent=title;
+    qarea.innerHTML = intro ? "<div class='callout' style='margin-top:0'>"+intro+"</div>" : "";
+    set.forEach(function(q,idx){
+      var box=document.createElement('div'); box.className='q'; box.id='box_'+q.id;
+      var h="<div class='stem'><span class='tag'>"+q.subtopic+"</span><br>"+(idx+1)+". "+q.stem+"</div>"+miniMatrix(q);
+      if(q.type==='single'){ q.options.forEach(function(o,oi){ h+="<label class='opt'><input type='radio' name='q_"+q.id+"' value='"+oi+"'> "+o+"</label>"; }); }
+      else { h+="<input class='num' id='num_"+q.id+"' inputmode='decimal' placeholder='Zahl eingeben'> "; }
+      h+="<div class='fb' id='fb_"+q.id+"'></div>"; box.innerHTML=h; qarea.appendChild(box);
+    });
+    actions.innerHTML="<button class='btn' id='evalBtn'>Antworten auswerten</button>";
+    document.getElementById('evalBtn').onclick=function(){ evaluate(set); };
+  }
+  function evaluate(set){
+    var correct=0;
+    set.forEach(function(q){
+      var ok=false;
+      if(q.type==='single'){ var sel=document.querySelector("input[name='q_"+q.id+"']:checked"); if(sel) ok=(q.options[parseInt(sel.value,10)]===q.answer); }
+      else { var el=document.getElementById('num_'+q.id), raw=(el.value||'').replace(',','.').trim(); if(raw!==''){ var v=(function(s){if(s.indexOf("/")>0){var p=s.split("/");return p.length===2?parseFloat(p[0])/parseFloat(p[1]):NaN;}return parseFloat(s);})(raw); ok=!isNaN(v)&&Math.abs(v-q.answer)<=(q.tolerance||0.001); } }
+      var fb=document.getElementById('fb_'+q.id); fb.style.display='block'; fb.className='fb '+(ok?'ok':'bad');
+      fb.innerHTML=(ok?'✓ Richtig. ':'✗ Noch nicht. ')+q.feedback;
+      var box=document.getElementById('box_'+q.id); box.classList.add('locked'); box.querySelectorAll('input').forEach(function(i){i.disabled=true;});
+      if(ok) correct++;
+    });
+    totalCorrect+=correct; totalAnswered+=set.length; lastBatch={correct:correct,n:set.length};
+    scoreTag.textContent="Gesamt: "+totalCorrect+" / "+totalAnswered+" richtig"; setBar();
+
+    if(roundIndex===1){
+      var pass=correct>=cfg.passThreshold, nd=pass?cfg.onPass:cfg.onFail, nextSet=take(nd,cfg.followupCount);
+      var intro=pass ? "🚀 <b>Stark – "+correct+"/"+set.length+"!</b> Zwei schwerere Aufgaben." : "🧭 <b>"+correct+"/"+set.length+".</b> Hier zwei Aufgaben zum Festigen.";
+      roundIndex=2; actions.innerHTML="<button class='btn' id='nextBtn'>Weiter</button>";
+      document.getElementById('nextBtn').onclick=function(){ renderSet(nextSet, pass?'Runde 2 · Vertiefung':'Runde 2 · Festigung', intro); };
+    } else { moreOrFinish(); }
+  }
+  function moreOrFinish(){
+    if(remaining()<=0){ finish(); return; }
+    actions.innerHTML="<button class='btn' id='moreBtn'>Mehr Fragen ("+Math.min(cfg.moreCount,remaining())+")</button> "+
+                      "<button class='btn ghost' id='finBtn'>Abschließen &amp; Ergebnis</button>";
+    document.getElementById('moreBtn').onclick=function(){
+      var harder=(lastBatch.correct/lastBatch.n)>=0.5, nd=harder?'schwer':'leicht', nextSet=take(nd,cfg.moreCount);
+      roundIndex++; renderSet(nextSet,'Runde '+roundIndex+(harder?' · schwerer':' · leichter'), harder?'Du bist gut drauf – wir legen nach.':'Wir festigen weiter.');
+    };
+    document.getElementById('finBtn').onclick=finish;
+  }
+  function finish(){
+    bar.style.width='100%'; actions.innerHTML="";
+    var pct= totalAnswered? Math.round(100*totalCorrect/totalAnswered):0;
+    var done=document.createElement('div'); done.className='callout'; done.style.borderLeftColor='#1c8c5a';
+    done.innerHTML="<b>Dein Ergebnis: "+totalCorrect+" / "+totalAnswered+" richtig ("+pct+" %).</b><br>"+
+      "Den Feinschliff – und deine persönlichen Fragen – machen wir im <b>Live-Q&amp;A</b> und im <b>Live-Klausurtraining</b>."+
+      "<div style='margin-top:.7rem'><a class='btn alt' href='#angebot'>Bestehe Deine Klausur – Platz sichern</a></div>";
+    qarea.appendChild(done); scoreTag.textContent="Endergebnis: "+totalCorrect+" / "+totalAnswered+" richtig";
+  }
+  roundIndex=1; renderSet(take('mittel',cfg.startCount), 'Runde 1 · '+cfg.startCount+' Fragen', null);
+})();
+</script>
+<script>
+/* Fachbegriff-Tooltips: position:fixed (viewport-sicher), Hover am Desktop + Tap-Toggle mobil */
+(function(){
+  var terms=[].slice.call(document.querySelectorAll('.term')), isTouch=false;
+  document.addEventListener('touchstart',function(){ isTouch=true; },{passive:true});
+  function hideAll(){ terms.forEach(function(t){ var p=t.querySelector('.tip'); if(p) p.style.display='none'; }); }
+  function place(t){
+    var tip=t.querySelector('.tip'); if(!tip) return;
+    hideAll(); tip.style.display='block'; tip.style.maxWidth=Math.min(280, window.innerWidth-16)+'px';
+    var r=t.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+    var left=Math.min(Math.max(8, r.left), window.innerWidth-tw-8);
+    var top=r.top-th-8; if(top<8) top=r.bottom+8;
+    top=Math.max(8, Math.min(top, window.innerHeight-th-8));
+    tip.style.left=left+'px'; tip.style.top=top+'px';
+  }
+  terms.forEach(function(t){
+    var tip=t.querySelector('.tip'); if(!tip) return;
+    t.addEventListener('mouseenter',function(){ if(!isTouch) place(t); });
+    t.addEventListener('mouseleave',function(){ if(!isTouch) tip.style.display='none'; });
+    t.addEventListener('click',function(e){ e.stopPropagation(); var open=tip.style.display==='block'; hideAll(); if(!open) place(t); });
+    t.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); var open=tip.style.display==='block'; hideAll(); if(!open) place(t); } });
+  });
+  document.addEventListener('click',hideAll);
+  window.addEventListener('scroll',hideAll,{passive:true});
+  window.addEventListener('resize',hideAll);
+})();
+</script>
+
+<!-- ============================================================ -->
+<!-- PREISMODUL · BLOCK D · JS (setMode + Frist-/Countdown-Logik)  -->
+<!-- ============================================================ -->
+<script id="preismodul-js">
+(function(){
+  "use strict";
+
+  var FRIST_ISO = "2026-07-27";
+
+  function $(id){ return document.getElementById(id); }
+
+  function fristAbgelaufen(){
+    if(!/^\d{4}-\d{2}-\d{2}/.test(FRIST_ISO)) return false;
+    var d = new Date(FRIST_ISO + "T23:59:59");
+    return !isNaN(d.getTime()) && Date.now() > d.getTime();
+  }
+
+  window.setMode = function(mode){
+    var btns = document.querySelectorAll('#modebtns .modebtn');
+    var active = null;
+    btns.forEach(function(b){
+      var on = (b.getAttribute('data-mode') === mode);
+      b.classList.toggle('active', on);
+      if(on) active = b;
+    });
+    if(!active) return;
+
+    var abgelaufen = fristAbgelaufen();
+    var now = active.getAttribute('data-now');
+    var old = active.getAttribute('data-old');
+    var regular = active.getAttribute('data-regular') || now;
+
+    var elNow = $('priceNow'), elOld = $('priceOld'), elSave = $('saveTag');
+    if(elNow) elNow.textContent = abgelaufen ? regular : now;
+    if(elOld) elOld.style.display = abgelaufen ? 'none' : '';
+    if(elSave) elSave.style.display = abgelaufen ? 'none' : '';
+    if(elOld && !abgelaufen) elOld.textContent = old;
+
+
+    var note = $('modeNote');
+    if(note) note.innerHTML = active.getAttribute('data-note') || '';
+  };
+
+  window.onCtaClick = function(){
+    var el = $('offerCta');
+    if(el) el.setAttribute('data-clicked','1');
+  };
+
+  if(fristAbgelaufen()){
+    var fb = $('freebar'); if(fb) fb.style.display = 'none';
+  }
+
+  if(document.getElementById('modebtns')) window.setMode('komplett');
+})();
+</script>
+
+<!-- ============================================================ -->
+<!-- BUCHUNGSMODUL · DATEN (window.BK_DATA) – identisch fuer alle  -->
+<!-- OSTA-Lektionen verwendet.                                    -->
+<!-- ============================================================ -->
+<script id="bk-data">
+window.BK_DATA = {
+  preise: { gratis:'gratis', einzel:'6,90 €', bundle:'39,90 €', bundle_streich:'69,00 €', bundle_handouts:'49,90 €', bundle_handouts_streich:'94,80 €', multi:'69,90 €', qa_einzel:'9,90 €', qa_3er:'24,90 €', klausur:'19,90 €', handout:'8,90 €' },
+  lektionen: [
+    { nr:1, thema:'Deskriptive Statistik I: Lage & Streuung', slug:'osta-kap01-lage-streuung', gratis:false, keywords:['Mittelwert & Median','Modus','Quantile','Varianz & Standardabweichung','Häufigkeitsverteilungen'] },
+    { nr:2, thema:'Deskriptive Statistik II: Zusammenhang & Regression', slug:'osta-kap02-regression', gratis:false, keywords:['Kovarianz','Korrelationskoeffizient','KQ-Regressionsgerade','Bestimmtheitsmaß'] },
+    { nr:3, thema:'Wahrscheinlichkeitsrechnung', slug:'osta-kap03-wahrscheinlichkeit', gratis:true, keywords:['Laplace','Bedingte WK','Unabhängigkeit','Satz von Bayes','Vierfeldertafel'] },
+    { nr:4, thema:'Zufallsvariablen', slug:'osta-kap04-zufallsvariablen', gratis:false, keywords:['Erwartungswert','Varianz','Dichte','Verteilungsfunktion','Exponentialverteilung'] },
+    { nr:5, thema:'Verteilungsmodelle: Binomial & Poisson', slug:'osta-kap05-verteilungsmodelle', gratis:false, keywords:['Bernoulli-Experiment','Binomialverteilung','Poisson-Verteilung','Approximation'] },
+    { nr:6, thema:'Normalverteilung & Stichprobenmittel', slug:'osta-kap06-normalverteilung', gratis:false, keywords:['Standardisieren','z-Wert','Quantile ablesen','Stichprobenmittel','Zentraler Grenzwertsatz'] },
+    { nr:7, thema:'Schätzen: Punktschätzer & Maximum Likelihood', slug:'osta-kap07-schaetzen', gratis:false, keywords:['Erwartungstreue','Momentenmethode','Maximum Likelihood','Effizienz'] },
+    { nr:8, thema:'Konfidenzintervalle', slug:'osta-kap08-konfidenzintervalle', gratis:false, keywords:['Konfidenzniveau','Intervall fürs Mittel','t-Verteilung','Stichprobenumfang'] },
+    { nr:9, thema:'Testen I: Testprinzip & Gauß-Test', slug:'osta-kap09-testen1', gratis:false, keywords:['Hypothesenpaar','Fehler 1. & 2. Art','Gauß-Test','p-Wert','Signifikanzniveau'] },
+    { nr:10, thema:'Testen II: t-Test & Chi-Quadrat', slug:'osta-kap10-testen2', gratis:false, keywords:['t-Test','Chi-Quadrat-Anpassungstest','Unabhängigkeitstest','Testauswahl'] }
+  ],
+  faecher: [ {k:'OMIK',n:'Mikroökonomik 1'}, {k:'OSTA',n:'Statistik'}, {k:'OFIN',n:'Finanzen 1'}, {k:'BFIN',n:'Finanzen 2'} ],
+  termine: [
+    {tag:'Fr 24.07.2026', zeit:'10:00', block:'Vormittag'}, {tag:'Sa 25.07.2026', zeit:'10:00', block:'Vormittag'}, {tag:'So 26.07.2026', zeit:'10:00', block:'Vormittag'},
+    {tag:'Fr 24.07.2026', zeit:'19:00', block:'Abend'}, {tag:'Sa 25.07.2026', zeit:'19:00', block:'Abend'}, {tag:'So 26.07.2026', zeit:'19:00', block:'Abend'}
+  ]
+};
+</script>
+
+<!-- ============================================================ -->
+<!-- BUCHUNGSMODUL · BLOCK B · HTML (leeres Modal-Geruest)         -->
+<!-- ============================================================ -->
+<div id="bkModal" class="bk-modal" hidden role="presentation">
+  <div class="bk-dialog" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+    <button type="button" class="bk-close" aria-label="Schliessen" onclick="closeBk()">&times;</button>
+    <div id="bkContent"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- BUCHUNGSMODUL · BLOCK C · JS (openBk/closeBk, Render je Typ,  -->
+<!-- ARIA/Fokus, ESC/Backdrop, Funnel-Hilfsfunktion merken()).    -->
+<!-- Preis-/Nr-Zugriff kompatibel zur gemeinsamen BK_DATA          -->
+<!-- (verschachtelte preise.* und Lektions-Feld nr).              -->
+<!-- ============================================================ -->
+<script id="buchungsmodul-js">
+(function(){
+  "use strict";
+
+  var lastFocus = null;
+
+  function $(id){ return document.getElementById(id); }
+
+  /* HTML-escapen fuer alle datengetriebenen Werte (Text UND Attribute). */
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+    });
+  }
+
+  /* Kompatibilitaets-Helfer fuer die gemeinsame BK_DATA-Struktur. */
+  function prices(d){ return d.preise || d; }            // preise.* oder top-level
+  function lekNr(l){ return l.nr != null ? l.nr : l.n; } // nr oder n
+
+  /* ---------- Render-Funktionen je Typ (liefern HTML-String) ---------- */
+
+  /* 1) 'lektionen' – alle Lektionen einzeln buchen. */
+  function renderLektionen(d){
+    var kurs = esc(d.kursKuerzel || "OSTA");
+    var pr = prices(d);
+    var rows = (d.lektionen || []).map(function(l){
+      var titel = "Kap " + esc(lekNr(l)) + " · " + esc(l.thema);
+      var right;
+      if(l.gratis){
+        right = '<a class="bk-badge" href="' + esc(l.slug) + '.html">gratis · ansehen</a>';
+      } else {
+        var preis = esc(l.einzel || pr.einzel || "");
+        var merk  = esc("Einzellektion Kap " + lekNr(l) + " · " + l.thema);
+        right = '<span class="bk-preis">' + preis + '</span>' +
+                '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">Vormerken</button>';
+      }
+      return '<li class="bk-row"><span class="bk-row-t">' + titel + '</span>' +
+             '<span class="bk-row-r">' + right + '</span></li>';
+    }).join("");
+    return '<h2 id="bkTitle" class="bk-h">Alle ' + kurs + '-Lektionen einzeln buchen</h2>' +
+           '<ul class="bk-list">' + rows + '</ul>';
+  }
+
+  /* 2) 'faecher' – nur Kuerzel (gross) + Klarname, je "einzeln buchen". */
+  function renderFaecher(d){
+    var pr = prices(d);
+    var rows = (d.faecher || []).map(function(f){
+      var merk = esc("Fach-Bundle: " + f.k + " – " + f.n);
+      return '<li class="bk-fach">' +
+               '<span class="bk-fach-t">' +
+                 '<span class="bk-fach-k">' + esc(f.k) + '</span>' +
+                 '<span class="bk-fach-n">' + esc(f.n) + '</span>' +
+               '</span>' +
+               '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">einzeln buchen</button>' +
+             '</li>';
+    }).join("");
+    var hinweis = '<p class="bk-hint">Das Paket „2–3 Kurse parallel“ (' +
+                  esc(pr.multi || "") + ') kombiniert 2–3 dieser Fächer – jedes ist ' +
+                  'auch einzeln als Fach-Bundle (' + esc(pr.bundle || "") + ') buchbar.</p>';
+    return '<h2 id="bkTitle" class="bk-h">Diese Fächer bieten wir dieses Semester an</h2>' +
+           '<ul class="bk-list">' + rows + '</ul>' + hinweis;
+  }
+
+  /* 3) 'termine' – nach block gruppiert, radio-artige Auswahl + Vormerken. */
+  function renderTermine(d){
+    var termine = d.termine || [];
+    var order = [], groups = {};
+    termine.forEach(function(t){
+      var b = t.block || "Termine";
+      if(!groups[b]){ groups[b] = []; order.push(b); }
+      groups[b].push(t);
+    });
+    var blocks = order.map(function(b){
+      var opts = groups[b].map(function(t){
+        var val = esc(t.tag + ", " + t.zeit + " Uhr");
+        return '<label class="bk-opt">' +
+                 '<input type="radio" name="bkTermin" value="' + val + '">' +
+                 '<span>' + esc(t.tag) + ", " + esc(t.zeit) + " Uhr</span>" +
+               '</label>';
+      }).join("");
+      return '<div class="bk-tgroup"><h3 class="bk-tgroup-h">' + esc(b) + '</h3>' + opts + '</div>';
+    }).join("");
+    return '<h2 id="bkTitle" class="bk-h">Wähle deinen Termin – Live-Q&amp;A / Klausurtraining</h2>' +
+           blocks +
+           '<p class="bk-need" hidden>Bitte wähle zuerst einen Termin aus.</p>' +
+           '<div class="bk-actionrow">' +
+             '<button type="button" class="bk-btn" data-bk-action="termin-submit">Diesen Termin vormerken</button>' +
+           '</div>' +
+           '<p class="bk-foot">Alle Termine nach der letzten Vorlesung und vor der Klausur.</p>';
+  }
+
+  /* 4) 'handouts' – je Kapitel Vormerken + aufklappbarer Inhalt (Keyword-Chips). */
+  function renderHandouts(d){
+    var pr = prices(d);
+    var preis = esc(pr.handout || "");
+    var rows = (d.lektionen || []).map(function(l){
+      var titel = "Kap " + esc(lekNr(l)) + " · " + esc(l.thema);
+      var merk  = esc("Handout-PDF Kap " + lekNr(l) + " · " + l.thema);
+      var chips = (l.keywords || []).map(function(k){
+        return '<span class="bk-chip">' + esc(k) + '</span>';
+      }).join("");
+      var details = chips
+        ? '<details class="bk-details"><summary>Inhalt</summary>' +
+          '<div class="bk-chips">' + chips + '</div></details>'
+        : "";
+      return '<li class="bk-row">' +
+               '<span class="bk-row-t">' + titel + details + '</span>' +
+               '<span class="bk-row-r">' +
+                 '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">Vormerken (' + preis + ')</button>' +
+               '</span>' +
+             '</li>';
+    }).join("");
+    return '<h2 id="bkTitle" class="bk-h">Handout-PDFs je Kapitel (' + preis + ')</h2>' +
+           '<ul class="bk-list">' + rows + '</ul>';
+  }
+
+  var RENDER = {
+    lektionen: renderLektionen,
+    faecher:   renderFaecher,
+    termine:   renderTermine,
+    handouts:  renderHandouts
+  };
+
+  /* ---------- Fokus-Falle innerhalb des Dialogs ---------- */
+  function focusables(modal){
+    var sel = 'a[href],button:not([disabled]),input:not([disabled]),' +
+              'select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    return Array.prototype.filter.call(modal.querySelectorAll(sel), function(el){
+      return el.offsetParent !== null || el === document.activeElement;
+    });
+  }
+
+  function onKey(e){
+    if(e.key === "Escape" || e.key === "Esc"){ closeBk(); return; }
+    if(e.key !== "Tab") return;
+    var modal = $("bkModal"); if(!modal) return;
+    var f = focusables(modal); if(!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+
+  /* ---------- Oeffentliche API: openBk / closeBk ---------- */
+
+  window.openBk = function(typ){
+    var modal   = $("bkModal");
+    var content = $("bkContent");
+    var data    = window.BK_DATA || {};
+    var render  = RENDER[typ];
+    if(!modal || !content || !render) return;
+
+    content.innerHTML = render(data);
+
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";     // Hintergrund nicht scrollen
+    document.addEventListener("keydown", onKey);
+
+    var closeBtn = modal.querySelector(".bk-close");
+    if(closeBtn) closeBtn.focus();
+  };
+
+  window.closeBk = function(){
+    var modal = $("bkModal");
+    if(!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", onKey);
+    if(lastFocus && typeof lastFocus.focus === "function"){
+      try { lastFocus.focus(); } catch(e){}
+    }
+    lastFocus = null;
+  };
+
+  /* ---------- Funnel-Hilfsfunktion merken() ----------
+     Setzt das Hidden-Feld name="interesse" und scrollt zu #vormerken.
+     Nur definieren, wenn die Seite noch KEIN merken() hat. */
+  if(typeof window.merken !== "function"){
+    window.merken = function(text){
+      var f = document.querySelector('[name="interesse"]') || $("vmInteresse");
+      if(!f){
+        var form = $("vmForm") ||
+                   document.querySelector("#vormerken form") ||
+                   document.querySelector("form");
+        if(form){
+          f = document.createElement("input");
+          f.type = "hidden"; f.name = "interesse"; f.id = "vmInteresse";
+          form.appendChild(f);
+        }
+      }
+      if(f) f.value = text || "";
+
+      var picked = $("vmPicked");
+      if(picked){
+        if(text){
+          picked.innerHTML = "Dein Interesse: <b>" +
+            String(text).replace(/[<>]/g, "") +
+            "</b> — trag dich unten ein, wir merken dich vor.";
+          picked.style.display = "block";
+        } else {
+          picked.style.display = "none";
+        }
+      }
+
+      var t = $("vormerken");
+      if(t) t.scrollIntoView({ behavior:"smooth", block:"start" });
+      var v = $("vmVorname");
+      if(v) setTimeout(function(){
+        try { v.focus({ preventScroll:true }); } catch(e){ v.focus(); }
+      }, 500);
+    };
+  }
+
+  /* ---------- Verdrahtung (einmalig, delegiert auf persistente Knoten) ---------- */
+  var modal   = $("bkModal");
+  var content = $("bkContent");
+
+  if(modal){
+    modal.addEventListener("click", function(e){
+      if(e.target === modal) closeBk();
+    });
+  }
+
+  if(content){
+    content.addEventListener("click", function(e){
+      var m = e.target.closest ? e.target.closest("[data-bk-merken]") : null;
+      if(m){
+        var txt = m.getAttribute("data-bk-merken");
+        closeBk();
+        window.merken(txt);
+        return;
+      }
+      var sub = e.target.closest ? e.target.closest('[data-bk-action="termin-submit"]') : null;
+      if(sub){
+        var sel = content.querySelector('input[name="bkTermin"]:checked');
+        if(!sel){
+          var need = content.querySelector(".bk-need");
+          if(need) need.hidden = false;
+          return;
+        }
+        closeBk();
+        window.merken("Live-Termin: " + sel.value);
+        return;
+      }
+    });
+
+    content.addEventListener("change", function(e){
+      if(e.target && e.target.name === "bkTermin"){
+        Array.prototype.forEach.call(content.querySelectorAll(".bk-opt"), function(o){
+          var r = o.querySelector("input");
+          o.classList.toggle("bk-sel", !!(r && r.checked));
+        });
+        var need = content.querySelector(".bk-need");
+        if(need) need.hidden = true;
+      }
+    });
+  }
+})();
+</script>
+
+<div class="vm-ov" id="vmOv" role="dialog" aria-modal="true" aria-labelledby="vmT">
+  <div class="vm-box">
+    <button type="button" class="vm-x" aria-label="Schließen" onclick="vmClose()">&times;</button>
+    <h3 id="vmT">Unverbindlich vormerken</h3>
+    <p class="vm-intro">So funktioniert's: Mit der Vormerkung schalten wir dir die <b>Probe-Lektionen</b> frei. Schau sie dir in Ruhe an &ndash; <b>danach entscheidest du</b>, ob du teilnehmen möchtest. Zur Planung des Kursbetriebs nehmen wir dich &ndash; mit deinem Einverständnis &ndash; in unsere <b>WhatsApp-Gruppe</b> auf (Beitrittslink kommt per E-Mail).</p>
+    <form name="vormerkung" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="danke.html" id="vmForm">
+      <input type="hidden" name="form-name" value="vormerkung">
+      <input type="hidden" name="subject" value="Neue Vormerkung &ndash; BWL Kurse">
+      <p hidden><label>Bitte nicht ausfüllen: <input name="bot-field"></label></p>
+      <label class="f" for="vmVorname">Vorname *</label>
+      <input type="text" id="vmVorname" name="vorname" required autocomplete="given-name" placeholder="Dein Vorname">
+      <label class="f" for="vmEmail">E-Mail-Adresse *</label>
+      <input type="email" id="vmEmail" name="email" required autocomplete="email" placeholder="name@beispiel.de">
+      <p class="vm-fnote">Ohne Telefonnummer senden wir dir die WhatsApp-Einladung <b>datenschutzkonform an diese E-Mail-Adresse</b>.</p>
+      <label class="f" for="vmTel">Handynummer <span class="vm-opt">(optional &ndash; „Direkt in WhatsApp aufnehmen")</span></label>
+      <input type="tel" id="vmTel" name="handynummer" autocomplete="tel" inputmode="tel" placeholder="z. B. 0151 23456789">
+      <p class="vm-fnote">Nur wenn du möchtest: Mit deiner Nummer nehmen wir dich <b>direkt</b> in die WhatsApp-Gruppe auf.</p>
+      <label class="vm-chk"><input type="checkbox" name="whatsapp_einverstaendnis" value="ja" required>
+        <span>Ich bin einverstanden, dass ihr mich zur <b>Planung des Kursbetriebs</b> in eure <b>WhatsApp-Gruppe</b> aufnehmt bzw. mir den Beitrittslink an meine E-Mail-Adresse sendet. *</span></label>
+      <label class="vm-chk"><input type="checkbox" name="datenschutz_einverstaendnis" value="ja" required>
+        <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Vormerkung einverstanden. *</span></label>
+      <div class="vm-act">
+        <button type="submit" class="vm-btn gold">Vormerkung absenden</button>
+        <button type="button" class="vm-btn gh" onclick="vmClose()">Abbrechen</button>
+      </div>
+      <div class="vm-err" id="vmErr">Da ist etwas schiefgelaufen. Bitte versuch es erneut.</div>
+      <p class="vm-note">* Pflichtfelder. Die Vormerkung ist kostenlos und unverbindlich.</p>
+    </form>
+    <div class="vm-ok" id="vmOk"></div>
+  </div>
+</div>
+
+<script>
+function vmOpen(){var o=document.getElementById('vmOv');if(o){o.classList.add('open');document.body.style.overflow='hidden';var v=document.getElementById('vmVorname');if(v)setTimeout(function(){v.focus();},50);}}
+function vmClose(){var o=document.getElementById('vmOv');if(o){o.classList.remove('open');document.body.style.overflow='';}}
+(function(){
+  var ov=document.getElementById('vmOv'); if(!ov) return;
+  ov.addEventListener('click',function(e){ if(e.target===ov) vmClose(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') vmClose(); });
+  var f=document.getElementById('vmForm');
+  if(f) f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){ f.reportValidity(); return; }
+    var data=new FormData(f), name=(data.get('vorname')||'').replace(/[<>]/g,'');
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()})
+      .then(function(r){ if(!r.ok) throw new Error('net');
+        document.getElementById('vmErr').style.display='none'; f.style.display='none';
+        var ok=document.getElementById('vmOk');
+        ok.innerHTML='<b>Danke, '+name+'!</b><br>Deine Vormerkung ist bei uns eingegangen. Wir melden uns per E-Mail – inklusive WhatsApp-Beitrittslink. Viel Erfolg beim Probearbeiten!';
+        ok.style.display='block';
+      })
+      .catch(function(){ document.getElementById('vmErr').style.display='block'; });
+  });
+})();
+</script>
+</body>
+</html>

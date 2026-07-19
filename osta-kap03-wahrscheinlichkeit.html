@@ -488,6 +488,23 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
 .qcount{font-size:.8rem;color:var(--ink2)}
 .numrow{display:flex;gap:8px;align-items:center;margin:.5rem 0}
 .q .stem{font-size:1.02rem}
+.pgroup{font-size:11px;letter-spacing:.09em;font-weight:600;color:var(--accent);text-transform:uppercase;margin:.4rem 0 .7rem}
+.pgroup.k2{margin-top:1.4rem}
+.pk{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;position:relative}
+.pk.feat{border:2px solid var(--accent)}
+.pk .pkrb{position:absolute;top:-9px;left:16px;background:var(--accent);color:#2A1500;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:20px}
+.pk h4{font-family:var(--se);font-size:1.08rem;font-weight:600;margin:0 0 2px}
+.pk small{color:var(--grey);font-size:12.5px;display:block;line-height:1.45}
+.pk .pkpr{font-family:var(--se);font-size:1.5rem;font-weight:600;margin-top:8px}
+.pk .pkpr s{font-family:var(--sa);font-size:.8rem;color:var(--grey);font-weight:400;margin-left:6px}
+.pk .pksub{font-size:12.5px;color:var(--grey);margin-top:8px;line-height:1.5}
+.pk .pkbtn{margin-top:10px}
+.ez{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line)}
+.ez:last-of-type{border-bottom:0}
+.ez .ezn{font-size:14px}.ez .ezn small{display:block;color:var(--grey);font-size:12px;margin-top:1px;line-height:1.4}
+.ez .ezr{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.ez .ezp{font-weight:600}
+.bk-btn.pkbtn{font-size:.8rem;padding:.35rem .8rem;white-space:nowrap}
 .pv-head{display:flex;gap:16px;align-items:center;margin-bottom:14px}
 .pv-head .mono{width:100px;height:100px;flex:0 0 auto}
 .pv-head h3{font-family:var(--se);font-size:1.35rem;margin:0}
@@ -660,27 +677,18 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
     </div>
     <p class="note" style="margin:.2rem 0 1rem">OSTA Klausur-Check &ndash; alle 10 Kapitel + 1&times; Live-Online-Q&amp;A. Preis inkl. USt. Statt 69,00&nbsp;€ im Einzelkauf (10 &times; 6,90&nbsp;€).</p>
 
-    <a class="btn alt cta-wide" id="offerCta" href="#" onclick="vmOpen();return false;">Jetzt vormerken</a>
+    <a class="btn alt cta-wide" id="offerCta" href="#" onclick="vmOpen();return false;">unverbindlich testen</a>
 
-    <h3 style="margin-top:1.4rem">Alle Preise im Überblick</h3>
-    <ul class="check" style="list-style:none;padding-left:0">
-      <li>Diese Probe-Lektion &ndash; <b>gratis</b></li>
-      <li>Einzelne Lektion &ndash; <b>6,90 €</b>
-        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('lektionen')">Lektion wählen</button></li>
-      <li>OSTA Klausur-Check (alle 10 Kapitel + Live-Q&amp;A) &ndash; <b>39,90 €</b> statt 69,00 € im Einzelkauf (10 &times; 6,90 €)</li>
-      <li>OSTA Klausur-Check <b>+ Handouts &amp; Musterlösungen</b> (alles aus &bdquo;OSTA Klausur-Check&ldquo; + Handout-PDFs mit Aufgaben &amp; Musterlösungen zu allen Kapiteln) &ndash; <b>69,90 €</b>
-        <span class="save" style="margin-left:.4rem;font-size:.82rem;vertical-align:middle">Beliebteste Wahl</span></li>
-      <li><b>Mehrere Kurse parallel</b>
-        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('faecher')">Fächer wählen</button>
-        <span class="muted" style="margin-left:.4rem">OMIK &middot; OSTA &middot; OFIN &middot; BFIN</span>
-        <span class="muted" style="display:block;margin-top:.3rem">Klausur-Check: 2 Kurse <b>69,90 €</b> &middot; 3 Kurse <b>89,90 €</b><br>Klausur-Check + Handouts: 2 Kurse <b>99,80 €</b> &middot; 3 Kurse <b>129,70 €</b></span></li>
-      <li>Live-Online-Q&amp;A &ndash; <b>9,90 €</b> einzeln / <b>24,90 €</b> im 3er-Ticket
-        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('termine')">Termin wählen</button></li>
-      <li>Live-Klausurtraining &ndash; <b>19,90 €</b><span class="muted" style="display:block;margin-top:.25rem">Ganze Klausuraufgaben vorab einsenden &ndash; in einer Session ausführlich gelöst.</span>
-        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('termine')">Termin wählen</button></li>
-      <li>Handout-PDF (Zusammenfassung + Aufgaben mit Lösungen) &ndash; <b>8,90 €</b>
-        <button type="button" class="bk-btn" style="margin-left:.5rem;font-size:.82rem;padding:.3rem .7rem;vertical-align:middle" onclick="openBk('handouts')">Handout wählen</button></li>
-    </ul>
+    <h3 style="margin-top:1.6rem">Preise wie in der App</h3>
+    <div class="pgroup">Pakete &middot; das Rundum-Sorglos</div>
+    <div class="pk"><h4>OSTA Klausur-Check</h4><small>Alle 10 Kapitel + 1&times; Live-Q&amp;A</small><div class="pkpr">39,90 €<s>statt 69,00 €</s></div></div>
+    <div class="pk feat"><span class="pkrb">Beliebteste Wahl</span><h4>Klausur-Check + alle Handouts</h4><small>Alles oben + Handout-PDFs mit Aufgaben &amp; Musterlösungen</small><div class="pkpr">69,90 €</div></div>
+    <div class="pk"><h4>Mehrere Kurse parallel</h4><small>OMIK &middot; OSTA &middot; OFIN &middot; BFIN</small><div class="pkpr">ab 69,90 €</div><div class="pksub">Klausur-Check: 2 Kurse <b>69,90 €</b> &middot; 3 Kurse <b>89,90 €</b><br>+ Handouts: 2 Kurse <b>99,80 €</b> &middot; 3 Kurse <b>129,70 €</b></div><button type="button" class="bk-btn pkbtn" onclick="openBk('faecher')">Fächer wählen</button></div>
+    <div class="pgroup k2">Einzeln buchbar</div>
+    <div class="ez"><span class="ezn">Einzelne Lektion<small>wird voll auf den Klausur-Check angerechnet</small></span><span class="ezr"><span class="ezp">6,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('lektionen')">wählen</button></span></div>
+    <div class="ez"><span class="ezn">Live-Online-Q&amp;A<small>1× gratis im Klausur-Check &middot; 3er-Ticket 24,90 €</small></span><span class="ezr"><span class="ezp">9,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('termine')">wählen</button></span></div>
+    <div class="ez"><span class="ezn">Live-Klausurtraining<small>Ganze Klausuraufgaben vorab einsenden &ndash; in einer Session ausführlich gelöst</small></span><span class="ezr"><span class="ezp">19,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('termine')">wählen</button></span></div>
+    <div class="ez"><span class="ezn">Handout-PDF<small>Zusammenfassung + Aufgaben mit Lösungen</small></span><span class="ezr"><span class="ezp">8,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('handouts')">wählen</button></span></div>
     <p class="note">Alle Preise inkl. USt. Buchung über die Vormerkung &ndash; die Bezahlung schalten wir in Kürze frei.</p>
   </div>
 

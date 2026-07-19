@@ -825,7 +825,10 @@ footer .fbrand b{font-family:var(--serif)}
       <h2>Hol dir dein zweites Gratis-Kapitel.</h2>
       <p class="sub" style="max-width:none">Meld dich kostenlos an und such dir <b>ein zweites Kapitel deiner Wahl</b> aus, das du gratis dazubekommst. <b>Keine Zahlungspflicht</b> &ndash; alles Weitere entscheidest du später in der App.</p>
       <div class="fnote" id="vmPicked" style="display:none;background:var(--surface-2);border-radius:var(--r-sm);padding:10px 14px;box-shadow:inset 0 0 0 1px var(--hair);margin-bottom:6px"></div>
-      <form name="vormerkung" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="danke.html" id="vmForm">
+      <form method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" id="vmForm">
+        <input type="hidden" name="locale" value="de">
+        <input type="hidden" name="html_type" value="simple">
+        <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-5000px!important;width:1px;height:1px;overflow:hidden">
         <input type="hidden" name="form-name" value="vormerkung">
         <input type="hidden" name="subject" value="Neue Vormerkung · BWL Kurse OSTA">
         <input type="hidden" name="interesse" id="vmInteresse" value="">
@@ -835,7 +838,7 @@ footer .fbrand b{font-family:var(--serif)}
         <input type="text" id="vmVorname" name="vorname" required autocomplete="given-name" placeholder="Dein Vorname">
 
         <label class="f" for="vmEmail">E&#8209;Mail&#8209;Adresse *</label>
-        <input type="email" id="vmEmail" name="email" required autocomplete="email" placeholder="name@beispiel.de">
+        <input type="email" id="vmEmail" name="EMAIL" required autocomplete="email" placeholder="name@beispiel.de">
         <p class="fnote">Ohne Telefonnummer senden wir dir die WhatsApp&#8209;Einladung datenschutzkonform an diese E&#8209;Mail&#8209;Adresse.</p>
 
         <label class="f" for="vmTel">Handynummer <span style="font-weight:400;color:var(--text-2)">(optional)</span></label>
@@ -1185,12 +1188,17 @@ window.addEventListener("resize", drawRails);
     if(!f.checkValidity()){ f.reportValidity(); return; }
     var data = new FormData(f);
     var name = (data.get("vorname") || "").replace(/[<>]/g,"");
-    fetch("/", {method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded"}, body:new URLSearchParams(data).toString()})
-      .then(function(r){ if(!r.ok) throw new Error("net");
+    var body = new URLSearchParams();
+    body.append("EMAIL", (data.get("EMAIL") || "").trim());
+    body.append("email_address_check", "");
+    body.append("locale", "de");
+    body.append("html_type", "simple");
+    fetch(f.getAttribute("action"), {method:"POST", mode:"no-cors", body: body})
+      .then(function(){
         $("vmErr").style.display = "none";
         f.style.display = "none";
         var ok = $("vmOk");
-        ok.innerHTML = "<b>Danke, " + name + "!</b><br>Deine Vormerkung ist bei uns eingegangen. Wir melden uns per E-Mail, inklusive WhatsApp-Beitrittslink. Viel Erfolg beim Probearbeiten!";
+        ok.innerHTML = "<b>Geschafft" + (name ? ", " + name : "") + "!</b><br>Deine Gratis-Lektion wartet. Wir haben dir eine E-Mail geschickt \u2013 best\u00e4tige kurz den Link, dann geht\u2019s direkt los.";
         ok.style.display = "block";
         ok.scrollIntoView({behavior:"smooth", block:"center"});
       })

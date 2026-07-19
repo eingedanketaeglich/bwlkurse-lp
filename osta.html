@@ -1367,5 +1367,34 @@ window.BK_DATA = {
   }
 })();
 </script>
+<style id="v43-politur">
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+.btn{transition:transform .18s ease,box-shadow .2s ease,background-color .18s ease,filter .18s ease;will-change:transform}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary:hover{box-shadow:0 10px 26px rgba(232,118,10,.30)}
+.btn-silver:hover,.btn-app:hover{box-shadow:0 8px 20px rgba(32,35,42,.16)}
+h1,h2{letter-spacing:-.015em}
+.v43-price-note{margin:20px auto 0;max-width:860px;font-size:14.5px;line-height:1.65;color:var(--ink,#20232A);background:var(--bg,#fff);border:1px solid var(--hair,rgba(32,35,42,.12));border-radius:12px;padding:15px 17px}
+.v43-live{display:inline-flex;align-items:center;gap:8px;margin-top:4px;background:rgba(232,118,10,.10);color:#c96406;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+</style>
+<script id="v43-politur-js">
+(function(){
+  var pre=document.getElementById('preise');
+  if(pre&&!pre.querySelector('.v43-price-note')){
+    var root=pre.querySelector(':scope > .wrap')||pre;
+    var n=document.createElement('div');n.className='v43-price-note';
+    n.innerHTML='<b>Mehrere Kurse parallel</b> (Klausur-Check): 2 Kurse 69,90&nbsp;€ · 3 Kurse 89,90&nbsp;€. Mit allen Handouts: 2 Kurse 99,80&nbsp;€ · 3 Kurse 129,70&nbsp;€.<br><span class="v43-live">Live-Klausurtraining · 19&nbsp;€ – ganze Klausuraufgaben vorab einsenden</span>';
+    root.appendChild(n);
+  }
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  function kids(root){var k=Array.prototype.filter.call(root.children,function(n){return n.nodeType===1;});while(k.length===1&&k[0].children.length>1){root=k[0];k=Array.prototype.filter.call(root.children,function(n){return n.nodeType===1;});}return k;}
+  function apply(root){var vh=window.innerHeight||800,i=0;kids(root).forEach(function(el){var t=el.tagName.toLowerCase();if(t==='script'||t==='style'||t==='link')return;var r=el.getBoundingClientRect();if(r.top<vh*0.85)return;el.classList.add('reveal');el.style.transitionDelay=Math.min(i*90,380)+'ms';i++;io.observe(el);});}
+  var hero=document.querySelector('.hero .wrap');if(hero)apply(hero);
+  ['klausurcheck','gratis','weiter','sofunktionierts','stimmen','autor','preise','faq','app-holen'].forEach(function(id){var s=document.getElementById(id);if(!s)return;apply(s.querySelector(':scope > .wrap')||s);});
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live-Q&A vormerken · Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#EAE9E5;--paper:#F5F4F1;--ink:#20232A;--ink2:#3b414d;--muted:#71767f;--orange:#E8760A;--orange-d:#c96406;--line:rgba(32,35,42,.13);--line2:rgba(32,35,42,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+.top{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.top img{width:38px;height:38px;border-radius:9px;object-fit:cover}
+.top b{font-family:'Fraunces';font-size:17px}
+.wrap{max-width:560px;margin:0 auto;padding:28px 18px 60px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px}
+.kick{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.card h2{font-size:clamp(22px,5.5vw,27px);margin:8px 0 10px}
+.sub{font-size:15.5px;color:var(--ink2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--orange);color:#fff;font-weight:600;font-size:16px;padding:14px 22px;border:0;border-radius:999px;cursor:pointer;transition:transform .16s,background .16s;width:100%;margin-top:18px}
+.btn:hover{transform:translateY(-1px);background:var(--orange-d)}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line2);margin-top:10px}
+.btn.ghost:hover{background:#faf9f7}
+.acc{margin-top:18px;display:none}
+.acc.show{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.fach{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.fh{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;padding:16px 16px;cursor:pointer;text-align:left;font-family:inherit}
+.fh .k{font-family:'Fraunces';font-weight:600;color:var(--orange);font-size:17px;min-width:54px}
+.fh .n{flex:1;font-weight:500;font-size:15.5px;color:var(--ink)}
+.fh .chev{transition:transform .25s;color:var(--muted)}
+.fach.open .chev{transform:rotate(180deg)}
+.fbody{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.fach.open .fbody{max-height:640px}
+.fpad{padding:2px 16px 16px}
+.tlabel{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:8px 0 8px}
+.terms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.term{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 12px;cursor:pointer;font-size:14px;transition:.15s}
+.term:hover{border-color:var(--line2)}
+.term.sel{background:rgba(232,118,10,.1);border-color:var(--orange);color:var(--orange-d);font-weight:600}
+.term .d{display:block;font-weight:600;color:var(--ink)}
+.term.sel .d{color:var(--orange-d)}
+.term .z{font-size:12.5px;color:var(--muted)}
+.reg{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line2);display:none}
+.reg.show{display:block}
+.reg label{display:block;font-size:13px;font-weight:600;margin:10px 0 5px}
+.reg input{width:100%;font:inherit;font-size:15px;padding:11px 13px;border:1px solid var(--line2);border-radius:11px;background:#fff;color:var(--ink)}
+.reg .hint{font-size:12.5px;color:var(--muted);margin-top:5px}
+.done{display:none;background:rgba(45,140,80,.09);border:1px solid rgba(45,140,80,.4);border-radius:12px;padding:16px 16px;margin-top:8px}
+.done.show{display:block;animation:fade .3s ease}
+.done b{color:#227a45}
+.pill{display:inline-block;background:rgba(232,118,10,.1);color:var(--orange-d);font-weight:600;font-size:13px;padding:5px 11px;border-radius:999px;margin-bottom:8px}
+.note{max-width:560px;margin:14px auto 0;padding:0 18px;font-size:12px;color:var(--muted);text-align:center}
+</style></head>
+<body>
+<div class="top"><img src="data:image/png;base64,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" alt=""><b>BWL&nbsp;Kurse</b></div>
+<div class="wrap">
+  <div class="card" id="card">
+    <div class="kick">Online-Q&amp;A vor der Klausur</div>
+    <h2>Live-Q&amp;A vormerken</h2>
+    <p class="sub">Sichere dir deinen Platz in einer Live-Fragerunde kurz vor der Klausur. Wähl dein Fach und einen Termin — wir informieren dich per Mail zum Onboarding.</p>
+    <button class="btn" id="start">Vormerken Live Q&amp;A</button>
+    <button class="btn ghost" id="gratis">Erst Gratis-Lektion ansehen</button>
+
+    <div class="acc" id="acc"></div>
+  </div>
+</div>
+<p class="note">Mockup · Interaktion zum Antippen. Fächer &amp; Termine kommen später aus dem Buchungsmodul, Anmeldung läuft über Brevo.</p>
+
+<script>
+var FAECHER=[{k:'OMIK',n:'Mikroökonomik 1'},{k:'OSTA',n:'Statistik 1'},{k:'OFIN',n:'Finanzen 1'}];
+var TERMINE=[{t:'Fr 24.07.',z:'10:00',b:'Vormittag'},{t:'Sa 25.07.',z:'10:00',b:'Vormittag'},{t:'So 26.07.',z:'10:00',b:'Vormittag'},{t:'Fr 24.07.',z:'19:00',b:'Abend'},{t:'Sa 25.07.',z:'19:00',b:'Abend'},{t:'So 26.07.',z:'19:00',b:'Abend'}];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var acc=document.getElementById('acc');
+document.getElementById('start').addEventListener('click',function(){
+  this.style.display='none';
+  acc.innerHTML=FAECHER.map(function(f,i){
+    var terms=TERMINE.map(function(t,j){return '<button class="term" data-f="'+i+'" data-t="'+j+'"><span class="d">'+t.t+'</span><span class="z">'+t.z+' · '+t.b+'</span></button>';}).join('');
+    return '<div class="fach" data-i="'+i+'">'+
+      '<button class="fh" data-fh="'+i+'"><span class="k">'+f.k+'</span><span class="n">'+esc(f.n)+'</span><span class="chev">▾</span></button>'+
+      '<div class="fbody"><div class="fpad"><div class="tlabel">Termin wählen</div><div class="terms">'+terms+'</div>'+
+      '<div class="reg" data-reg="'+i+'"><span class="pill" data-pill="'+i+'"></span>'+
+      '<label>E-Mail-Adresse *</label><input type="email" placeholder="name@beispiel.de">'+
+      '<label>Handynummer <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input type="tel" placeholder="z. B. 0151 23456789">'+
+      '<p class="hint">Ohne Nummer bekommst du die Infos per Mail.</p>'+
+      '<button class="btn" data-submit="'+i+'">Für die '+f.k+'-Q&amp;A-Liste anmelden</button></div>'+
+      '<div class="done" data-done="'+i+'"><b>Perfekt!</b><br>Du wirst in Kürze per Mail zum Onboarding informiert.</div>'+
+      '</div></div></div>';
+  }).join('');
+  acc.classList.add('show');
+});
+acc.addEventListener('click',function(e){
+  var fh=e.target.closest('[data-fh]');
+  if(fh){var i=fh.getAttribute('data-fh');var el=acc.querySelector('.fach[data-i="'+i+'"]');
+    var wasOpen=el.classList.contains('open');
+    acc.querySelectorAll('.fach').forEach(function(x){x.classList.remove('open');});
+    if(!wasOpen)el.classList.add('open');return;}
+  var term=e.target.closest('.term');
+  if(term){var fi=term.getAttribute('data-f'),ti=term.getAttribute('data-t');
+    var fach=acc.querySelector('.fach[data-i="'+fi+'"]');
+    fach.querySelectorAll('.term').forEach(function(x){x.classList.remove('sel');});
+    term.classList.add('sel');
+    var reg=fach.querySelector('[data-reg="'+fi+'"]');
+    var tm=TERMINE[ti];
+    fach.querySelector('[data-pill="'+fi+'"]').textContent=FAECHER[fi].k+' · '+tm.t+' '+tm.z;
+    reg.classList.add('show');
+    reg.scrollIntoView({behavior:'smooth',block:'nearest'});return;}
+  var sub=e.target.closest('[data-submit]');
+  if(sub){e.preventDefault();var fi=sub.getAttribute('data-submit');
+    var fach=acc.querySelector('.fach[data-i="'+fi+'"]');
+    fach.querySelector('[data-reg="'+fi+'"]').style.display='none';
+    fach.querySelector('.terms').style.display='none';
+    fach.querySelector('.tlabel').style.display='none';
+    var d=fach.querySelector('[data-done="'+fi+'"]');d.classList.add('show');
+    d.scrollIntoView({behavior:'smooth',block:'center'});return;}
+});
+document.getElementById('gratis').addEventListener('click',function(){alert('Mockup: führt zur Gratis-Lektion (Brevo-Formular).');});
+</script>
+</body></html>

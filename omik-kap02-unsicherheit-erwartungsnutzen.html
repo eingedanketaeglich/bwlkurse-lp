@@ -523,7 +523,7 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
   <div class="brand">BWL Kurse<small>Mikroökonomik (OMIK) · Goethe-Uni Frankfurt · Kapitel 2</small></div>
   <div class="spacer"></div>
   <!-- PREISMODUL · BLOCK A (Header-Preis-Pill): führt per Anker zur Angebots-Sektion #angebot -->
-  <a class="pill" href="#angebot">Wer besteht?</a>
+  <a class="pill" href="#angebot">Schaffst du’s?</a>
 </div></div>
 
 <section class="hero"><div class="wrap">
@@ -703,7 +703,7 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
     <div class="pgroup">Pakete &middot; das Rundum-Sorglos</div>
     <div class="pk"><h4>OMIK Klausur-Check</h4><small>Alle 10 Kapitel</small><div class="pkpr">39,90 €<s>statt 69,00 €</s></div></div>
     <div class="pk feat"><span class="pkrb">Beliebteste Wahl</span><h4>OMIK Klausur-Check + alle Handouts</h4><small>Alles oben + Handout-PDFs mit Aufgaben &amp; Musterlösungen</small><div class="pkpr">79,90 €</div></div>
-    <div class="pk"><h4>Mehrere Kurse parallel</h4><small>OMIK &middot; OSTA &middot; OFIN &middot; BFIN</small><div class="pkpr">ab 69,90 €</div><div class="pksub">Klausur-Check: 2 Kurse <b>69,90 €</b> &middot; 3 Kurse <b>89,90 €</b><br>+ Handouts: 2 Kurse <b>99,80 €</b> &middot; 3 Kurse <b>129,70 €</b></div><button type="button" class="bk-btn pkbtn" onclick="openBk('faecher')">Fächer wählen</button></div>
+    <div class="pk"><h4>Mehrere Kurse parallel</h4><small>OMIK &middot; OSTA &middot; OFIN</small><div class="pkpr">ab 69,90 €</div><div class="pksub">Klausur-Check: 2 Kurse <b>69,90 €</b> &middot; 3 Kurse <b>89,90 €</b><br>+ Handouts: 2 Kurse <b>99,80 €</b> &middot; 3 Kurse <b>129,70 €</b></div><button type="button" class="bk-btn pkbtn" onclick="openBk('faecher')">Fächer wählen</button></div>
     <div class="pgroup k2">Einzeln buchbar</div>
     <div class="ez"><span class="ezn">Einzelne Lektion<small>wird voll auf den Klausur-Check angerechnet</small></span><span class="ezr"><span class="ezp">6,90 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('lektionen')">wählen</button></span></div>
     <div class="ez"><span class="ezn">Live-Klausurtraining<small>Ganze Klausuraufgaben vorab einsenden, in einer Session ausführlich gelöst</small></span><span class="ezr"><span class="ezp">19,00 €</span><button type="button" class="bk-btn pkbtn" onclick="openBk('termine')">wählen</button></span></div>
@@ -932,7 +932,7 @@ window.BK_DATA = {
     { nr:9, thema:'Cournot, Bertrand & Stackelberg', slug:'omik-kap09-oligopol', gratis:false, keywords:['Cournot-Mengenwettbewerb','Bertrand-Preiswettbewerb','Stackelberg-Führerschaft','Reaktionsfunktion'] },
     { nr:10, thema:'Klausurtraining', slug:'omik-kap10-klausurtraining', gratis:false, keywords:['Aufgabentypen','Rechenwege','Musterlösungen','Prüfungsstrategie'] }
   ],
-  faecher: [ {k:'OMIK',n:'Mikroökonomik 1'}, {k:'OSTA',n:'Statistik'}, {k:'OFIN',n:'Finanzen 1'}, {k:'BFIN',n:'Finanzen 2'} ],
+  faecher: [ {k:'OMIK',n:'Mikroökonomik 1'}, {k:'OSTA',n:'Statistik'}, {k:'OFIN',n:'Finanzen 1'} ],
   termine: [
     {tag:'Fr 17.07.2026', zeit:'10:00', block:'Vormittag'}, {tag:'Sa 18.07.2026', zeit:'10:00', block:'Vormittag'}, {tag:'So 19.07.2026', zeit:'10:00', block:'Vormittag'},
     {tag:'Fr 17.07.2026', zeit:'19:00', block:'Abend'}, {tag:'Sa 18.07.2026', zeit:'19:00', block:'Abend'}, {tag:'So 19.07.2026', zeit:'19:00', block:'Abend'}
@@ -1009,7 +1009,7 @@ window.BK_DATA = {
                  '<span class="bk-fach-k">' + esc(f.k) + '</span>' +
                  '<span class="bk-fach-n">' + esc(f.n) + '</span>' +
                '</span>' +
-               '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">einzeln buchen</button>' +
+               '<a class="bk-btn" href="' + esc(f.k.toLowerCase()) + '.html">einzeln buchen</a>' +
              '</li>';
     }).join("");
     var hinweis = '<p class="bk-hint">Das Paket „2 bis 3 Kurse parallel“ (' +
@@ -1342,7 +1342,7 @@ function vmClose(){var o=document.getElementById('vmOv');if(o){o.classList.remov
         f.parentNode.insertBefore(box, f.nextSibling);
       }
       box.style.display = 'block';
-      f.style.display = 'none';
+      var sb=f.querySelector('button[type="submit"]'); if(sb){ sb.disabled=true; }
     }, 25);
   }, true);
 })();

@@ -1624,6 +1624,7 @@ h1,h2{letter-spacing:-.015em}
       }
       box.style.display = 'block';
       var sb=f.querySelector('button[type="submit"]'); if(sb){ sb.disabled=true; }
+      if(box.scrollIntoView) box.scrollIntoView({block:'nearest',behavior:'smooth'});
     }, 25);
   }, true);
 })();

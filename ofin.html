@@ -408,7 +408,7 @@ label.f{display:block;font-weight:600;margin:16px 0 6px;font-size:15px}
   border-radius:999px;padding:5px 14px;box-shadow:var(--sh-1);
 }
 .upsells{display:grid;gap:14px;margin-top:18px}
-@media(min-width:900px){.upsells{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:900px){.upsells{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}}
 .ups{
   background:var(--surface-2);border-radius:var(--r-md);padding:18px;
   box-shadow:inset 0 0 0 1px var(--hair);display:flex;flex-direction:column;gap:6px;
@@ -597,6 +597,149 @@ footer .fbrand b{font-family:var(--serif)}
 .step h3{font-size:17px;margin-bottom:4px}
 .step p{font-size:14.5px;color:var(--text-2);margin:0;max-width:none}
 </style>
+<style id="bkbc-css">
+/* ===== BKBC · Faecher-Paket-Konfigurator · identisch in App + Landing ===== */
+.bkbc-card{border:2px solid var(--accent);border-radius:14px;padding:14px;background:var(--surface-2);box-shadow:var(--sh-1)}
+.bkbc-h{font-weight:600;font-size:16px;margin:0 0 2px}
+.bkbc-sub{font-size:12px;color:var(--text-2);margin:0 0 10px;line-height:1.45}
+.bkbc-save{color:var(--done);font-size:12px;font-weight:600;margin-top:3px}
+.bkbc-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid var(--hair);border-radius:10px;margin:0 0 8px;cursor:pointer;background:var(--surface)}
+.bkbc-row:hover{border-color:var(--accent)}
+.bkbc-row.sel{border-color:var(--accent);background:var(--glow)}
+.bkbc-row input{width:20px;height:20px;accent-color:var(--accent);flex:none;margin:0}
+.bkbc-rt{flex:1;min-width:0}
+.bkbc-rt b{display:block;font-weight:600;font-size:14px}
+.bkbc-rt small{display:block;color:var(--text-3);font-size:12px;line-height:1.4}
+.bkbc-ho-row{margin-top:12px;border-style:dashed}
+.bkbc-sum{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:14px 2px 10px}
+.bkbc-total{font-size:26px;font-weight:600;white-space:nowrap;line-height:1.1}
+.bkbc-cta{display:flex;width:100%;align-items:center;justify-content:center;min-height:48px;cursor:pointer;border:0;border-radius:10px;font-size:15px;font-weight:600;text-align:center;background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500;box-shadow:var(--sh-1)}
+.bkbc-cta:disabled{background:var(--surface);color:var(--text-3);cursor:not-allowed;box-shadow:inset 0 0 0 1px var(--hair)}
+.bkbc-note{font-size:11.5px;color:var(--text-3);line-height:1.45;margin:10px 2px 0;text-align:center}
+</style>
+<script id="bkbc-core">
+/* =====================================================================
+   BKBC · Faecher-Paket-Konfigurator (Mehrfachauswahl + Auto-Summe)
+   ---------------------------------------------------------------------
+   ⛔ DIESER BLOCK IST IN ALLEN DATEIEN IDENTISCH:
+      App    : osta-app-vorschau/index.html (+ omik-/ofin-app-vorschau)
+      Landing: bwlkurse-lp/index.html, osta.html, omik.html, ofin.html
+   Preise NUR hier aendern - danach in alle Dateien kopieren.
+   Checkout-Hook: window.bkbcOnCheckout(payload)
+      payload = {faecher:["OSTA",...], handouts:true|false, anzahl:N, total:Zahl}
+   ===================================================================== */
+window.BKBC = (function(){
+  "use strict";
+
+  /* ================= CONFIG (einzige Preisquelle) ================= */
+  var CFG = {
+    FAECHER: [
+      {code:"OMIK", sub:"Mikro\u00f6konomik 1"},
+      {code:"OSTA", sub:"Statistik"},
+      {code:"OFIN", sub:"Finanzen 1"}
+    ],
+    /* Staffel Klausur-Check (ohne Handouts) */
+    KLAUSURCHECK: {0:0, 1:39.90, 2:69.90, 3:89.90},
+    /* Staffel mit allen Handouts */
+    MIT_HANDOUTS: {0:0, 1:79.90, 2:99.80, 3:129.70},
+    /* "vormerken" = unverbindliche Vormerkung (kein Zahlungsanbieter aktiv)
+       "bestellen" = echter Kaufabschluss, Button-Beschriftung nach \u00a7312j BGB
+       -> auf "bestellen" umstellen, SOBALD der Checkout wirklich zahlungspflichtig ist. */
+    CTA_MODUS: "vormerken"
+  };
+  /* ================================================================ */
+
+  function fmt(n){ return n.toFixed(2).replace(".", ",") + " \u20ac"; }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function preis(anzahl, handouts){
+    var tab = handouts ? CFG.MIT_HANDOUTS : CFG.KLAUSURCHECK;
+    return (tab[anzahl] != null) ? tab[anzahl] : 0;
+  }
+
+  function markup(){
+    var rows = CFG.FAECHER.map(function(f){
+      return '<label class="bkbc-row"><input type="checkbox" class="bkbc-f" data-code="' + esc(f.code) + '">' +
+             '<span class="bkbc-rt"><b>' + esc(f.code) + '</b><small>' + esc(f.sub) + '</small></span></label>';
+    }).join("");
+    return '<div class="bkbc-card">' +
+      '<div class="bkbc-h">F\u00e4cher-Paket zusammenstellen</div>' +
+      '<p class="bkbc-sub">F\u00e4cher antippen \u2013 der Preis rechnet sich automatisch zusammen.</p>' +
+      rows +
+      '<label class="bkbc-row bkbc-ho-row"><input type="checkbox" class="bkbc-ho">' +
+        '<span class="bkbc-rt"><b>mit allen Handouts</b><small>Aufgaben-PDFs + Musterl\u00f6sungen zu jedem Kapitel</small></span></label>' +
+      '<div class="bkbc-sum">' +
+        '<div><div class="bkbc-cnt bkbc-sub" style="margin:0">Noch keine F\u00e4cher gew\u00e4hlt</div>' +
+        '<div class="bkbc-save"></div></div>' +
+        '<div class="bkbc-total">' + fmt(0) + '</div>' +
+      '</div>' +
+      '<button type="button" class="bkbc-cta" disabled>F\u00e4cher w\u00e4hlen</button>' +
+      '<div class="bkbc-msg bkbc-note"></div>' +
+    '</div>';
+  }
+
+  function bind(root){
+    var r = root || document;
+    var fs = Array.prototype.slice.call(r.querySelectorAll(".bkbc-f"));
+    if(!fs.length) return null;
+    var ho   = r.querySelector(".bkbc-ho"),
+        elT  = r.querySelector(".bkbc-total"),
+        elC  = r.querySelector(".bkbc-cnt"),
+        elS  = r.querySelector(".bkbc-save"),
+        cta  = r.querySelector(".bkbc-cta"),
+        msg  = r.querySelector(".bkbc-msg");
+    if(!ho || !elT || !cta) return null;
+
+    function upd(){
+      var picked = fs.filter(function(x){ return x.checked; });
+      var n = picked.length, h = !!ho.checked;
+      var total = preis(n, h), einzel = preis(1, h);
+      var save  = (n >= 2) ? (n * einzel - total) : 0;
+
+      fs.forEach(function(x){
+        var row = x.closest ? x.closest(".bkbc-row") : x.parentNode;
+        if(row) row.classList.toggle("sel", x.checked);
+      });
+      var hoRow = ho.closest ? ho.closest(".bkbc-row") : ho.parentNode;
+      if(hoRow) hoRow.classList.toggle("sel", h);
+
+      elT.textContent = fmt(total);
+      if(elC) elC.textContent = (n === 0)
+        ? "Noch keine F\u00e4cher gew\u00e4hlt"
+        : (n + (n === 1 ? " Fach" : " F\u00e4cher") + (h ? " \u00b7 mit allen Handouts" : " \u00b7 Klausur-Check"));
+      if(elS) elS.textContent = (save > 0) ? ("Du sparst " + fmt(save)) : "";
+
+      cta.disabled = (n === 0);
+      cta.textContent = (n === 0)
+        ? "F\u00e4cher w\u00e4hlen"
+        : ((CFG.CTA_MODUS === "bestellen" ? "Zahlungspflichtig bestellen \u00b7 " : "Paket vormerken \u00b7 ") + fmt(total));
+
+      cta._payload = {
+        faecher: picked.map(function(x){ return x.getAttribute("data-code"); }),
+        handouts: h, anzahl: n, total: total
+      };
+    }
+
+    fs.forEach(function(x){ x.addEventListener("change", upd); });
+    ho.addEventListener("change", upd);
+    cta.addEventListener("click", function(e){
+      e.preventDefault();
+      if(cta.disabled) return;
+      var p = cta._payload;
+      if(typeof window.bkbcOnCheckout === "function"){ window.bkbcOnCheckout(p); return; }
+      if(msg) msg.textContent = "Auswahl: " + p.anzahl + (p.anzahl === 1 ? " Fach" : " F\u00e4cher") +
+        (p.handouts ? " mit allen Handouts" : "") + " = " + fmt(p.total) + " (Checkout noch nicht angebunden)";
+    });
+    upd();
+    return {update: upd};
+  }
+
+  return {cfg: CFG, fmt: fmt, preis: preis, markup: markup, bind: bind};
+})();
+</script>
 </head>
 <body data-fach="OFIN">
 
@@ -672,9 +815,9 @@ footer .fbrand b{font-family:var(--serif)}
 </div>
 <div class="sc-fb" id="scFb1"><b>Die YTM</b> ist der interne Zinsfuß, bei dem der Barwert aller künftigen Zahlungen (Kupons + Rückzahlung) dem aktuellen Kurs entspricht.</div>
 <div class="sc-eval"><button type="button" class="btn btn-primary" id="scEval" disabled>Auswerten</button></div>
-<div class="sc-result r2" id="scR2"><b class="head num">2 von 2. Stark!</b><p>Die Grundlagen sitzen. Hol dir jetzt die komplette Gratis-Lektion und teste dich am ganzen Kapitel.</p><div class="sc-actions"><a class="btn btn-primary" href="ofin-kap03-anleihen.html">Zur Gratis&#8209;Lektion</a></div></div>
-<div class="sc-result r1" id="scR1"><b class="head num">1 von 2. Gar nicht schlecht!</b><p>Eine Frage saß, eine noch nicht. Genau da entscheidet sich die Klausur. Die kostenlose Probe&#8209;Lektion schließt die Lücke Schritt für Schritt.</p><div class="sc-actions"><a class="btn btn-primary" href="ofin-kap03-anleihen.html">Gratis&#8209;Lektion starten</a></div></div>
-<div class="sc-result r0" id="scR0"><b class="head num">0 von 2. Gut, dass du es jetzt merkst.</b><p>Kein Grund zur Panik, noch ist Zeit. Die kostenlose Probe&#8209;Lektion erklärt dir alles von Grund auf, Schritt für Schritt.</p><div class="sc-actions"><a class="btn btn-primary" href="ofin-kap03-anleihen.html">Gratis&#8209;Lektion starten</a></div></div>
+<div class="sc-result r2" id="scR2"><b class="head num">2 von 2. Stark!</b><p>Die Grundlagen sitzen. Hol dir jetzt die komplette Gratis-Lektion und teste dich am ganzen Kapitel.</p><div class="sc-actions"><a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">Zur Gratis&#8209;Lektion</a></div></div>
+<div class="sc-result r1" id="scR1"><b class="head num">1 von 2. Gar nicht schlecht!</b><p>Eine Frage saß, eine noch nicht. Genau da entscheidet sich die Klausur. Die kostenlose Probe&#8209;Lektion schließt die Lücke Schritt für Schritt.</p><div class="sc-actions"><a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">Gratis&#8209;Lektion starten</a></div></div>
+<div class="sc-result r0" id="scR0"><b class="head num">0 von 2. Gut, dass du es jetzt merkst.</b><p>Kein Grund zur Panik, noch ist Zeit. Die kostenlose Probe&#8209;Lektion erklärt dir alles von Grund auf, Schritt für Schritt.</p><div class="sc-actions"><a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">Gratis&#8209;Lektion starten</a></div></div>
 
       
 
@@ -682,13 +825,13 @@ footer .fbrand b{font-family:var(--serif)}
       <div class="sc-optin" id="scOptin" hidden>
         <b>Sichere dir weitere Lektionen, kostenlos und unverbindlich!</b>
         <p class="fnote" style="margin:4px 0 12px">auch für die Fächer OSTA und OMIK. Wir melden uns per Mail, sobald es losgeht.</p>
-        <form id="scForm" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" target="brevo_sink"><input type="hidden" name="email_address_check" value=""><input type="hidden" name="locale" value="de">
+        <form id="scForm">
           <input type="hidden" name="form-name" value="vormerkung">
           <input type="hidden" name="subject" value="Neue Vormerkung · BWL Kurse OFIN">
           <input type="hidden" name="interesse" id="scInteresse" value="">
           <div class="f-row">
             <input type="text" name="vorname" required autocomplete="given-name" placeholder="Dein Vorname" aria-label="Vorname">
-            <input type="email" name="EMAIL" required autocomplete="email" placeholder="name@beispiel.de" aria-label="E-Mail-Adresse">
+            <input type="email" name="email" required autocomplete="email" placeholder="name@beispiel.de" aria-label="E-Mail-Adresse">
           </div>
           <label class="chk"><input type="checkbox" name="datenschutz_einverstaendnis" value="ja" required>
             <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Vormerkung einverstanden.&nbsp;*</span></label>
@@ -716,7 +859,7 @@ footer .fbrand b{font-family:var(--serif)}
           <span class="chip">Kupon</span><span class="chip">Barwert</span><span class="chip">Rendite (YTM)</span><span class="chip">Zinsstruktur</span><span class="chip">Duration</span>
         </div>
       </div>
-      <a class="btn btn-primary" href="ofin-kap03-anleihen.html">Kostenlos starten</a>
+      <a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">Kostenlos starten</a>
     </div>
   </div>
 </section>
@@ -773,16 +916,12 @@ footer .fbrand b{font-family:var(--serif)}
     <h2>Was Teilnehmende sagen.</h2>
     <p class="sub">Der Kurs ist im Testbetrieb. Echte Stimmen sammeln wir gerade ein und veröffentlichen sie nur mit Einverständnis.</p>
     <div class="voices">
-      <div class="voice">
-        <span class="ph-badge">Platzhalter · Testbetrieb</span>
-        <p class="vq">„Hier steht künftig eine echte Stimme aus dem Kurs."</p>
-        <div class="vwho">{{STIMME_1_NAME}} · {{STIMME_1_KONTEXT}}</div>
+      <div class="voice" style="grid-column:1/-1;max-width:620px;margin-inline:auto">
+        <div class="vstars" aria-label="5 von 5 Sternen" style="color:var(--accent);letter-spacing:3px;font-size:15px;margin-bottom:8px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="vq">&bdquo;Ren&eacute; geht weit &uuml;ber den Lehrplan hinaus. Er hat mir nicht nur Fachwissen vermittelt, sondern beigebracht, Zusammenh&auml;nge zu erkennen.&ldquo;</p>
+        <div class="vwho">Matteo Seth &middot; Wirtschaftsstudent</div>
       </div>
-      <div class="voice">
-        <span class="ph-badge">Platzhalter · Testbetrieb</span>
-        <p class="vq">„Hier steht künftig eine echte Stimme aus dem Kurs."</p>
-        <div class="vwho">{{STIMME_2_NAME}} · {{STIMME_2_KONTEXT}}</div>
-      </div>
+      
     </div>
   </div>
 </section>
@@ -816,7 +955,7 @@ footer .fbrand b{font-family:var(--serif)}
       <h2>Hol dir dein zweites Gratis-Kapitel.</h2>
       <p class="sub" style="max-width:none">Meld dich kostenlos an und such dir <b>ein zweites Kapitel deiner Wahl</b> aus, das du gratis dazubekommst. <b>Keine Zahlungspflicht</b> &ndash; alles Weitere entscheidest du später in der App.</p>
       <div class="fnote" id="vmPicked" style="display:none;background:var(--surface-2);border-radius:var(--r-sm);padding:10px 14px;box-shadow:inset 0 0 0 1px var(--hair);margin-bottom:6px"></div>
-      <form id="vmForm" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" target="brevo_sink"><input type="hidden" name="email_address_check" value=""><input type="hidden" name="locale" value="de">
+      <form name="vormerkung" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="danke.html" id="vmForm">
         <input type="hidden" name="form-name" value="vormerkung">
         <input type="hidden" name="subject" value="Neue Vormerkung · BWL Kurse OFIN">
         <input type="hidden" name="interesse" id="vmInteresse" value="">
@@ -826,7 +965,7 @@ footer .fbrand b{font-family:var(--serif)}
         <input type="text" id="vmVorname" name="vorname" required autocomplete="given-name" placeholder="Dein Vorname">
 
         <label class="f" for="vmEmail">E&#8209;Mail&#8209;Adresse *</label>
-        <input type="email" id="vmEmail" name="EMAIL" required autocomplete="email" placeholder="name@beispiel.de">
+        <input type="email" id="vmEmail" name="email" required autocomplete="email" placeholder="name@beispiel.de">
         <p class="fnote">Ohne Telefonnummer senden wir dir die WhatsApp&#8209;Einladung datenschutzkonform an diese E&#8209;Mail&#8209;Adresse.</p>
 
         <label class="f" for="vmTel">Handynummer <span style="font-weight:400;color:var(--text-2)">(optional)</span></label>
@@ -840,7 +979,7 @@ footer .fbrand b{font-family:var(--serif)}
 
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
           <button type="submit" class="btn btn-primary">Vormerkung absenden</button>
-          <a class="btn btn-silver" href="ofin-kap03-anleihen.html">Erst Gratis&#8209;Lektion ansehen</a>
+          <a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">Erst Gratis&#8209;Lektion ansehen</a>
         </div>
         <div class="form-err" id="vmErr">Da ist etwas schiefgelaufen. Bitte versuch es erneut.</div>
         <p class="fnote" style="margin-top:12px">* Pflichtfelder. Die Vormerkung ist kostenlos und unverbindlich.</p>
@@ -857,7 +996,7 @@ footer .fbrand b{font-family:var(--serif)}
     <h2>Preise wie in der App.</h2>
     <p class="sub">Du zahlst für den ganzen Kurs <b>nie mehr als 39,90&nbsp;€</b>: Jedes einzeln gekaufte Kapitel wird voll auf „OFIN Klausur-Check" angerechnet. Freigeschaltet wird in der App.</p>
 
-    <div class="ladder"><div class="tier feat"><span class="ribbon">Beliebteste Wahl</span><span class="rung">Paket</span><h3 style="color:var(--premium-ink)">OFIN Klausur-Check</h3><div class="price num"><span class="now">39,90&nbsp;€</span><span class="old">62,10&nbsp;€</span></div><p class="pd">Alle <b>10 Kapitel</b> als interaktive Lektionen, inkl. <b>1 Live-Q&amp;A gratis</b>.</p><a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>Alle 10 Handouts als Paket</h3><div class="price num"><span class="now">49,90&nbsp;€</span><span class="old">89,00&nbsp;€</span></div><p class="pd">Aufgaben und ausführliche Musterlösungen zu jedem Kapitel, als Ergänzung zu den Lektionen.</p><a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>OFIN Klausur-Check + alle Handouts</h3><div class="price num"><span class="now">79,90&nbsp;€</span></div><p class="pd">Der komplette Kurs <b>plus alle Handout-PDFs</b> (Aufgaben + Musterlösungen), inkl. 1 Live-Q&amp;A gratis.</p><a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div></div><div class="upsells"><div class="ups"><b>Einzel-Lektion</b><span class="up num">6,90&nbsp;€</span><span class="ud">Ein Kapitel deiner Wahl. Wird voll auf „OFIN Klausur-Check" angerechnet.</span></div><div class="ups"><b>Einzel-Handout</b><span class="up num">8,90&nbsp;€</span><span class="ud">Aufgaben + Musterlösungen zu einem Kapitel als PDF.</span></div><div class="ups"><b>Live-Q&amp;A</b><span class="up num">9,00&nbsp;€</span><span class="ud">Deine Fragen live in kleiner Gruppe. Gratis bei „OFIN Klausur-Check".</span></div><div class="ups"><b>Kapitel 3</b><span class="up num" style="color:var(--done)">gratis</span><span class="ud">Wahrscheinlichkeitsrechnung, sofort ohne Anmeldung spielbar.</span></div></div><div class="garantie"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Nie mehr als 39,90&nbsp;€ für den ganzen Kurs</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kapitel 3 gratis, ohne Anmeldung</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Alle Preise umsatzsteuerfrei</span></div>
+    <div class="ladder"><div class="tier feat"><span class="ribbon">Beliebteste Wahl</span><span class="rung">Paket</span><h3 style="color:var(--premium-ink)">OFIN Klausur-Check</h3><div class="price num"><span class="now">39,90&nbsp;€</span><span class="old">62,10&nbsp;€</span></div><p class="pd">Alle <b>10 Kapitel</b> als interaktive Lektionen, inkl. <b>1 Live-Q&amp;A gratis</b>.</p><a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>Alle 10 Handouts als Paket</h3><div class="price num"><span class="now">49,90&nbsp;€</span><span class="old">89,00&nbsp;€</span></div><p class="pd">Aufgaben und ausführliche Musterlösungen zu jedem Kapitel, als Ergänzung zu den Lektionen.</p><a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>OFIN Klausur-Check + alle Handouts</h3><div class="price num"><span class="now">69,90&nbsp;€</span></div><p class="pd">Der komplette Kurs <b>plus alle Handout-PDFs</b> (Aufgaben + Musterlösungen), inkl. 1 Live-Q&amp;A gratis.</p><a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div></div><div class="upsells"><div class="ups"><b>Einzel-Lektion</b><span class="up num">6,90&nbsp;€</span><span class="ud">Ein Kapitel deiner Wahl. Wird voll auf „OFIN Klausur-Check" angerechnet.</span></div><div class="ups"><b>Einzel-Handout</b><span class="up num">8,90&nbsp;€</span><span class="ud">Aufgaben + Musterlösungen zu einem Kapitel als PDF.</span></div><div class="ups"><b>Live-Q&amp;A</b><span class="up num">9,00&nbsp;€</span><span class="ud">Deine Fragen live in kleiner Gruppe. Gratis bei „OFIN Klausur-Check".</span></div><div class="ups"><b>Live-Klausurtraining</b><span class="up num">19,00&nbsp;€</span><span class="ud">Ganze Klausuraufgaben vorab einsenden, in der Session ausführlich gelöst.</span></div><div class="ups"><b>Kapitel 3</b><span class="up num" style="color:var(--done)">gratis</span><span class="ud">Wahrscheinlichkeitsrechnung, sofort ohne Anmeldung spielbar.</span></div></div><div class="garantie"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Nie mehr als 39,90&nbsp;€ für den ganzen Kurs</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kapitel 3 gratis, ohne Anmeldung</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Alle Preise umsatzsteuerfrei</span></div>
   </div>
 </section>
 
@@ -1228,14 +1367,7 @@ window.BK_DATA = {
   }
 
   function renderFaecher(d){
-    var rows = (d.faecher || []).map(function(f){
-      var merk = esc("Fach-Bundle: " + f.k + " · " + f.n);
-      return '<li class="bk-fach"><span class="bk-fach-t"><span class="bk-fach-k">' + esc(f.k) + '</span>' +
-             '<span class="bk-fach-n">' + esc(f.n) + '</span></span>' +
-             '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">einzeln buchen</button></li>';
-    }).join("");
-    var hinweis = '<p class="bk-hint">Das Klausurphasen-Paket (' + esc(d.multi) + ') bündelt OMIK, OSTA und OFIN. Jedes Fach ist auch einzeln als Bundle (' + esc(d.bundle) + ') buchbar.</p>';
-    return '<h2 id="bkTitle" class="bk-h">Diese Fächer bieten wir dieses Semester an</h2><ul class="bk-list">' + rows + '</ul>' + hinweis;
+    return '<h2 id="bkTitle" class="bk-h">Fächer-Paket zusammenstellen</h2>' + window.BKBC.markup();
   }
 
   function renderTermine(d){
@@ -1295,6 +1427,7 @@ window.BK_DATA = {
     var render = RENDER[typ];
     if(!modal || !content || !render) return;
     content.innerHTML = render(window.BK_DATA || {});
+    if(typ === "faecher" && window.BKBC) window.BKBC.bind(content);
     lastFocus = document.activeElement;
     modal.hidden = false;
     document.body.style.overflow = "hidden";
@@ -1353,31 +1486,90 @@ window.BK_DATA = {
     });
   }
 })();
+
+/* ---- BKBC-Konfigurator: Checkout-Hook an den bestehenden Merken-Flow ---- */
+window.bkbcOnCheckout = function(p){
+  var art = p.handouts ? "Klausur-Check + alle Handouts" : "Klausur-Check";
+  var txt = "Fächer-Paket: " + p.faecher.join(" + ") + " · " + art + " · " + window.BKBC.fmt(p.total);
+  if(typeof window.closeBk === "function") window.closeBk();
+  if(typeof window.merken === "function") window.merken(txt);
+};
 </script>
-<iframe name="brevo_sink" title="Anmeldung" aria-hidden="true" tabindex="-1" style="position:absolute;width:0;height:0;border:0;left:-9999px"></iframe>
-<script>
-/* Brevo-Lead-Verdrahtung: Lead-Formulare senden per verstecktem iFrame an Brevo (Double-Opt-in), Nutzer bleibt auf der Seite. */
+<style id="v43-politur">
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+.btn{transition:transform .18s ease,box-shadow .2s ease,background-color .18s ease,filter .18s ease;will-change:transform}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary:hover{box-shadow:0 10px 26px rgba(232,118,10,.30)}
+.btn-silver:hover,.btn-app:hover{box-shadow:0 8px 20px rgba(32,35,42,.16)}
+h1,h2{letter-spacing:-.015em}
+.v43-price-note{margin:20px auto 0;max-width:860px;font-size:14.5px;line-height:1.65;color:var(--ink,#20232A);background:var(--bg,#fff);border:1px solid var(--hair,rgba(32,35,42,.12));border-radius:12px;padding:15px 17px}
+.v43-live{display:inline-flex;align-items:center;gap:8px;margin-top:4px;background:rgba(232,118,10,.10);color:#c96406;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+</style>
+<script id="v43-politur-js">
 (function(){
-  document.addEventListener('submit', function(e){
-    var f = e.target;
-    if(!f || f.nodeName !== 'FORM') return;
-    if(!f.querySelector('input[name="EMAIL"]')) return;
-    if(f.checkValidity && !f.checkValidity()) return;
-    e.stopImmediatePropagation();
-    setTimeout(function(){
-      var box = f.parentNode.querySelector('.brevo-ok');
-      if(!box){
-        box = document.createElement('div');
-        box.className = 'brevo-ok';
-        box.setAttribute('role','status');
-        box.style.cssText = 'margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(46,125,50,.10);color:#1f5130;font-size:15px;line-height:1.5;border:1px solid rgba(46,125,50,.30)';
-        box.innerHTML = '<b>Fast geschafft!</b> Wir haben dir eine E-Mail geschickt, bitte bestätige den Link darin, dann schalten wir dich frei.';
-        f.parentNode.insertBefore(box, f.nextSibling);
-      }
-      box.style.display = 'block';
-      f.style.display = 'none';
-    }, 25);
-  }, true);
+  var pre=document.getElementById('preise');
+  if(pre&&!pre.querySelector('.v43-price-note')){
+    var root=pre.querySelector(':scope > .wrap')||pre;
+    var n=document.createElement('div');n.className='v43-price-note';
+    n.innerHTML='<b>Mehrere Kurse parallel</b> (Klausur-Check): 2 Kurse 69,90&nbsp;€ · 3 Kurse 89,90&nbsp;€. Mit allen Handouts: 2 Kurse 99,80&nbsp;€ · 3 Kurse 129,70&nbsp;€.';
+    root.appendChild(n);
+  }
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  function kids(root){var k=Array.prototype.filter.call(root.children,function(n){return n.nodeType===1;});while(k.length===1&&k[0].children.length>1){root=k[0];k=Array.prototype.filter.call(root.children,function(n){return n.nodeType===1;});}return k;}
+  function apply(root){var vh=window.innerHeight||800,i=0;kids(root).forEach(function(el){var t=el.tagName.toLowerCase();if(t==='script'||t==='style'||t==='link')return;var r=el.getBoundingClientRect();if(r.top<vh*0.85)return;el.classList.add('reveal');el.style.transitionDelay=Math.min(i*90,380)+'ms';i++;io.observe(el);});}
+  var hero=document.querySelector('.hero .wrap');if(hero)apply(hero);
+  ['klausurcheck','gratis','weiter','sofunktionierts','stimmen','autor','preise','faq','app-holen'].forEach(function(id){var s=document.getElementById(id);if(!s)return;apply(s.querySelector(':scope > .wrap')||s);});
+})();
+</script>
+<style id="v43-burger-css">
+.v43-burger{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:var(--text-2);cursor:pointer;border-radius:12px;flex:0 0 auto}
+.v43-burger:hover{background:var(--bg-2)}
+.v43-navwrap{position:fixed;inset:0;z-index:300;display:none}
+.v43-navwrap.open{display:block}
+.v43-navback{position:absolute;inset:0;background:rgba(15,17,20,.46)}
+.v43-nav{position:absolute;top:0;right:0;height:100%;width:min(87vw,344px);background:var(--surface);box-shadow:-10px 0 34px rgba(0,0,0,.24);padding:20px;overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+.v43-navwrap.open .v43-nav{transform:none}
+.v43-navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.v43-navhead strong{font-family:var(--serif);font-size:18px;color:var(--text)}
+.v43-navclose{width:40px;height:40px;border:0;background:transparent;cursor:pointer;border-radius:10px;color:var(--text-2)}
+.v43-navclose:hover{background:var(--bg-2)}
+.v43-nav h3{font-size:11.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--text-3);margin:20px 0 6px}
+.v43-nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--text);font-weight:500;font-size:15.5px}
+.v43-nav a:hover{background:var(--bg-2)}
+.v43-nav a .nk{font-family:var(--serif);font-weight:600;color:var(--accent);min-width:52px}
+.v43-navcta{margin-top:22px !important;justify-content:center !important;background:var(--accent);color:#fff !important;font-weight:600;border-radius:999px !important}
+.v43-navcta:hover{background:var(--accent-deep) !important;color:#fff !important}
+</style>
+<script id="v43-burger-js">
+(function(){
+  var wrap=document.querySelector('.appbar .wrap'); if(!wrap||document.getElementById('v43NavWrap'))return;
+  var SEC=[['klausurcheck','Klausur-Check'],['gratis','Gratis-Lektion'],['sofunktionierts',"So funktioniert’s"],['stimmen','Stimmen'],['preise','Preise'],['faq','Fragen & Antworten'],['app-holen','App holen']];
+  var sl='';SEC.forEach(function(x){if(document.getElementById(x[0]))sl+='<a href="#'+x[0]+'" data-close>'+x[1]+'</a>';});
+  var nav=document.createElement('div');nav.className='v43-navwrap';nav.id='v43NavWrap';nav.setAttribute('aria-hidden','true');
+  nav.innerHTML='<div class="v43-navback" data-close></div><nav class="v43-nav" aria-label="Menü">'
+   +'<div class="v43-navhead"><strong>Menü</strong><button type="button" class="v43-navclose" data-close aria-label="Menü schließen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'
+   +'<h3>Auf dieser Seite</h3>'+sl
+   +'<h3>Kurse</h3>'
+   +'<a href="index.html"><span class="nk">⌂</span> Alle Kurse</a>'
+   +'<a href="osta.html"><span class="nk">OSTA</span> Statistik&nbsp;1</a>'
+   +'<a href="omik.html"><span class="nk">OMIK</span> Mikroökonomik&nbsp;1</a>'
+   +'<a href="ofin.html"><span class="nk">OFIN</span> Finanzen&nbsp;1</a>'
+   +'<h3>Rechtliches</h3><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>'
+   +(document.getElementById('preise')?'<a class="v43-navcta" href="#preise" data-close>Zu den Preisen</a>':'')
+   +'</nav>';
+  document.body.appendChild(nav);
+  var b=document.createElement('button');b.type='button';b.className='v43-burger';
+  b.setAttribute('aria-label','Menü öffnen');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','v43NavWrap');
+  b.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  wrap.appendChild(b);
+  function op(){nav.classList.add('open');nav.setAttribute('aria-hidden','false');b.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function cl(){nav.classList.remove('open');nav.setAttribute('aria-hidden','true');b.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  b.addEventListener('click',op);
+  nav.addEventListener('click',function(e){var t=e.target;if(t.hasAttribute('data-close')||(t.closest&&t.closest('[data-close]')))cl();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open'))cl();});
 })();
 </script>
 </body>

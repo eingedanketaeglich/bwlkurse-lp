@@ -31,14 +31,47 @@
     <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
     <h1>Deine Anmeldung ist bestätigt</h1>
     <p class="sub">Danke! Deine E-Mail wurde bestätigt und deine Gratis-Lektion ist freigeschaltet.</p>
-    <p class="hint">Du kannst sofort loslegen, ganz ohne Passwort.</p>
+    <div class="hint" id="zgBox">
+      <span id="zgTxt">Dein App-Zugang wird eingerichtet &hellip;</span>
+      <form id="zgForm" style="display:none;margin-top:10px">
+        <input id="zgMail" type="email" required placeholder="deine@email.de" style="width:100%;padding:12px;border:1px solid #d9d5cc;border-radius:10px;font-size:15px;margin-bottom:8px;font-family:inherit">
+        <button type="submit" style="width:100%;background:var(--accent);color:#fff;border:none;font-weight:700;font-size:15px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit">Zugangsdaten per E-Mail anfordern</button>
+      </form>
+    </div>
     <div class="waehle">Wähle dein Fach</div>
     <a class="btn" href="osta-kap03-wahrscheinlichkeit.html">OSTA · Statistik 1<small>Gratis-Kapitel 3: Wahrscheinlichkeitsrechnung</small></a>
     <a class="btn" href="omik-kap02-unsicherheit-erwartungsnutzen.html">OMIK · Mikroökonomik 1<small>Gratis-Kapitel 2: Unsicherheit &amp; Erwartungsnutzen</small></a>
     <a class="btn" href="ofin-kap03-anleihen.html">OFIN · Finanzen 1<small>Gratis-Kapitel 3: Anleihen, Renten &amp; Zinsstruktur</small></a>
-    <p class="tipp">Tipp: In der App bekommst du nach der kostenlosen Anmeldung ein zweites Kapitel deiner Wahl gratis dazu.</p>
+    <p class="tipp">Tipp: In der App bekommst du nach der kostenlosen Anmeldung automatisch ein weiteres, fest vorgegebenes Gratis-Kapitel dazu &ndash; bei OMIK Kapitel&nbsp;8, bei OFIN Kapitel&nbsp;6, bei OSTA Kapitel&nbsp;8. Es schaltet automatisch frei, sobald du dich in der App mit deinen Zugangsdaten anmeldest.</p>
     <p class="foot">BWL Kurse · Klausurvorbereitung für die Goethe-Universität Frankfurt · <a href="mailto:info@klausurchecker.de">info@klausurchecker.de</a><br>
     <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
   </div>
+<script>
+(function(){
+  "use strict";
+  var FN="https://adrfijztnbebzghumdxn.supabase.co/functions/v1/free-signup";
+  var q=new URLSearchParams(location.search);
+  var email=(q.get("email")||q.get("EMAIL")||"").trim().toLowerCase();
+  var vorname=(q.get("vorname")||q.get("VORNAME")||"").trim();
+  var fach=(q.get("fach")||"").trim().toLowerCase();
+  var txt=document.getElementById("zgTxt"), form=document.getElementById("zgForm"), inp=document.getElementById("zgMail");
+  function esc(s){ return String(s).replace(/[<>&"]/g,""); }
+  function zeigeFormular(msg){ txt.innerHTML=msg; form.style.display="block"; }
+  function anfordern(mail){
+    txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; form.style.display="none";
+    fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:mail,vorname:vorname,fach:fach})})
+      .then(function(r){ return r.json().then(function(d){ return d; }); })
+      .then(function(d){
+        if(d && d.status==="created"){ txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs an "+esc(mail)+".</b> Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach. Nach der ersten Anmeldung kannst du das Passwort \u00e4ndern."; }
+        else if(d && d.status==="exists"){ txt.innerHTML="F\u00fcr <b>"+esc(mail)+"</b> gibt es schon einen App-Zugang \u2013 melde dich in der App einfach mit deinem Passwort an."; }
+        else { zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); }
+      })
+      .catch(function(){ zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); });
+  }
+  if(form) form.addEventListener("submit",function(e){ e.preventDefault(); var m=(inp.value||"").trim().toLowerCase(); if(m.indexOf("@")>0) anfordern(m); });
+  if(email && email.indexOf("@")>0){ anfordern(email); }
+  else { zeigeFormular("Fast geschafft: F\u00fcr deinen App-Zugang (Benutzername + Einmalpasswort per Mail) trag hier kurz deine best\u00e4tigte E-Mail-Adresse ein:"); }
+})();
+</script>
 </body>
 </html>

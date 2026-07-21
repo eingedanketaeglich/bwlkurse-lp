@@ -615,9 +615,6 @@ footer .fbrand b{font-family:var(--serif)}
 .bkbc-total{font-size:26px;font-weight:600;white-space:nowrap;line-height:1.1}
 .bkbc-cta{display:flex;width:100%;align-items:center;justify-content:center;min-height:48px;cursor:pointer;border:0;border-radius:10px;font-size:15px;font-weight:600;text-align:center;background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500;box-shadow:var(--sh-1)}
 .bkbc-cta:disabled{background:var(--surface);color:var(--text-3);cursor:not-allowed;box-shadow:inset 0 0 0 1px var(--hair)}
-.bkbc-consent{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--text-2);line-height:1.45;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:11px 12px;margin:0 0 10px;cursor:pointer}
-.bkbc-consent input{width:18px;height:18px;accent-color:var(--accent);flex:none;margin:1px 0 0}
-.bkbc-hint{font-size:12px;color:var(--text-2);text-align:center;margin-top:8px;min-height:1px}
 .bkbc-note{font-size:11.5px;color:var(--text-3);line-height:1.45;margin:10px 2px 0;text-align:center}
 </style>
 <script id="bkbc-core">
@@ -679,14 +676,7 @@ window.BKBC = (function(){
         '<div class="bkbc-save"></div></div>' +
         '<div class="bkbc-total">' + fmt(0) + '</div>' +
       '</div>' +
-      /* Widerrufsverzicht (\u00a7356 Abs.6 BGB) nur im echten Kaufmodus: ohne Vertrag gibt es nichts zu verzichten */
-      (CFG.CTA_MODUS === "bestellen"
-        ? '<label class="bkbc-consent"><input type="checkbox" class="bkbc-consent-cb">' +
-          '<span>Ich verlange ausdr\u00fccklich, dass mit der Bereitstellung der Kursinhalte sofort begonnen wird. ' +
-          'Mir ist bekannt, dass ich mit Beginn der Ausf\u00fchrung mein <b>Widerrufsrecht verliere</b>.</span></label>'
-        : '') +
       '<button type="button" class="bkbc-cta" disabled>F\u00e4cher w\u00e4hlen</button>' +
-      '<div class="bkbc-hint"></div>' +
       '<div class="bkbc-msg bkbc-note"></div>' +
     '</div>';
   }
@@ -700,10 +690,7 @@ window.BKBC = (function(){
         elC  = r.querySelector(".bkbc-cnt"),
         elS  = r.querySelector(".bkbc-save"),
         cta  = r.querySelector(".bkbc-cta"),
-        cons = r.querySelector(".bkbc-consent-cb"),
-        hint = r.querySelector(".bkbc-hint"),
         msg  = r.querySelector(".bkbc-msg");
-    var needConsent = (CFG.CTA_MODUS === "bestellen");
     if(!ho || !elT || !cta) return null;
 
     function upd(){
@@ -725,25 +712,19 @@ window.BKBC = (function(){
         : (n + (n === 1 ? " Fach" : " F\u00e4cher") + (h ? " \u00b7 mit allen Handouts" : " \u00b7 Klausur-Check"));
       if(elS) elS.textContent = (save > 0) ? ("Du sparst " + fmt(save)) : "";
 
-      var verzicht = needConsent ? !!(cons && cons.checked) : false;
-      cta.disabled = (n === 0) || (needConsent && !verzicht);
-      if(hint) hint.textContent = (n > 0 && needConsent && !verzicht)
-        ? "Bitte den Hinweis zum Widerrufsrecht best\u00e4tigen, um fortzufahren." : "";
+      cta.disabled = (n === 0);
       cta.textContent = (n === 0)
         ? "F\u00e4cher w\u00e4hlen"
         : ((CFG.CTA_MODUS === "bestellen" ? "Zahlungspflichtig bestellen \u00b7 " : "Paket vormerken \u00b7 ") + fmt(total));
 
       cta._payload = {
         faecher: picked.map(function(x){ return x.getAttribute("data-code"); }),
-        handouts: h, anzahl: n, total: total,
-        widerrufsverzicht: verzicht,
-        verzichtZeitpunkt: verzicht ? new Date().toISOString() : null
+        handouts: h, anzahl: n, total: total
       };
     }
 
     fs.forEach(function(x){ x.addEventListener("change", upd); });
     ho.addEventListener("change", upd);
-    if(cons) cons.addEventListener("change", upd);
     cta.addEventListener("click", function(e){
       e.preventDefault();
       if(cta.disabled) return;
@@ -1021,7 +1002,7 @@ window.BKBC = (function(){
     <h2>Preise wie in der App.</h2>
     <p class="sub">Du zahlst für den ganzen Kurs <b>nie mehr als 39,90&nbsp;€</b>: Jedes einzeln gekaufte Kapitel wird voll auf „OFIN Klausur-Check" angerechnet. Freigeschaltet wird in der App.</p>
 
-    <div class="ladder"><div class="tier feat"><span class="ribbon">Beliebteste Wahl</span><span class="rung">Paket</span><h3 style="color:var(--premium-ink)">OFIN Klausur-Check</h3><div class="price num"><span class="now">39,90&nbsp;€</span><span class="old">62,10&nbsp;€</span></div><p class="pd">Alle <b>9 Kapitel</b> als interaktive Lektionen.</p><a class="btn btn-primary" href="https://buy.stripe.com/28E14nd4X7eo1affPz8bS0d" target="_blank" rel="noopener">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>Alle 10 Handouts als Paket</h3><div class="price num"><span class="now">49,90&nbsp;€</span><span class="old">89,00&nbsp;€</span></div><p class="pd">Aufgaben und ausführliche Musterlösungen zu jedem Kapitel, als Ergänzung zu den Lektionen.</p><a class="btn btn-silver" href="https://buy.stripe.com/fZu3cv8OH42c6uzavf8bS0e" target="_blank" rel="noopener">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>OFIN Klausur-Check + alle Handouts</h3><div class="price num"><span class="now">79,90&nbsp;€</span></div><p class="pd">Der komplette Kurs <b>plus alle Handout-PDFs</b> (Aufgaben + Musterlösungen).</p><a class="btn btn-silver" href="https://buy.stripe.com/dRmeVd7KD1U42ej32N8bS0f" target="_blank" rel="noopener">In der App freischalten</a></div><div class="tier"><span class="rung">Live dazubuchen</span><h3>Live-Klausurtraining</h3><div class="price num"><span class="now">19,00&nbsp;€</span></div><p class="pd">Ganze Klausuraufgaben vorab einsenden, in der Session ausführlich gelöst.</p><button type="button" class="btn btn-primary" data-bk="termine">Termin wählen</button></div></div><div class="upsells"><div class="ups"><b>Einzel-Lektion</b><span class="up num">6,90&nbsp;€</span><span class="ud">Ein Kapitel deiner Wahl. Wird voll auf „OFIN Klausur-Check" angerechnet.</span></div><div class="ups"><b>Einzel-Handout</b><span class="up num">8,90&nbsp;€</span><span class="ud">Aufgaben + Musterlösungen zu einem Kapitel als PDF.</span></div><div class="ups"><b>Kapitel 3</b><span class="up num" style="color:var(--done)">gratis</span><span class="ud">Wahrscheinlichkeitsrechnung, sofort ohne Anmeldung spielbar.</span></div></div><div class="garantie"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Nie mehr als 39,90&nbsp;€ für den ganzen Kurs</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kapitel 3 gratis, ohne Anmeldung</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Alle Preise umsatzsteuerfrei</span></div>
+    <div class="ladder"><div class="tier feat"><span class="ribbon">Beliebteste Wahl</span><span class="rung">Paket</span><h3 style="color:var(--premium-ink)">OFIN Klausur-Check</h3><div class="price num"><span class="now">39,90&nbsp;€</span><span class="old">62,10&nbsp;€</span></div><p class="pd">Alle <b>9 Kapitel</b> als interaktive Lektionen.</p><a class="btn btn-primary" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div><div class="tier"><span class="rung">Live dazubuchen</span><h3>Live Q&A</h3><div class="price num"><span class="now">19,00&nbsp;€</span></div><p class="pd">Ganze Klausuraufgaben vorab einsenden, in der Session ausführlich gelöst.</p><button type="button" class="btn btn-primary" data-bk="termine">Termine wählen</button></div><div class="tier"><span class="rung">Paket</span><h3>Alle 10 Handouts als Paket</h3><div class="price num"><span class="now">49,90&nbsp;€</span><span class="old">89,00&nbsp;€</span></div><p class="pd">Aufgaben und ausführliche Musterlösungen zu jedem Kapitel, als Ergänzung zu den Lektionen.</p><a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div><div class="tier"><span class="rung">Paket</span><h3>OFIN Klausur-Check + alle Handouts</h3><div class="price num"><span class="now">79,90&nbsp;€</span></div><p class="pd">Der komplette Kurs <b>plus alle Handout-PDFs</b> (Aufgaben + Musterlösungen).</p><a class="btn btn-silver" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">In der App freischalten</a></div></div><div class="upsells"><div class="ups"><b>Einzel-Lektion</b><span class="up num">6,90&nbsp;€</span><span class="ud">Ein Kapitel deiner Wahl. Wird voll auf „OFIN Klausur-Check" angerechnet.</span></div><div class="ups"><b>Einzel-Handout</b><span class="up num">8,90&nbsp;€</span><span class="ud">Aufgaben + Musterlösungen zu einem Kapitel als PDF.</span></div><div class="ups"><b>Kapitel 3</b><span class="up num" style="color:var(--done)">gratis</span><span class="ud">Wahrscheinlichkeitsrechnung, sofort ohne Anmeldung spielbar.</span></div></div><div class="garantie"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Nie mehr als 39,90&nbsp;€ für den ganzen Kurs</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kapitel 3 gratis, ohne Anmeldung</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Alle Preise umsatzsteuerfrei</span></div>
   </div>
 </section>
 
@@ -1438,7 +1419,7 @@ window.BK_DATA = {
       }).join("");
       return '<div class="bk-tgroup"><h3 class="bk-tgroup-h">' + esc(g) + '</h3>' + opts + '</div>';
     }).join("");
-    return '<h2 id="bkTitle" class="bk-h">Wähle deinen Termin: Live-Klausurtraining</h2>' + blocks +
+    return '<h2 id="bkTitle" class="bk-h">Wähle deinen Termin: Live Q&A</h2>' + blocks +
            '<p class="bk-need" hidden>Bitte wähle zuerst einen Termin aus.</p>' +
            '<div class="bk-actionrow"><button type="button" class="bk-btn" data-bk-action="termin-submit">Diesen Termin vormerken</button></div>' +
            '<p class="bk-foot">Alle Termine nach der letzten Vorlesung und vor der Klausur.</p>';

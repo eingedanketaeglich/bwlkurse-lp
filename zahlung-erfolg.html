@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zahlung erfolgreich · BWL Kurse</title>
+<meta name="robots" content="noindex">
+<style>
+  body{margin:0;padding:24px;background:#EAE9E5;font-family:Inter,system-ui,-apple-system,sans-serif;color:#1B1D21;
+       display:flex;min-height:90vh;align-items:center;justify-content:center}
+  .card{background:#fff;border:1px solid #E3DFD6;border-radius:14px;padding:28px 26px;max-width:520px;text-align:center}
+  .ok{width:56px;height:56px;border-radius:50%;background:#1a8a4a;color:#fff;font-size:30px;line-height:56px;margin:0 auto 14px}
+  h1{font-size:22px;margin:0 0 8px}
+  p{font-size:15px;line-height:1.55;color:#3d4550;margin:8px 0}
+  a.btn{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:10px;background:#E8760A;color:#fff;
+        text-decoration:none;font-weight:600}
+  small{display:block;margin-top:16px;color:#6b7280;font-size:12px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="ok">✓</div>
+  <h1 id="h">Zahlung erfolgreich!</h1>
+  <p id="t">Danke für deinen Kauf. Du bekommst in wenigen Minuten eine Bestätigung per E-Mail.</p>
+  <p id="k" hidden>Wenn das dein erster Kauf war, steht in der E-Mail auch dein <b>Start-Passwort</b> für dein Konto.</p>
+  <a class="btn" href="https://www.klausurchecker.de/">Zurück zu BWL Kurse</a>
+  <small>Keine E-Mail bekommen? Schau bitte im Spam-Ordner nach oder schreib an info@klausurchecker.de.</small>
+</div>
+<script>
+  var q = new URLSearchParams(location.search);
+  if (q.get("typ") === "qa") {
+    document.getElementById("h").textContent = "Termin bestätigt!";
+    document.getElementById("t").innerHTML = "Deine Zahlung ist eingegangen, dein Platz im <b>Live-Klausurtraining</b> ist reserviert. Die Bestätigung mit allen Details kommt per E-Mail.";
+  }
+  document.getElementById("k").hidden = false;
+</script>
+</body>
+</html>

@@ -1634,5 +1634,23 @@ h1,h2{letter-spacing:-.015em}
   }, true);
 })();
 </script>
+<script>
+(function(){
+  "use strict";
+  if(!window.BKBC || !window.BKBC.cfg) return;
+  window.BKBC.cfg.CTA_MODUS = "bestellen";
+  window.bkbcOnCheckout = function(p){
+    if(!p || p.widerrufsverzicht !== true) return;
+    fetch("https://adrfijztnbebzghumdxn.supabase.co/functions/v1/create-checkout", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ typ:"bundle", faecher:p.faecher, handouts:p.handouts,
+        widerrufsverzicht:p.widerrufsverzicht, verzichtZeitpunkt:p.verzichtZeitpunkt })
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if(d && d.url) location.href = d.url;
+      else alert(d && d.error ? d.error : "Fehler beim Start der Zahlung.");
+    }).catch(function(){ alert("Fehler beim Start der Zahlung."); });
+  };
+})();
+</script>
 </body>
 </html>

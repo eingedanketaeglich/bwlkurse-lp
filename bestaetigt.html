@@ -39,9 +39,9 @@
       </form>
     </div>
     <div class="waehle">Wähle dein Fach</div>
-    <a class="btn" href="osta-kap03-wahrscheinlichkeit.html">OSTA · Statistik 1<small>Gratis-Kapitel 3: Wahrscheinlichkeitsrechnung</small></a>
-    <a class="btn" href="omik-kap02-unsicherheit-erwartungsnutzen.html">OMIK · Mikroökonomik 1<small>Gratis-Kapitel 2: Unsicherheit &amp; Erwartungsnutzen</small></a>
-    <a class="btn" href="ofin-kap03-anleihen.html">OFIN · Finanzen 1<small>Gratis-Kapitel 3: Anleihen, Renten &amp; Zinsstruktur</small></a>
+    <a class="btn" data-fach="osta" href="osta-kap03-wahrscheinlichkeit.html">OSTA · Statistik 1<small>Gratis-Kapitel 3: Wahrscheinlichkeitsrechnung</small></a>
+    <a class="btn" data-fach="omik" href="omik-kap02-unsicherheit-erwartungsnutzen.html">OMIK · Mikroökonomik 1<small>Gratis-Kapitel 2: Unsicherheit &amp; Erwartungsnutzen</small></a>
+    <a class="btn" data-fach="ofin" href="ofin-kap03-anleihen.html">OFIN · Finanzen 1<small>Gratis-Kapitel 3: Anleihen, Renten &amp; Zinsstruktur</small></a>
     <p class="tipp">Tipp: In der App bekommst du nach der kostenlosen Anmeldung automatisch ein weiteres, fest vorgegebenes Gratis-Kapitel dazu &ndash; bei OMIK Kapitel&nbsp;8, bei OFIN Kapitel&nbsp;6, bei OSTA Kapitel&nbsp;8. Es schaltet automatisch frei, sobald du dich in der App mit deinen Zugangsdaten anmeldest.</p>
     <p class="foot">BWL Kurse · Klausurvorbereitung für die Goethe-Universität Frankfurt · <a href="mailto:info@klausurchecker.de">info@klausurchecker.de</a><br>
     <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
@@ -53,24 +53,34 @@
   var q=new URLSearchParams(location.search);
   var email=(q.get("email")||q.get("EMAIL")||"").trim().toLowerCase();
   var vorname=(q.get("vorname")||q.get("VORNAME")||"").trim();
-  var fach=(q.get("fach")||"").trim().toLowerCase();
+  var fachParam=(q.get("fach")||q.get("FACH")||"").trim().toLowerCase();
   var txt=document.getElementById("zgTxt"), form=document.getElementById("zgForm"), inp=document.getElementById("zgMail");
+  var gesendet=false;
   function esc(s){ return String(s).replace(/[<>&"]/g,""); }
   function zeigeFormular(msg){ txt.innerHTML=msg; form.style.display="block"; }
-  function anfordern(mail){
-    txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; form.style.display="none";
-    fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:mail,vorname:vorname,fach:fach})})
-      .then(function(r){ return r.json().then(function(d){ return d; }); })
+  function sende(mail, fach, still){
+    if(gesendet) return; gesendet=true;
+    var body=JSON.stringify({email:mail,vorname:vorname,fach:fach||""});
+    fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:body,keepalive:true})
+      .then(function(r){ return r.json(); })
       .then(function(d){
-        if(d && d.status==="created"){ txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs an "+esc(mail)+".</b> Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach. Nach der ersten Anmeldung kannst du das Passwort \u00e4ndern."; }
-        else if(d && d.status==="exists"){ txt.innerHTML="F\u00fcr <b>"+esc(mail)+"</b> gibt es schon einen App-Zugang \u2013 melde dich in der App einfach mit deinem Passwort an."; }
-        else { zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); }
+        if(still) return;
+        if(d && d.status==="created"){ txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs an "+esc(mail)+".</b> Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach."; }
+        else if(d && d.status==="exists"){ txt.innerHTML="F\u00fcr <b>"+esc(mail)+"</b> gibt es schon einen App-Zugang \u2013 melde dich in der App mit deinem Passwort an."; }
+        else { gesendet=false; zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); }
       })
-      .catch(function(){ zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); });
+      .catch(function(){ if(!still){ gesendet=false; zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); } });
   }
-  if(form) form.addEventListener("submit",function(e){ e.preventDefault(); var m=(inp.value||"").trim().toLowerCase(); if(m.indexOf("@")>0) anfordern(m); });
-  if(email && email.indexOf("@")>0){ anfordern(email); }
-  else { zeigeFormular("Fast geschafft: F\u00fcr deinen App-Zugang (Benutzername + Einmalpasswort per Mail) trag hier kurz deine best\u00e4tigte E-Mail-Adresse ein:"); }
+  var btns=document.querySelectorAll("a.btn[data-fach]");
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener("click", function(){
+      if(email && !gesendet){ sende(email, this.getAttribute("data-fach"), true); }
+    });
+  }
+  if(form) form.addEventListener("submit",function(e){ e.preventDefault(); var m=(inp.value||"").trim().toLowerCase(); if(m.indexOf("@")>0){ email=m; sende(m, fachParam, false); form.style.display="none"; txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; } });
+  if(email && fachParam){ sende(email, fachParam, false); txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; }
+  else if(email){ txt.innerHTML="<b>Fast geschafft:</b> W\u00e4hle unten dein Fach \u2013 deine Zugangsdaten (Benutzername + Einmalpasswort) kommen dann f\u00fcr genau diese App per E-Mail. Schau auch im Spam-Ordner nach."; }
+  else { zeigeFormular("Fast geschafft: F\u00fcr deinen App-Zugang (Benutzername + Einmalpasswort per Mail) trag hier kurz deine best\u00e4tigte E-Mail-Adresse ein \u2013 und w\u00e4hle dann unten dein Fach:"); }
 })();
 </script>
 </body>

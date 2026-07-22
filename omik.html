@@ -1283,6 +1283,7 @@ window.addEventListener("resize", drawRails);
     var _tel = (data.get("handynummer") || "").replace(/[<>]/g,"").trim();
     if(_tel) body.append("HANDY", _tel);
     body.append("WHATSAPP", data.get("whatsapp_einverstaendnis") ? "ja" : "nein");
+    body.append("FACH", "omik");
     fetch(scForm.getAttribute("action"), {method:"POST", mode:"no-cors", body: body})
       .then(function(){
         document.getElementById("scErr").style.display = "none";

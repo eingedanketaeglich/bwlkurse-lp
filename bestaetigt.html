@@ -32,7 +32,7 @@
     <div class="brand-sub">powered by BWLKurse</div>
     <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
     <h1>Deine Anmeldung ist bestätigt</h1>
-    <p class="sub">Danke! Deine E-Mail wurde bestätigt und deine Gratis-Lektion ist freigeschaltet.</p>
+    <p class="sub">Danke! Deine E-Mail ist bestätigt. Deine Zugangsdaten kommen jetzt per E-Mail — damit kommst du in alle drei Kurse.</p>
     <div class="hint" id="zgBox">
       <span id="zgTxt">Dein App-Zugang wird eingerichtet &hellip;</span>
       <form id="zgForm" style="display:none;margin-top:10px">
@@ -40,11 +40,11 @@
         <button type="submit" style="width:100%;background:var(--accent);color:#fff;border:none;font-weight:700;font-size:15px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit">Zugangsdaten per E-Mail anfordern</button>
       </form>
     </div>
-    <div class="waehle">Wähle dein Fach</div>
-    <a class="btn" data-fach="osta" href="https://www.klausurchecker.de/app/osta/">OSTA · Statistik 1<small>Gratis-Kapitel 3: Wahrscheinlichkeitsrechnung</small></a>
-    <a class="btn" data-fach="omik" href="https://www.klausurchecker.de/app/omik/">OMIK · Mikroökonomik 1<small>Gratis-Showroom · kompletter Kurs, alle 10 Kapitel</small></a>
-    <a class="btn" data-fach="ofin" href="https://www.klausurchecker.de/app/ofin/">OFIN · Finanzen 1<small>Gratis-Kapitel 3: Anleihen, Renten &amp; Zinsstruktur</small></a>
-    <p class="tipp">Tipp: Nach dem Login kannst du dir in der App weitere Lektionen freischalten.</p>
+    <div class="waehle">Schon reinschauen?</div>
+    <a class="btn" data-fach="osta" href="https://www.klausurchecker.de/app/osta/">OSTA · Statistik 1<small>Dein Statistik-Kurs in der App</small></a>
+    <a class="btn" data-fach="omik" href="https://www.klausurchecker.de/app/omik/">OMIK · Mikroökonomik 1<small>Gratis-Showroom · ganzer Kurs frei</small></a>
+    <a class="btn" data-fach="ofin" href="https://www.klausurchecker.de/app/ofin/">OFIN · Finanzen 1<small>Dein Finanzen-Kurs in der App</small></a>
+    <p class="tipp">Tipp: Sobald dein Login per Mail da ist, schaltest du in der App alles frei.</p>
     <p class="foot">BWL Kurse · Klausurvorbereitung für die Goethe-Universität Frankfurt · <a href="mailto:info@klausurchecker.de">info@klausurchecker.de</a><br>
     <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
   </div>
@@ -77,8 +77,8 @@
       .then(function(r){ return r.json(); })
       .then(function(d){
         if(still) return;
-        if(d && d.status==="created"){ txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs an "+esc(mail)+".</b> Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach."; }
-        else if(d && d.status==="exists"){ txt.innerHTML="F\u00fcr <b>"+esc(mail)+"</b> gibt es schon einen App-Zugang \u2013 melde dich in der App mit deinem Passwort an."; }
+        if(d && d.status==="created"){ txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs an "+esc(mail)+".</b> Sie gelten f\u00fcr alle drei Kurse. Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach."; }
+        else if(d && d.status==="exists"){ txt.innerHTML="F\u00fcr <b>"+esc(mail)+"</b> gibt es schon einen Zugang \u2013 dein Passwort steht in deiner ersten Zugangsmail. Schau unten schon in deine Kurse rein."; }
         else { gesendet=false; zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); }
       })
       .catch(function(){ if(!still){ gesendet=false; zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); } });
@@ -90,9 +90,8 @@
     });
   }
   if(form) form.addEventListener("submit",function(e){ e.preventDefault(); var m=(inp.value||"").trim().toLowerCase(); if(m.indexOf("@")>0){ email=m; sende(m, fachParam, false); form.style.display="none"; txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; } });
-  if(email && fachParam){ sende(email, fachParam, false); txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; }
-  else if(email){ txt.innerHTML="<b>Fast geschafft:</b> W\u00e4hle unten dein Fach \u2013 deine Zugangsdaten (Benutzername + Einmalpasswort) kommen dann f\u00fcr genau diese App per E-Mail. Schau auch im Spam-Ordner nach."; }
-  else { zeigeFormular("Fast geschafft: F\u00fcr deinen App-Zugang (Benutzername + Einmalpasswort per Mail) trag hier kurz deine best\u00e4tigte E-Mail-Adresse ein \u2013 und w\u00e4hle dann unten dein Fach:"); }
+  if(email){ sende(email, fachParam, false); txt.textContent="Dein Zugang wird eingerichtet \u2026"; }
+  else { zeigeFormular("Fast geschafft: Trag hier kurz deine best\u00e4tigte E-Mail-Adresse ein, dann schicken wir dir die Zugangsdaten \u2013 sie gelten f\u00fcr alle drei Kurse:"); }
 })();
 </script>
 </body>

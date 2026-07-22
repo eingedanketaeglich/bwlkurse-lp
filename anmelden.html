@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anmelden · BWL Kurse</title>
+<meta name="robots" content="noindex">
+<style>
+  body{margin:0;padding:24px;background:#EAE9E5;font-family:Inter,Helvetica,Arial,sans-serif;color:#1B1D21;
+       display:flex;min-height:90vh;align-items:center;justify-content:center}
+  .card{background:#F8F7F4;border:1px solid #E3DFD6;border-radius:16px;padding:32px 26px;max-width:460px;
+        width:100%;text-align:center;box-sizing:border-box}
+  .brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:18px;margin-bottom:18px}
+  h1{font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:1.3;margin:0 0 10px}
+  p{font-size:15px;line-height:1.55;color:#3d4550;margin:10px 0}
+  .spin{width:34px;height:34px;margin:16px auto 6px;border:3px solid #DEDCD4;border-top-color:#E8760A;
+        border-radius:50%;animation:r .9s linear infinite}
+  @keyframes r{to{transform:rotate(360deg)}}
+  a.btn{display:inline-block;margin-top:14px;padding:13px 26px;border-radius:12px;background:#E8760A;color:#fff;
+        text-decoration:none;font-weight:700;font-size:16px}
+  .apps{margin-top:16px;font-size:13px;color:#6b6f76}
+  .apps a{color:#B85E00}
+  small{display:block;margin-top:18px;color:#6b7280;font-size:12px;line-height:1.6}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">BWL Kurse</div>
+
+  <div id="laden">
+    <h1>Du wirst angemeldet …</h1>
+    <div class="spin"></div>
+    <p>Einen Moment, wir öffnen deine App.</p>
+  </div>
+
+  <div id="manuell" hidden>
+    <h1>Anmelden ohne Passwort</h1>
+    <p>Klick auf den Button – du landest direkt in deiner App.</p>
+    <a class="btn" id="goBtn" href="#">Jetzt anmelden</a>
+  </div>
+
+  <div id="fehler" hidden>
+    <h1>Das hat nicht geklappt</h1>
+    <p id="fehlerText">Dieser Anmelde-Link ist nicht mehr gültig.</p>
+    <p>Du kommst trotzdem rein: Öffne deine App, tippe auf <b>Anmelden</b> und dann auf
+       <b>„Passwort vergessen?“</b> – du bekommst sofort ein neues Einmalpasswort per E-Mail.</p>
+    <a class="btn" href="https://www.klausurchecker.de/app/osta/">Zur App</a>
+    <div class="apps">Dein Konto gilt für alle Fächer:
+      <a href="https://www.klausurchecker.de/app/osta/">OSTA</a> ·
+      <a href="https://www.klausurchecker.de/app/omik/">OMIK</a> ·
+      <a href="https://www.klausurchecker.de/app/ofin/">OFIN</a></div>
+  </div>
+
+  <small>Fragen? Schreib an <a href="mailto:info@klausurchecker.de" style="color:#6b7280">info@klausurchecker.de</a>.</small>
+</div>
+<script>
+(function () {
+  "use strict";
+  var FN = "https://adrfijztnbebzghumdxn.supabase.co/functions/v1/magic-login";
+  var $ = function (id) { return document.getElementById(id); };
+  function zeige(welche, text) {
+    $("laden").hidden = welche !== "laden";
+    $("manuell").hidden = welche !== "manuell";
+    $("fehler").hidden = welche !== "fehler";
+    if (text) $("fehlerText").textContent = text;
+  }
+
+  // Token steht in ?k= (Query, damit Klick-Tracking der Mail ihn nicht abschneidet).
+  var k = new URLSearchParams(location.search).get("k") || "";
+  if (!k) { zeige("fehler", "In diesem Link fehlt der Anmelde-Schlüssel."); return; }
+
+  var versucht = false;
+  function anmelden() {
+    if (versucht) return;
+    versucht = true;
+    zeige("laden");
+    fetch(FN, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ k: k })
+    }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d && res.d.url) { location.replace(res.d.url); return; }
+        zeige("fehler", (res.d && res.d.error) || "Dieser Anmelde-Link ist nicht mehr gültig.");
+      })
+      .catch(function () {
+        versucht = false;
+        zeige("manuell");
+      });
+  }
+
+  // Der Token ist mehrfach nutzbar: ein automatischer Vorab-Abruf durch ein Mailprogramm
+  // verbraucht ihn NICHT. Deshalb darf die Anmeldung sofort starten (ein Klick weniger).
+  $("goBtn").addEventListener("click", function (e) { e.preventDefault(); versucht = false; anmelden(); });
+  anmelden();
+})();
+</script>
+</body>
+</html>

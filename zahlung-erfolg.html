@@ -6,33 +6,124 @@
 <title>Zahlung erfolgreich · BWL Kurse</title>
 <meta name="robots" content="noindex">
 <style>
-  body{margin:0;padding:24px;background:#EAE9E5;font-family:Inter,system-ui,-apple-system,sans-serif;color:#1B1D21;
+  body{margin:0;padding:24px;background:#EAE9E5;font-family:Inter,Helvetica,Arial,sans-serif;color:#1B1D21;
        display:flex;min-height:90vh;align-items:center;justify-content:center}
-  .card{background:#fff;border:1px solid #E3DFD6;border-radius:14px;padding:28px 26px;max-width:520px;text-align:center}
+  .card{background:#F8F7F4;border:1px solid #E3DFD6;border-radius:16px;padding:30px 26px;max-width:520px;
+        width:100%;text-align:center;box-sizing:border-box}
   .ok{width:56px;height:56px;border-radius:50%;background:#1a8a4a;color:#fff;font-size:30px;line-height:56px;margin:0 auto 14px}
-  h1{font-size:22px;margin:0 0 8px}
-  p{font-size:15px;line-height:1.55;color:#3d4550;margin:8px 0}
-  a.btn{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:10px;background:#E8760A;color:#fff;
-        text-decoration:none;font-weight:600}
-  small{display:block;margin-top:16px;color:#6b7280;font-size:12px}
+  h1{font-family:Georgia,'Times New Roman',serif;font-size:23px;line-height:1.3;margin:0 0 8px}
+  p{font-size:15px;line-height:1.55;color:#3d4550;margin:9px 0}
+  .box{background:#fff;border:1px solid #DEDCD4;border-radius:12px;padding:14px 16px;margin:16px 0;text-align:left}
+  .lbl{font-size:12.5px;color:#6b6f76;margin:0 0 3px}
+  .val{margin:0 0 12px;font-weight:700;color:#1B1D21;font-size:15px;word-break:break-word}
+  .val:last-child{margin-bottom:0}
+  a.btn{display:inline-block;margin-top:6px;padding:13px 26px;border-radius:12px;background:#E8760A;color:#fff;
+        text-decoration:none;font-weight:700;font-size:16px}
+  a.btn.sek{background:transparent;color:#B85E00;border:1px solid #DEDCD4;font-weight:600;font-size:15px;padding:11px 22px}
+  .schritte{text-align:left;font-size:14px;line-height:1.6;color:#3d4550;margin:14px 0 0;padding-left:20px}
+  .warte{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:7px;border:2px solid #DEDCD4;
+         border-top-color:#E8760A;border-radius:50%;animation:r .9s linear infinite}
+  @keyframes r{to{transform:rotate(360deg)}}
+  .apps{margin-top:14px;font-size:13px;color:#6b6f76}
+  .apps a{color:#B85E00}
+  small{display:block;margin-top:18px;color:#6b7280;font-size:12px;line-height:1.6}
+  [hidden]{display:none !important}
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="ok">✓</div>
+  <div class="ok">&#10003;</div>
   <h1 id="h">Zahlung erfolgreich!</h1>
-  <p id="t">Danke für deinen Kauf. Du bekommst in wenigen Minuten eine Bestätigung per E-Mail.</p>
-  <p id="k" hidden>Wenn das dein erster Kauf war, steht in der E-Mail auch dein <b>Start-Passwort</b> für dein Konto.</p>
-  <a class="btn" href="https://www.klausurchecker.de/">Zurück zu BWL Kurse</a>
-  <small>Keine E-Mail bekommen? Schau bitte im Spam-Ordner nach oder schreib an info@klausurchecker.de.</small>
+  <p id="t">Danke für deinen Kauf. Du bekommst gleich eine Bestätigung per E-Mail.</p>
+
+  <div class="box" id="detail" hidden>
+    <p class="lbl">Dein Kauf</p>
+    <p class="val" id="dProdukt">&ndash;</p>
+    <p class="lbl">Dein Zugang liegt auf dem Konto</p>
+    <p class="val" id="dMail">&ndash;</p>
+    <p class="lbl">Freischaltung</p>
+    <p class="val" id="dFrei"><span class="warte"></span>l&auml;uft &hellip;</p>
+  </div>
+
+  <a class="btn" id="loginBtn" hidden href="#">Jetzt anmelden und &ouml;ffnen</a>
+  <a class="btn sek" id="appBtn" hidden href="https://www.klausurchecker.de/app/osta/">Zur App</a>
+
+  <ol class="schritte" id="schritte" hidden>
+    <li>Auf <b>Jetzt anmelden</b> tippen &ndash; du kommst ohne Passwort direkt in die App.</li>
+    <li>Deine gekaufte Lektion ist dort sofort freigeschaltet.</li>
+    <li>Beim ersten Mal legst du noch dein eigenes Passwort fest.</li>
+  </ol>
+
+  <p id="hinweisMail">Wenn das dein erster Kauf war, steht in der E-Mail auch dein <b>Einmalpasswort</b> f&uuml;r dein Konto.</p>
+
+  <div class="apps">Dein Konto gilt f&uuml;r alle F&auml;cher:
+    <a href="https://www.klausurchecker.de/app/osta/">OSTA</a> &middot;
+    <a href="https://www.klausurchecker.de/app/omik/">OMIK</a> &middot;
+    <a href="https://www.klausurchecker.de/app/ofin/">OFIN</a></div>
+
+  <small>Keine E-Mail bekommen? Schau bitte im Spam-Ordner nach oder schreib an
+    <a href="mailto:info@klausurchecker.de" style="color:#6b7280">info@klausurchecker.de</a>.</small>
 </div>
 <script>
+(function () {
+  "use strict";
+  var FN = "https://adrfijztnbebzghumdxn.supabase.co/functions/v1/kauf-status";
+  var $ = function (id) { return document.getElementById(id); };
   var q = new URLSearchParams(location.search);
+  var sid = q.get("session_id") || "";
+
   if (q.get("typ") === "qa") {
-    document.getElementById("h").textContent = "Termin bestätigt!";
-    document.getElementById("t").innerHTML = "Deine Zahlung ist eingegangen, dein Platz im <b>Live-Klausurtraining</b> ist reserviert. Die Bestätigung mit allen Details kommt per E-Mail.";
+    $("h").textContent = "Termin bestätigt!";
+    $("t").innerHTML = "Deine Zahlung ist eingegangen, dein Platz im <b>Live Q&amp;A</b> ist reserviert. " +
+      "Die Bestätigung mit allen Details kommt per E-Mail.";
   }
-  document.getElementById("k").hidden = false;
+
+  // Ohne session_id (alte Links) bleibt die bisherige, generische Seite stehen.
+  if (!sid) return;
+
+  var loginUrl = null, versuche = 0, MAX = 15;
+
+  function zeigeStatus(d) {
+    $("detail").hidden = false;
+    if (d.produkt) $("dProdukt").textContent = d.produkt;
+    if (d.email) $("dMail").textContent = d.email;
+    if (d.app_url) $("appBtn").href = d.app_url;
+
+    if (d.freigeschaltet) {
+      $("dFrei").innerHTML = "<span style=\"color:#1a8a4a\">✓ fertig – dein Zugang ist offen</span>";
+    } else {
+      $("dFrei").innerHTML = "<span class=\"warte\"></span>läuft … (dauert meist nur Sekunden)";
+    }
+
+    if (!loginUrl && d.login_url) {
+      loginUrl = d.login_url;
+      $("loginBtn").href = loginUrl;
+      $("loginBtn").hidden = false;
+      $("schritte").hidden = false;
+      $("hinweisMail").innerHTML = "Du brauchst dafür kein Passwort. In deiner E-Mail findest du zusätzlich " +
+        "ein <b>Einmalpasswort</b>, falls du dich später von einem anderen Gerät anmelden willst.";
+    }
+    if (!loginUrl) $("appBtn").hidden = false;
+    // Kurz halten: die Details stehen direkt darunter im Kasten.
+    if (d.email) $("t").textContent = "Danke für deinen Kauf. Alles Wichtige auf einen Blick:";
+  }
+
+  function laden() {
+    versuche++;
+    fetch(FN, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: sid, login: !loginUrl })
+    }).then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || d.error) return;
+        zeigeStatus(d);
+        if (d.bezahlt && !d.freigeschaltet && versuche < MAX) setTimeout(laden, 3000);
+      })
+      .catch(function () { if (versuche < 3) setTimeout(laden, 4000); });
+  }
+  laden();
+})();
 </script>
 </body>
 </html>

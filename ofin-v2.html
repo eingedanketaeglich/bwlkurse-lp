@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<!--
+  BWL Kurse · OFIN · Finanzen 1 · FORSCHUNGS-VARIANTE (Probe/Lead)
+  Design-System: Silber/Orange, zwei Modi (Hell = Standard, Dunkel = Schwarz+Orange)
+  Familien-Bruecke Firestarter: gleiche Flammen-Form (Fortschritts-Signet) + gleiches Orange
+  Erstellt 2026-07-17 · Freigabe-Mockup v01 · Inhalte 1:1 aus ofin-probe-lektionen (Build 16.07.2026)
+
+  TRANSFER-TOKENS (vor Live-Gang ersetzen; solange Platzhalter, fuehren CTAs in die Vormerkung):
+    {{CHECKOUT_URL}}   = echter Checkout (z. B. CopeCart/Digistore24)
+    {{GRATIS_URL}}     = Gratis-Lektion (Standard: ofin-kap03-anleihen.html, relativ)
+    {{KLAUSUR_URL}}    = Kursbereich der Klausur-Variante (persoenlicher Kurslink)
+    {{OMIK_URL}}       = Forschungs-Seite Mikrooekonomik 1
+    {{OFIN_URL}}       = Forschungs-Seite Finanzen 1
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#EAE9E5">
+<title>OFIN · Testseite V2 (Mobil-Redesign)</title>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ CI-TOKENS · HELL (Silber, Standard) ============ */
+:root{
+  --bg:#EAE9E5; --bg-2:#E3E2DD; --surface:#F8F7F4; --surface-2:#EDECE8;
+  --line:#FCFBF9; --line-2:#E4DDCE; --hair:#D8D6CE;
+  --edge:inset 0 1px 0 #FFFFFF;
+  --text:#1B1D21; --text-2:#585B62; --text-3:#8C8F96;
+  --silver:#C6C9CF; --silver-btn:linear-gradient(180deg,#FCFBF9,#E6E5E0);
+  --accent:#E8760A; --accent-2:#F59440; --accent-deep:#C05C00; --glow:rgba(232,118,10,.16);
+  --done:#2E7D4F; --done-bg:#E7F1EA; --wrong:#C0453E;
+  --sh-1:0 1px 2px rgba(30,33,40,.06); --sh-2:0 8px 20px rgba(30,33,40,.09); --sh-3:0 18px 40px rgba(30,33,40,.15);
+  --premium:#20232A; --premium-2:#282C34; --premium-line:rgba(198,201,207,.42); --premium-ink:#ECEBE7; --premium-ink2:#A6AAB2;
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,-apple-system,sans-serif;
+  --r-sm:11px; --r-md:13px; --r-lg:16px; --r-xl:22px;
+}
+/* ============ CI-TOKENS · DUNKEL (Schwarz + Orange) ============ */
+[data-theme="dark"]{
+  --bg:#111214; --bg-2:#0C0D0F; --surface:#1A1C20; --surface-2:#23262B;
+  --line:rgba(201,204,212,.13); --line-2:rgba(201,204,212,.08); --hair:rgba(201,204,212,.16);
+  --edge:inset 0 1px 0 rgba(255,255,255,.05);
+  --text:#EAEBED; --text-2:#A3A7AE; --text-3:#71757C;
+  --silver:#C6C9CF; --silver-btn:linear-gradient(180deg,#2B2E34,#1E2126);
+  --accent:#E8760A; --accent-2:#F59440; --accent-deep:#F59440; --glow:rgba(232,118,10,.24);
+  --done:#4CAF7D; --done-bg:rgba(76,175,125,.13); --wrong:#D46660;
+  --sh-1:0 1px 2px rgba(0,0,0,.4); --sh-2:0 8px 20px rgba(0,0,0,.45); --sh-3:0 18px 40px rgba(0,0,0,.55);
+  --premium:#1C1F24; --premium-2:#23262C; --premium-line:rgba(201,204,212,.28); --premium-ink:#EAEBED; --premium-ink2:#9DA2AA;
+}
+
+/* ============ Fundament ============ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.18;margin:0 0 12px;letter-spacing:-.01em}
+h1{font-size:clamp(30px,5.4vw,44px)}
+h2{font-size:clamp(24px,3.6vw,30px)}
+h3{font-size:20px}
+p{margin:0 0 12px;max-width:66ch}
+a{color:var(--accent-deep)}
+img,svg{max-width:100%}
+.num{font-family:var(--sans);font-variant-numeric:tabular-nums}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:48px 0}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-2);margin-bottom:12px;
+}
+.kicker::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+.sub{color:var(--text-2);font-size:16px;max-width:60ch}
+button{font-family:inherit;font-size:16px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ============ Buttons (Orange = Aktion, Silber = zweite Ordnung) ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 22px;border-radius:var(--r-md);border:0;cursor:pointer;
+  font-weight:600;font-size:16px;text-decoration:none;text-align:center;
+  transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;
+}
+.btn-primary{
+  background:linear-gradient(180deg,var(--accent-2),var(--accent));
+  color:#2A1500;box-shadow:var(--sh-1),0 0 0 1px rgba(192,92,0,.25),0 6px 16px var(--glow);
+}
+.btn-primary:hover{filter:brightness(1.04);box-shadow:var(--sh-2),0 8px 22px var(--glow)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-silver{
+  background:var(--silver-btn);color:var(--text);
+  box-shadow:var(--edge),0 0 0 1px var(--hair),var(--sh-1);
+}
+.btn-silver:hover{box-shadow:var(--edge),0 0 0 1px var(--silver),var(--sh-2)}
+.btn-ghost{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1.5px var(--hair)}
+.btn-app{background:linear-gradient(180deg,var(--premium-2),var(--premium));color:#fff;box-shadow:var(--sh-1),0 0 0 1px var(--premium-line),0 6px 16px rgba(30,33,40,.18)}
+.btn-app:hover{filter:brightness(1.08);box-shadow:var(--sh-2),0 8px 22px rgba(30,33,40,.16)}
+.btn-app:active{transform:translateY(1px)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--silver)}
+.btn-wide{width:100%}
+
+/* ============ Appbar ============ */
+.appbar{
+  position:sticky;top:0;z-index:60;background:var(--surface);
+  border-bottom:1px solid var(--hair);
+  box-shadow:0 1px 0 var(--line),var(--sh-1);
+}
+[data-theme="dark"] .appbar{box-shadow:0 1px 0 rgba(201,204,212,.06),var(--sh-1)}
+.appbar .wrap{display:flex;align-items:center;gap:14px;min-height:68px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.signet{
+  width:44px;height:44px;border-radius:50%;flex:none;
+  background:linear-gradient(180deg,var(--premium-2),var(--premium));
+  box-shadow:inset 0 0 0 1px var(--premium-line),var(--sh-1);
+  display:flex;align-items:center;justify-content:center;
+}
+.signet svg{width:26px;height:26px}
+.brand b{font-family:var(--serif);font-weight:700;font-size:18px;letter-spacing:.01em;display:block;line-height:1.15}
+.brand small{display:block;font-size:12px;color:var(--text-2);letter-spacing:.04em}
+.appbar .sp{flex:1}
+.count-pill{
+  display:none;align-items:center;gap:7px;
+  background:var(--surface-2);border-radius:999px;padding:8px 14px;
+  box-shadow:inset 0 0 0 1px var(--hair);
+  font-size:13px;font-weight:600;color:var(--text-2);white-space:nowrap;
+}
+.count-pill b{color:var(--accent-deep);font-weight:700}
+@media(min-width:860px){.count-pill{display:inline-flex}}
+.theme-btn{
+  width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;flex:none;
+  background:var(--silver-btn);box-shadow:var(--edge),0 0 0 1px var(--hair),var(--sh-1);
+  display:flex;align-items:center;justify-content:center;color:var(--text-2);
+}
+.theme-btn:hover{color:var(--text)}
+.theme-btn .moon{display:none}
+[data-theme="dark"] .theme-btn .sun{display:none}
+[data-theme="dark"] .theme-btn .moon{display:block}
+.appbar .btn{min-height:44px;padding:10px 18px}
+@media(max-width:560px){.appbar .btn span{display:none}.appbar .btn::after{content:"Schaffst du’s?"}}
+
+/* ============ Hero ============ */
+.hero{padding:56px 0 40px;background:
+  radial-gradient(900px 420px at 85% -10%,var(--glow),transparent 60%),
+  linear-gradient(180deg,var(--bg-2),var(--bg));}
+.hero-grid{display:grid;gap:32px;align-items:center}
+@media(min-width:920px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:48px}}
+.hero h1 .hl{color:var(--accent-deep)}
+[data-theme="dark"] .hero h1 .hl{color:var(--accent-2)}
+.hero .lead{font-size:18px;color:var(--text-2);max-width:56ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 8px}
+.trust{
+  display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:20px;padding-top:16px;
+  border-top:1px solid var(--hair);color:var(--text-2);font-size:14px;
+}
+.trust b{color:var(--text);font-weight:700}
+.trust span{display:inline-flex;align-items:baseline;gap:6px}
+
+/* Premium-Karte (Graphit + Silber-Inset, beide Modi) */
+.premium-card{
+  background:linear-gradient(180deg,var(--premium-2),var(--premium));
+  color:var(--premium-ink);border-radius:var(--r-xl);
+  box-shadow:inset 0 0 0 1px var(--premium-line),var(--sh-3);
+  padding:28px;
+}
+.premium-card .pc-kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--premium-ink2);margin-bottom:14px}
+.pathcard-flame{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.pathcard-flame .ftxt b{display:block;font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.25}
+.pathcard-flame .ftxt span{font-size:13px;color:var(--premium-ink2)}
+.mini-path{margin:6px 0 4px}
+.pathcard-note{font-size:12px;color:var(--premium-ink2);margin:10px 0 0;max-width:none}
+.badge-demo{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--premium-ink2);border:1px solid var(--premium-line);border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:2px;
+}
+
+/* ============ Angebots-Streifen ============ */
+.offerstrip{
+  background:linear-gradient(180deg,var(--premium-2),var(--premium));
+  color:var(--premium-ink);border-top:1px solid var(--premium-line);border-bottom:1px solid var(--premium-line);
+}
+.offerstrip .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.offerstrip .os-txt{flex:1;min-width:260px;font-size:15px}
+.offerstrip .os-txt b{font-weight:700}
+.offerstrip .os-price{color:var(--accent-2);font-weight:700}
+.os-clock{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;
+  background:rgba(232,118,10,.14);color:var(--accent-2);
+  border:1px solid rgba(232,118,10,.35);border-radius:999px;padding:8px 16px;white-space:nowrap;
+}
+
+/* ============ Karten allgemein ============ */
+.card{
+  background:var(--surface);border-radius:var(--r-lg);
+  box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-2);
+  padding:28px;
+}
+[data-theme="dark"] .card{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-2)}
+
+/* ============ Klausurcheck ============ */
+.sc-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.sc-timer{font-size:13px;font-weight:600;color:var(--text-2);background:var(--surface-2);border-radius:999px;padding:5px 12px;box-shadow:inset 0 0 0 1px var(--hair)}
+.sc-q{font-weight:600;margin:26px 0 10px;font-size:17px}
+.sc-q .qn{
+  display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin-right:8px;
+  border-radius:50%;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--hair);
+  font-size:13px;font-weight:700;color:var(--text-2);vertical-align:-4px;
+}
+.sc-opt{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  background:var(--surface);color:var(--text);font-size:16px;line-height:1.45;
+  border:0;border-radius:var(--r-sm);padding:13px 16px;margin:8px 0;min-height:48px;
+  box-shadow:var(--edge),0 0 0 1px var(--hair),var(--sh-1);
+  transition:box-shadow .15s ease;
+}
+.sc-opt:hover{box-shadow:var(--edge),0 0 0 1.5px var(--silver),var(--sh-1)}
+.sc-opt.sel{box-shadow:var(--edge),0 0 0 2px var(--accent),var(--sh-1)}
+.sc-opt.ok{background:var(--done-bg);box-shadow:0 0 0 1.5px var(--done)}
+.sc-opt.bad{box-shadow:0 0 0 1.5px var(--wrong)}
+.sc-opt:disabled{cursor:default}
+.sc-fb{
+  display:none;font-size:14.5px;color:var(--text-2);background:var(--surface-2);
+  border-left:3px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:12px 16px;margin:10px 0 4px;
+}
+.sc-fb b{color:var(--text)}
+.sc-eval{margin-top:22px}
+.btn[disabled]{opacity:.45;cursor:default;pointer-events:none}
+.sc-result{display:none;margin-top:22px;border-radius:var(--r-md);padding:20px 22px}
+.sc-result.show{display:block;animation:rise .4s ease}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sc-result .head{display:block;font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:6px}
+.sc-result.r2{background:var(--done-bg);box-shadow:0 0 0 1px var(--done)}
+.sc-result.r2 .head{color:var(--done)}
+.sc-result.r1{background:var(--surface-2);box-shadow:0 0 0 1px var(--line-2)}
+.sc-result.r1 .head{color:var(--accent-deep)}
+.sc-result.r0{background:var(--surface-2);box-shadow:0 0 0 1px var(--line-2)}
+.sc-result.r0 .head{color:var(--wrong)}
+[data-theme="dark"] .sc-result.r1,[data-theme="dark"] .sc-result.r0{box-shadow:0 0 0 1px var(--line)}
+.sc-result p{font-size:15px;color:var(--text-2);max-width:none}
+.sc-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.sc-note{font-size:13px;color:var(--text-2);margin-top:16px}
+.sc-note svg{vertical-align:-2px;margin-right:5px}
+.sc-retry{background:none;border:0;color:var(--text-2);cursor:pointer;font-size:14px;text-decoration:underline;padding:4px 0;margin-top:10px}
+.sc-retry:hover{color:var(--text)}
+/* Inline-Opt-in nach dem Check */
+.sc-optin{margin-top:16px;padding-top:16px;border-top:1px solid var(--hair)}
+.sc-optin .f-row{display:flex;gap:10px;flex-wrap:wrap}
+.sc-optin input[type=text],.sc-optin input[type=email]{flex:1;min-width:160px}
+.sc-optin .chk{margin-top:10px}
+
+/* ============ Formular-Grundstile ============ */
+input[type=text],input[type=email],input[type=tel]{
+  width:100%;padding:12px 14px;min-height:48px;font-size:16px;font-family:inherit;
+  color:var(--text);background:var(--surface);
+  border:0;border-radius:var(--r-sm);
+  box-shadow:var(--edge),0 0 0 1px var(--hair);
+}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+label.f{display:block;font-weight:600;margin:16px 0 6px;font-size:15px}
+.fnote{font-size:13px;color:var(--text-2);margin:6px 0 0}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;font-size:14px;line-height:1.5;color:var(--text-2)}
+.chk input{margin-top:2px;width:20px;height:20px;flex:none;accent-color:var(--accent)}
+.chk a{color:var(--accent-deep)}
+.form-ok{display:none;background:var(--done-bg);box-shadow:0 0 0 1px var(--done);color:var(--text);padding:16px 18px;border-radius:var(--r-md);margin-top:14px;line-height:1.5}
+.form-err{display:none;background:var(--surface-2);box-shadow:0 0 0 1px var(--wrong);color:var(--wrong);padding:12px 16px;border-radius:var(--r-md);margin-top:14px;font-size:14.5px}
+
+/* ============ Gratis-Karte ============ */
+.gratis-card{display:grid;gap:24px;align-items:center}
+@media(min-width:820px){.gratis-card{grid-template-columns:auto 1fr auto}}
+.gratis-badge{
+  display:inline-flex;align-items:center;gap:8px;align-self:start;
+  background:var(--done-bg);color:var(--done);font-weight:700;font-size:13px;letter-spacing:.06em;
+  border-radius:999px;padding:7px 14px;box-shadow:inset 0 0 0 1px var(--done);white-space:nowrap;
+}
+.gratis-card h3{font-size:22px;margin-bottom:6px}
+.gratis-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{
+  font-size:13px;font-weight:500;color:var(--text-2);
+  background:var(--surface-2);border-radius:999px;padding:5px 12px;
+  box-shadow:inset 0 0 0 1px var(--hair);
+}
+
+/* ============ Lernpfad ============ */
+.path-flame{display:flex;align-items:center;gap:20px;margin:8px 0 30px}
+.path-flame .ftxt b{display:block;font-family:var(--serif);font-size:20px;font-weight:600}
+.path-flame .ftxt span{font-size:14px;color:var(--text-2)}
+.flamewrap{position:relative;flex:none;filter:drop-shadow(0 4px 14px var(--glow))}
+.path-zone{position:relative;margin-top:10px}
+.path-rail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.path-rail path{stroke:var(--hair);stroke-width:3;fill:none}
+.pnode{
+  position:relative;display:flex;gap:18px;align-items:flex-start;
+  padding:14px 0;
+}
+.porb{
+  position:relative;z-index:2;flex:none;width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--silver-btn);
+  box-shadow:var(--edge),0 0 0 1px var(--hair),var(--sh-1);
+  font-weight:700;font-size:16px;color:var(--text-2);
+}
+.pnode.locked .porb svg{width:18px;height:18px;color:var(--text-2)}
+.pnode.free .porb{
+  background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#FFFFFF;
+  box-shadow:0 0 0 4px var(--glow),0 0 0 1px var(--accent-deep),var(--sh-2);
+}
+.pnode.current .porb::after{
+  content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:2px solid var(--accent);opacity:.55;
+}
+.pbody{flex:1;min-width:0;padding-top:2px}
+.pnode .ptag{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)}
+.pnode.free .ptag{color:var(--accent-deep)}
+[data-theme="dark"] .pnode.free .ptag{color:var(--accent-2)}
+.pnode h3{font-size:18px;margin:3px 0 2px}
+.pnode .pdesc{font-size:14.5px;color:var(--text-2);max-width:58ch}
+.pnode .pstat{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--text-2);margin-top:8px}
+.pnode.free .pstat{color:var(--done)}
+.pnode.locked a.unlock{font-size:13.5px;font-weight:600;color:var(--accent-deep);text-decoration:none}
+.pnode.locked a.unlock:hover{text-decoration:underline}
+.pnode.current .pbody{
+  background:var(--surface);border-radius:var(--r-lg);padding:16px 18px;margin:-6px 0;
+  box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-2);
+}
+[data-theme="dark"] .pnode.current .pbody{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-2)}
+.pnode.current .pbody .btn{margin-top:12px}
+@media(min-width:760px){
+  .pnode{width:88%}
+  .pnode:nth-child(4n+1){margin-left:0}
+  .pnode:nth-child(4n+2){margin-left:6%}
+  .pnode:nth-child(4n+3){margin-left:12%}
+  .pnode:nth-child(4n+4){margin-left:6%}
+}
+.part-label{
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);
+  display:flex;align-items:center;gap:12px;margin:26px 0 6px;position:relative;z-index:2;
+}
+.part-label::after{content:"";flex:1;height:1px;background:var(--hair)}
+
+/* ============ Stimmen (Platzhalter) ============ */
+.voices{display:grid;gap:16px}
+@media(min-width:760px){.voices{grid-template-columns:1fr 1fr}}
+.voice{position:relative;padding:24px;border-radius:var(--r-lg);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--hair)}
+.voice .vq{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--text-2)}
+.voice .vwho{margin-top:12px;font-size:13px;font-weight:600;color:var(--text-3)}
+.ph-badge{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-2);background:var(--surface);border-radius:999px;padding:4px 10px;
+  box-shadow:inset 0 0 0 1px var(--hair);margin-bottom:12px;
+}
+
+/* ============ Autor ============ */
+.author{display:grid;gap:28px;align-items:center}
+@media(min-width:820px){.author{grid-template-columns:200px 1fr}}
+.author .foto{
+  width:180px;height:180px;object-fit:cover;border-radius:50%;justify-self:center;
+  box-shadow:0 0 0 1px var(--premium-line),0 0 0 6px rgba(198,201,207,.08),var(--sh-2);
+}
+.author p{color:var(--premium-ink);max-width:62ch}
+.author .aq{font-family:var(--serif);font-size:19px;font-style:italic;line-height:1.5;color:var(--premium-ink);border-left:2px solid var(--accent);padding-left:16px;margin-top:18px}
+.astats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:20px 0 4px}
+.astat{background:rgba(255,255,255,.04);border-radius:var(--r-md);padding:14px 16px;box-shadow:inset 0 0 0 1px var(--premium-line)}
+.astat b{display:block;font-size:20px;font-weight:700;color:var(--accent-2)}
+.astat span{font-size:12.5px;color:var(--premium-ink2);line-height:1.35;display:block;margin-top:2px}
+
+/* ============ Preis-Leiter ============ */
+.ladder{display:grid;gap:18px;margin-top:26px}
+@media(min-width:900px){.ladder{grid-template-columns:repeat(3,1fr);align-items:stretch}}
+.tier{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--surface);border-radius:var(--r-lg);padding:26px 24px;
+  box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-1);
+}
+[data-theme="dark"] .tier{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-1)}
+.tier .rung{font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--text-2)}
+.tier h3{font-size:19px;margin:8px 0 4px}
+.tier .price{display:flex;align-items:baseline;gap:10px;margin:10px 0 4px}
+.tier .price .now{font-size:32px;font-weight:700;letter-spacing:-.02em}
+.tier .price .old{font-size:15px;color:var(--text-2);text-decoration:line-through}
+.tier .pd{font-size:14.5px;color:var(--text-2);flex:1}
+.tier .pd b{color:var(--text)}
+.tier .plus{display:block;margin-top:8px;font-weight:600;color:var(--accent-deep);font-size:13.5px}
+[data-theme="dark"] .tier .plus{color:var(--accent-2)}
+.tier .btn{margin-top:18px}
+.tier.feat{
+  background:linear-gradient(180deg,var(--premium-2),var(--premium));color:var(--premium-ink);
+  box-shadow:inset 0 0 0 1px var(--premium-line),var(--sh-3);
+}
+.tier.feat .rung{color:var(--premium-ink2)}
+.tier.feat .pd{color:var(--premium-ink2)}
+.tier.feat .pd b{color:var(--premium-ink)}
+.tier.feat .price .old{color:var(--premium-ink2)}
+.tier.feat .plus{color:var(--accent-2)}
+.ribbon{
+  position:absolute;top:-13px;left:22px;
+  background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500;
+  font-size:12px;font-weight:700;letter-spacing:.04em;
+  border-radius:999px;padding:5px 14px;box-shadow:var(--sh-1);
+}
+.upsells{display:grid;gap:14px;margin-top:18px}
+@media(min-width:900px){.upsells{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}}
+.ups{
+  background:var(--surface-2);border-radius:var(--r-md);padding:18px;
+  box-shadow:inset 0 0 0 1px var(--hair);display:flex;flex-direction:column;gap:6px;
+}
+.ups b{font-size:15px}
+.ups .up{font-size:19px;font-weight:700}
+.ups .ud{font-size:13px;color:var(--text-2);flex:1}
+.ups button{
+  margin-top:8px;align-self:start;background:none;border:0;cursor:pointer;padding:6px 0;min-height:44px;
+  font-size:14px;font-weight:600;color:var(--accent-deep);
+}
+[data-theme="dark"] .ups button{color:var(--accent-2)}
+.ups button:hover{text-decoration:underline}
+.garantie{
+  display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;
+  margin-top:24px;padding:16px 22px;border-radius:var(--r-md);
+  background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--hair);
+  font-size:14px;color:var(--text-2);
+}
+.garantie span{display:inline-flex;align-items:center;gap:8px}
+.garantie svg{color:var(--done);flex:none}
+
+/* ============ FAQ ============ */
+.faq{max-width:760px}
+.faq details{
+  background:var(--surface);border-radius:var(--r-md);margin:10px 0;
+  box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-1);
+}
+[data-theme="dark"] .faq details{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-1)}
+.faq summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;
+  padding:18px 20px;font-weight:600;font-size:16px;min-height:48px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";flex:none;margin-left:auto;width:10px;height:10px;
+  border-right:2px solid var(--text-2);border-bottom:2px solid var(--text-2);
+  transform:rotate(45deg);transition:transform .2s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq .fa{padding:0 20px 18px;color:var(--text-2);font-size:15px}
+.faq .fa p{max-width:none}
+
+/* ============ Faecher-Streifen ============ */
+.subjects{display:grid;gap:14px}
+@media(min-width:760px){.subjects{grid-template-columns:repeat(3,1fr)}}
+.subj{
+  display:block;text-decoration:none;color:inherit;
+  background:var(--surface);border-radius:var(--r-md);padding:20px;
+  box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-1);
+  transition:box-shadow .15s ease,transform .15s ease;
+}
+[data-theme="dark"] .subj{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-1)}
+.subj:hover{transform:translateY(-2px);box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-2)}
+.subj .sk{font-size:22px;font-weight:700;font-family:var(--serif)}
+.subj .sn{font-size:14px;color:var(--text-2);margin-top:2px}
+.subj .sd{font-size:13px;color:var(--text-2);margin-top:10px;padding-top:10px;border-top:1px solid var(--hair)}
+.subj.here{box-shadow:var(--edge),0 0 0 2px var(--accent),var(--sh-1)}
+.subj .sk .dot{color:var(--accent)}
+
+/* ============ Abschluss + Footer ============ */
+.closing{text-align:center;padding:40px 28px}
+.closing h2{font-size:clamp(24px,3.4vw,30px)}
+.closing p{margin:0 auto 20px;color:var(--premium-ink2);max-width:52ch}
+.closing .btn{min-width:260px}
+footer{background:var(--bg-2);border-top:1px solid var(--hair);padding:36px 0;margin-top:0;font-size:14px;color:var(--text-2)}
+footer a{color:var(--text-2)}
+footer .fbrand{display:flex;align-items:center;gap:10px;margin-bottom:12px;color:var(--text)}
+footer .fbrand b{font-family:var(--serif)}
+.disclaimer{font-size:13px;color:var(--text-3);max-width:74ch;margin-top:14px}
+[data-theme="dark"] .disclaimer{color:var(--text-2)}
+
+/* ============ Modal (Buchung) ============ */
+.bk-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(12,13,15,.6)}
+.bk-modal[hidden]{display:none}
+.bk-dialog{
+  position:relative;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;
+  background:var(--surface);color:var(--text);border-radius:var(--r-lg);
+  box-shadow:0 0 0 1px var(--line-2),var(--sh-3);padding:28px;
+}
+[data-theme="dark"] .bk-dialog{box-shadow:0 0 0 1px var(--line),var(--sh-3)}
+.bk-close{
+  position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:50%;
+  background:transparent;cursor:pointer;font-size:26px;line-height:1;color:var(--text-2);
+}
+.bk-close:hover{background:var(--surface-2);color:var(--text)}
+.bk-h{font-family:var(--serif);font-size:21px;font-weight:600;margin:0 40px 16px 0}
+.bk-list{list-style:none;margin:0;padding:0}
+.bk-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--hair)}
+.bk-row:last-child{border-bottom:0}
+.bk-row-t{flex:1 1 60%;min-width:0;font-weight:600;font-size:15px}
+.bk-row-r{display:flex;align-items:center;gap:10px;margin-left:auto}
+.bk-preis{font-weight:700;white-space:nowrap}
+.bk-badge{
+  display:inline-block;text-decoration:none;white-space:nowrap;
+  background:var(--done-bg);color:var(--done);font-weight:700;font-size:13px;
+  padding:7px 13px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--done);
+}
+.bk-btn{
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;min-height:44px;
+  background:var(--silver-btn);color:var(--text);font-weight:600;font-size:14px;
+  padding:9px 16px;border:0;border-radius:var(--r-sm);
+  box-shadow:var(--edge),0 0 0 1px var(--hair);
+}
+.bk-btn:hover{box-shadow:var(--edge),0 0 0 1px var(--silver),var(--sh-1)}
+.bk-hint,.bk-foot{color:var(--text-2);font-size:13.5px;margin-top:14px}
+.bk-details{margin-top:4px}
+.bk-details>summary{cursor:pointer;font-size:13px;color:var(--accent-deep);font-weight:600}
+[data-theme="dark"] .bk-details>summary{color:var(--accent-2)}
+.bk-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
+.bk-fach{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:13px 0;border-bottom:1px solid var(--hair)}
+.bk-fach:last-child{border-bottom:0}
+.bk-fach-t{display:flex;flex-direction:column;gap:2px;flex:1 1 auto}
+.bk-fach-k{font-size:20px;font-weight:700;font-family:var(--serif);line-height:1}
+.bk-fach-n{font-size:13.5px;color:var(--text-2)}
+.bk-tgroup-h{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-2);margin:14px 0 6px;font-weight:700}
+.bk-opt{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  border-radius:var(--r-sm);padding:11px 14px;margin:7px 0;min-height:48px;
+  font-weight:600;font-size:15px;box-shadow:var(--edge),0 0 0 1px var(--hair);
+}
+.bk-opt:hover{box-shadow:var(--edge),0 0 0 1.5px var(--silver)}
+.bk-opt input{accent-color:var(--accent);width:18px;height:18px}
+.bk-opt.bk-sel{box-shadow:var(--edge),0 0 0 2px var(--accent)}.bk-opt.bk-out{opacity:.55;cursor:not-allowed}.bk-opt.bk-out input{cursor:not-allowed}
+.bk-need{color:var(--wrong);font-size:14px;font-weight:600;margin:6px 0}
+.bk-actionrow{margin-top:14px}
+.bk-actionrow .bk-btn{display:flex;width:100%;font-size:15px;background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500;box-shadow:var(--sh-1)}
+@media(max-width:600px){
+  .bk-modal{padding:0;align-items:stretch}
+  .bk-dialog{max-width:100%;min-height:100%;max-height:100%;border-radius:0}
+}
+
+/* ==== App-Identitaet: echtes Logo + Ring statt Flamme ==== */
+.mark{width:40px;height:40px;flex:none;display:grid;place-items:center}
+.mark img{width:40px;height:40px;border-radius:9px;object-fit:cover}
+.mark img{width:40px;height:40px;object-fit:contain;grid-area:1/1}
+.mark.sm,.mark.sm img{width:28px;height:28px}
+.mark .lg-l{display:block}
+.mark .lg-d{display:none}
+[data-theme="dark"] .mark .lg-l{display:none}
+[data-theme="dark"] .mark .lg-d{display:block}
+.ring{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--silver);opacity:.5;stroke-width:3}
+.ring-fg{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;transition:stroke-dasharray .6s ease}
+.ringwrap{position:relative;flex:none;filter:drop-shadow(0 4px 14px var(--glow))}
+.ring-ctr{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:15px;color:var(--accent-deep)}
+[data-theme="dark"] .ring-ctr{color:var(--accent-2)}
+.premium-card .ring-ctr{color:var(--accent-2)}
+/* ==== Zwei-Wege-Bruecke ==== */
+.weiter-grid{display:grid;gap:14px}
+@media(min-width:720px){.weiter-grid{grid-template-columns:1fr 1fr}}
+.wcard{background:rgba(255,255,255,.04);border-radius:var(--r-md);padding:20px;box-shadow:inset 0 0 0 1px var(--premium-line);display:flex;flex-direction:column;gap:8px}
+.wcard b{font-family:var(--serif);font-size:18px;font-weight:600}
+.wcard p{color:var(--premium-ink2);font-size:14.5px;max-width:none;flex:1;margin:0}
+.wcard .btn{margin-top:6px}
+/* ==== App-Installation ==== */
+.install-grid{display:grid;gap:16px;margin-top:8px}
+@media(min-width:720px){.install-grid{grid-template-columns:1fr 1fr}}
+.install .ins-h{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;margin-bottom:10px}
+.install .ins-h svg{width:22px;height:22px;color:var(--accent-deep);flex:none}
+[data-theme="dark"] .install .ins-h svg{color:var(--accent-2)}
+.install ol{margin:0;padding-left:20px;color:var(--text-2);font-size:15px;line-height:1.7}
+.install ol b{color:var(--text)}
+
+/* ==== Kurs-Auswahl ==== */
+.courses{display:grid;gap:14px;margin-top:10px}
+@media(min-width:760px){.courses{grid-template-columns:repeat(3,1fr)}}
+.course{display:flex;flex-direction:column;gap:5px;text-decoration:none;color:inherit;background:var(--surface);border-radius:var(--r-lg);padding:22px;box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-1);transition:box-shadow .15s ease,transform .15s ease}
+[data-theme="dark"] .course{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-1)}
+.course:hover{transform:translateY(-2px);box-shadow:var(--edge),0 0 0 1px var(--silver),var(--sh-2)}
+.course.here{box-shadow:var(--edge),0 0 0 2px var(--accent),var(--sh-2)}
+.course .c-k{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1}
+.course .c-n{font-size:14px;color:var(--text-2)}
+.course .c-meta{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:13px}
+.course .c-date{font-weight:700;color:var(--text)}
+.course .c-free{color:var(--done);font-weight:600}
+.course .c-cta{margin-top:10px;font-weight:700;color:var(--accent-deep);font-size:14.5px}
+[data-theme="dark"] .course .c-cta{color:var(--accent-2)}
+.course.here .c-cta::before{content:"Dein Kurs · ";color:var(--text-2);font-weight:600}
+/* ==== So funktioniert's ==== */
+.steps{display:grid;gap:14px;margin-top:8px}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--surface);border-radius:var(--r-md);padding:22px;box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-1)}
+[data-theme="dark"] .step{box-shadow:var(--edge),0 0 0 1px var(--line),var(--sh-1)}
+.step .s-n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500;font-weight:700;margin-bottom:10px}
+.step h3{font-size:17px;margin-bottom:4px}
+.step p{font-size:14.5px;color:var(--text-2);margin:0;max-width:none}
+</style>
+<style id="bkbc-css">
+/* ===== BKBC · Faecher-Paket-Konfigurator · identisch in App + Landing ===== */
+.bkbc-card{border:2px solid var(--accent);border-radius:14px;padding:14px;background:var(--surface-2);box-shadow:var(--sh-1)}
+.bkbc-h{font-weight:600;font-size:16px;margin:0 0 2px}
+.bkbc-sub{font-size:12px;color:var(--text-2);margin:0 0 10px;line-height:1.45}
+.bkbc-save{color:var(--done);font-size:12px;font-weight:600;margin-top:3px}
+.bkbc-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid var(--hair);border-radius:10px;margin:0 0 8px;cursor:pointer;background:var(--surface)}
+.bkbc-row:hover{border-color:var(--accent)}
+.bkbc-row.sel{border-color:var(--accent);background:var(--glow)}
+.bkbc-row input{width:20px;height:20px;accent-color:var(--accent);flex:none;margin:0}
+.bkbc-rt{flex:1;min-width:0}
+.bkbc-rt b{display:block;font-weight:600;font-size:14px}
+.bkbc-rt small{display:block;color:var(--text-3);font-size:12px;line-height:1.4}
+.bkbc-ho-row{margin-top:12px;border-style:dashed}
+.bkbc-sum{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:14px 2px 10px}
+.bkbc-total{font-size:26px;font-weight:600;white-space:nowrap;line-height:1.1}
+.bkbc-cta{display:flex;width:100%;align-items:center;justify-content:center;min-height:48px;cursor:pointer;border:0;border-radius:10px;font-size:15px;font-weight:600;text-align:center;background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500;box-shadow:var(--sh-1)}
+.bkbc-cta:disabled{background:var(--surface);color:var(--text-3);cursor:not-allowed;box-shadow:inset 0 0 0 1px var(--hair)}
+.bkbc-note{font-size:11.5px;color:var(--text-3);line-height:1.45;margin:10px 2px 0;text-align:center}
+</style>
+<script id="bkbc-core">
+/* =====================================================================
+   BKBC · Faecher-Paket-Konfigurator (Mehrfachauswahl + Auto-Summe)
+   ---------------------------------------------------------------------
+   ⛔ DIESER BLOCK IST IN ALLEN DATEIEN IDENTISCH:
+      App    : ofin-app-vorschau/index.html (+ omik-/ofin-app-vorschau)
+      Landing: bwlkurse-lp/index.html, osta.html, omik.html, ofin.html (diese Datei: ofin-v2.html)
+   Preise NUR hier aendern - danach in alle Dateien kopieren.
+   Checkout-Hook: window.bkbcOnCheckout(payload)
+      payload = {faecher:["OFIN",...], handouts:true|false, anzahl:N, total:Zahl}
+   ===================================================================== */
+window.BKBC = (function(){
+  "use strict";
+
+  /* ================= CONFIG (einzige Preisquelle) ================= */
+  var CFG = {
+    FAECHER: [
+      {code:"OMIK", sub:"Mikro\u00f6konomik 1"},
+      {code:"OFIN", sub:"Statistik"},
+      {code:"OFIN", sub:"Finanzen 1"}
+    ],
+    /* Staffel Klausur-Check (ohne Handouts) */
+    KLAUSURCHECK: {0:0, 1:39.90, 2:69.90, 3:89.90},
+    /* Staffel mit allen Handouts */
+    MIT_HANDOUTS: {0:0, 1:79.90, 2:99.80, 3:129.70},
+    /* "vormerken" = unverbindliche Vormerkung (kein Zahlungsanbieter aktiv)
+       "bestellen" = echter Kaufabschluss, Button-Beschriftung nach \u00a7312j BGB
+       -> auf "bestellen" umstellen, SOBALD der Checkout wirklich zahlungspflichtig ist. */
+    CTA_MODUS: "vormerken"
+  };
+  /* ================================================================ */
+
+  function fmt(n){ return n.toFixed(2).replace(".", ",") + " \u20ac"; }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function preis(anzahl, handouts){
+    var tab = handouts ? CFG.MIT_HANDOUTS : CFG.KLAUSURCHECK;
+    return (tab[anzahl] != null) ? tab[anzahl] : 0;
+  }
+
+  function markup(){
+    var rows = CFG.FAECHER.map(function(f){
+      return '<label class="bkbc-row"><input type="checkbox" class="bkbc-f" data-code="' + esc(f.code) + '">' +
+             '<span class="bkbc-rt"><b>' + esc(f.code) + '</b><small>' + esc(f.sub) + '</small></span></label>';
+    }).join("");
+    return '<div class="bkbc-card">' +
+      '<div class="bkbc-h">F\u00e4cher-Paket zusammenstellen</div>' +
+      '<p class="bkbc-sub">F\u00e4cher antippen \u2013 der Preis rechnet sich automatisch zusammen.</p>' +
+      rows +
+      '<label class="bkbc-row bkbc-ho-row"><input type="checkbox" class="bkbc-ho">' +
+        '<span class="bkbc-rt"><b>mit allen Handouts</b><small>Aufgaben-PDFs + Musterl\u00f6sungen zu jedem Kapitel</small></span></label>' +
+      '<div class="bkbc-sum">' +
+        '<div><div class="bkbc-cnt bkbc-sub" style="margin:0">Noch keine F\u00e4cher gew\u00e4hlt</div>' +
+        '<div class="bkbc-save"></div></div>' +
+        '<div class="bkbc-total">' + fmt(0) + '</div>' +
+      '</div>' +
+      '<button type="button" class="bkbc-cta" disabled>F\u00e4cher w\u00e4hlen</button>' +
+      '<div class="bkbc-msg bkbc-note"></div>' +
+    '</div>';
+  }
+
+  function bind(root){
+    var r = root || document;
+    var fs = Array.prototype.slice.call(r.querySelectorAll(".bkbc-f"));
+    if(!fs.length) return null;
+    var ho   = r.querySelector(".bkbc-ho"),
+        elT  = r.querySelector(".bkbc-total"),
+        elC  = r.querySelector(".bkbc-cnt"),
+        elS  = r.querySelector(".bkbc-save"),
+        cta  = r.querySelector(".bkbc-cta"),
+        msg  = r.querySelector(".bkbc-msg");
+    if(!ho || !elT || !cta) return null;
+
+    function upd(){
+      var picked = fs.filter(function(x){ return x.checked; });
+      var n = picked.length, h = !!ho.checked;
+      var total = preis(n, h), einzel = preis(1, h);
+      var save  = (n >= 2) ? (n * einzel - total) : 0;
+
+      fs.forEach(function(x){
+        var row = x.closest ? x.closest(".bkbc-row") : x.parentNode;
+        if(row) row.classList.toggle("sel", x.checked);
+      });
+      var hoRow = ho.closest ? ho.closest(".bkbc-row") : ho.parentNode;
+      if(hoRow) hoRow.classList.toggle("sel", h);
+
+      elT.textContent = fmt(total);
+      if(elC) elC.textContent = (n === 0)
+        ? "Noch keine F\u00e4cher gew\u00e4hlt"
+        : (n + (n === 1 ? " Fach" : " F\u00e4cher") + (h ? " \u00b7 mit allen Handouts" : " \u00b7 Klausur-Check"));
+      if(elS) elS.textContent = (save > 0) ? ("Du sparst " + fmt(save)) : "";
+
+      cta.disabled = (n === 0);
+      cta.textContent = (n === 0)
+        ? "F\u00e4cher w\u00e4hlen"
+        : ((CFG.CTA_MODUS === "bestellen" ? "Zahlungspflichtig bestellen \u00b7 " : "Paket vormerken \u00b7 ") + fmt(total));
+
+      cta._payload = {
+        faecher: picked.map(function(x){ return x.getAttribute("data-code"); }),
+        handouts: h, anzahl: n, total: total
+      };
+    }
+
+    fs.forEach(function(x){ x.addEventListener("change", upd); });
+    ho.addEventListener("change", upd);
+    cta.addEventListener("click", function(e){
+      e.preventDefault();
+      if(cta.disabled) return;
+      var p = cta._payload;
+      if(typeof window.bkbcOnCheckout === "function"){ window.bkbcOnCheckout(p); return; }
+      if(msg) msg.textContent = "Auswahl: " + p.anzahl + (p.anzahl === 1 ? " Fach" : " F\u00e4cher") +
+        (p.handouts ? " mit allen Handouts" : "") + " = " + fmt(p.total) + " (Checkout noch nicht angebunden)";
+    });
+    upd();
+    return {update: upd};
+  }
+
+  return {cfg: CFG, fmt: fmt, preis: preis, markup: markup, bind: bind};
+})();
+</script>
+</head>
+<body data-fach="OFIN">
+
+<!-- ============ APPBAR ============ -->
+<header class="appbar">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="BWL Kurse, zum Seitenanfang">
+      <span class="mark"><img class="lg-l" src="data:image/png;base64,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" alt="BWL Kurse"><img class="lg-d" src="data:image/png;base64,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" alt=""></span>
+      <span><b>BWL Kurse</b><small>OFIN · Finanzen 1 · Prof. Schmeling</small></span>
+    </a>
+    <div class="sp"></div>
+    <span class="count-pill num" id="pillCount">Online&#8209;Vorteil endet in <b>…</b></span>
+    <button type="button" class="theme-btn" id="themeBtn" aria-label="Dunkelmodus einschalten" aria-pressed="false">
+      <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
+      <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 14.5A8.6 8.6 0 0 1 9.5 3.8a8.6 8.6 0 1 0 10.7 10.7z"/></svg>
+    </button>
+    <a class="btn btn-primary" href="#vormerken"><span>Schaffst du’s?</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="ofin">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Dein Kurs · OFIN · Finanzen 1</span>
+      <h1>Bist du <span class="hl">bereit</span> für deine OFIN&#8209;Klausur am 29.&nbsp;Juli?</h1>
+      <p class="lead">Die komplette Klausurvorbereitung für Finanzen&nbsp;1 bei Prof.&nbsp;Schmeling an der Goethe&#8209;Uni. Teste dich zuerst kostenlos, entscheide danach.</p>
+      <div class="v2-chips"><span class="chip">interaktive Lektionen</span><span class="chip">geprüfte Rechenwege</span><span class="chip">adaptive Selbsttests</span></div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#klausurcheck">60&#8209;Sekunden&#8209;Klausurcheck starten</a>
+      </div>
+      <span class="v2-kdays num" data-kdays></span>
+      <div class="trust num">
+        <span><b>seit 1999</b> Goethe-Uni</span>
+        <span><b>12.000+</b> zahlende Kunden</span>
+        <span><b>25.000 Std.</b> universitäre Lehre</span>
+      </div>
+    </div>
+
+    <!-- Premium-Pfadkarte (Graphit + Silber-Inset) -->
+    
+  </div>
+</section>
+
+
+
+<!-- ============ KLAUSURCHECK ============ -->
+<section id="klausurcheck">
+  <div class="wrap">
+    <span class="kicker">Klausur&#8209;Schnellcheck</span>
+    <div class="card" style="max-width:760px">
+      <div class="sc-head">
+        <h2 style="margin-bottom:4px">Wie fit bist du in Anleihen, Renten &amp; Zinsstruktur?</h2>
+      </div>
+      <p class="sub" style="margin-bottom:4px">2 Fragen, 60 Sekunden. Läuft komplett lokal in deinem Browser: nichts wird gespeichert, nichts übertragen.</p>
+      <div class="sc-gate">
+        <div class="v2-urne" id="v2Bw">
+          <div class="v2-bw-row">
+            <label class="v2-bw-lab">Zins <output id="bwZ" class="num">4,0&nbsp;%</output>
+              <input type="range" id="bwZins" min="0" max="12" step="0.5" value="4" aria-label="Marktzins in Prozent"></label>
+            <label class="v2-bw-lab">Laufzeit <output id="bwJ" class="num">5 Jahre</output>
+              <input type="range" id="bwJahre" min="1" max="20" step="1" value="5" aria-label="Laufzeit in Jahren"></label>
+          </div>
+          <p class="v2-urne-stat num" id="v2BwStat" role="status" aria-live="polite">
+            100&nbsp;€ in 5 Jahren sind heute <b id="bwOut">82,19&nbsp;€</b> wert.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="scStart">Check starten</button>
+      </div>
+      <div class="sc-body">
+
+      <div class="sc-q"><span class="qn num">1</span>Der Marktzins steigt. Was passiert mit dem Kurs einer laufenden festverzinslichen Anleihe?</div>
+<div data-sc-q="0">
+<button type="button" class="sc-opt" data-q="0" data-i="0">er steigt mit dem Zins</button>
+<button type="button" class="sc-opt" data-q="0" data-i="1">er bleibt gleich</button>
+<button type="button" class="sc-opt" data-q="0" data-i="2">er fällt</button>
+<button type="button" class="sc-opt" data-q="0" data-i="3">er verdoppelt sich</button>
+</div>
+<div class="sc-fb" id="scFb0"><b>Der Kurs fällt.</b> Anleihekurs und Marktzins bewegen sich gegenläufig: steigende Zinsen senken den Barwert der festen Zahlungen.</div>
+<div class="sc-q"><span class="qn num">2</span>Was beschreibt die Rendite (Yield to Maturity) einer Anleihe?</div>
+<div data-sc-q="1">
+<button type="button" class="sc-opt" data-q="1" data-i="0">den Nominalzins (Kupon)</button>
+<button type="button" class="sc-opt" data-q="1" data-i="1">den Zinssatz, der den Barwert aller Zahlungen dem Kurs gleichsetzt</button>
+<button type="button" class="sc-opt" data-q="1" data-i="2">den Kurs geteilt durch den Nennwert</button>
+<button type="button" class="sc-opt" data-q="1" data-i="3">die jährliche Kuponzahlung in Euro</button>
+</div>
+<div class="sc-fb" id="scFb1"><b>Die YTM</b> ist der interne Zinsfuß, bei dem der Barwert aller künftigen Zahlungen (Kupons + Rückzahlung) dem aktuellen Kurs entspricht.</div>
+<div class="sc-eval"><button type="button" class="btn btn-primary" id="scEval" disabled>Auswerten</button></div>
+<div class="sc-result r2" id="scR2"><b class="head num">2 von 2. Stark!</b><p>Die Grundlagen sitzen. Hol dir jetzt die komplette Gratis-Lektion und teste dich am ganzen Kapitel.</p><div class="sc-actions"><a class="btn btn-primary" href="ofin-kap03-anleihen.html">Zur Gratis&#8209;Lektion</a></div>
+      </div>
+      <div class="sc-result r1" id="scR1">
+        <b class="head num">1 von 2. Gar nicht schlecht!</b>
+        <p>Eine Frage saß, eine noch nicht. Genau an solchen Stellen entscheidet sich die Klausur. Die kostenlose Probe&#8209;Lektion schließt die Lücke Schritt für Schritt: klarer Rechenweg, durchgerechnetes Beispiel, adaptiver Selbsttest.</p>
+        <div class="sc-actions"><a class="btn btn-primary" href="ofin-kap03-anleihen.html">Gratis&#8209;Lektion starten</a></div>
+      </div>
+      <div class="sc-result r0" id="scR0">
+        <b class="head num">0 von 2. Gut, dass du es jetzt merkst.</b>
+        <p>Kein Grund zur Panik, noch ist Zeit. Aber Anleihen, Renten &amp; Zinsstruktur sicher zu beherrschen kann in der Klausur den Unterschied machen. Die kostenlose Probe&#8209;Lektion erklärt dir alles von Grund auf, Schritt für Schritt.</p>
+        <div class="sc-actions"><a class="btn btn-primary" href="ofin-kap03-anleihen.html">Gratis&#8209;Lektion starten</a></div>
+      </div>
+
+      <!-- Inline-Opt-in: erscheint nach der Auswertung -->
+      <div class="sc-optin" id="scOptin" hidden>
+        <b>Sichere dir weitere Lektionen, kostenlos und unverbindlich!</b>
+        <p class="fnote" style="margin:4px 0 12px">auch für die Fächer OMIK und OFIN. Wir melden uns per Mail, sobald es losgeht.</p>
+        <form target="brevo_sink" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" id="scForm">
+          <input type="hidden" name="locale" value="de">
+          <input type="hidden" name="html_type" value="simple">
+          <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-5000px!important;width:1px;height:1px;overflow:hidden">
+          <input type="hidden" name="form-name" value="vormerkung">
+          <input type="hidden" name="subject" value="Neue Vormerkung · BWL Kurse OFIN">
+          <input type="hidden" name="interesse" id="scInteresse" value="">
+          <div class="f-row">
+            <input type="text" name="vorname" required autocomplete="given-name" placeholder="Dein Vorname" aria-label="Vorname">
+            <input type="email" name="EMAIL" required autocomplete="email" placeholder="name@beispiel.de" aria-label="E-Mail-Adresse">
+          </div>
+          <label class="chk"><input type="checkbox" name="datenschutz_einverstaendnis" value="ja" required>
+            <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Vormerkung einverstanden.&nbsp;*</span></label>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px"><button type="submit" class="btn btn-primary">unverbindlich testen</button><a class="btn btn-app" href="https://eingedanketaeglich.github.io/ofin-app-vorschau/">OFIN-App öffnen</a></div>
+          <div class="form-err" id="scErr">Da ist etwas schiefgelaufen. Bitte versuch es erneut.</div>
+        </form>
+        <div class="form-ok" id="scOk"></div>
+      </div>
+
+      <button type="button" class="sc-retry" id="scRetry" style="display:none">Nochmal versuchen</button>
+      <p class="sc-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Dein Ergebnis bleibt auf deinem Gerät: keine Speicherung, keine Übertragung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GRATIS-LEKTION ============ -->
+<section id="gratis" style="padding-top:0">
+  <div class="wrap">
+    <div class="card gratis-card">
+      <span class="gratis-badge">KAPITEL 3 · GRATIS</span>
+      <div>
+        <h3>Anleihen, Renten &amp; Zinsstruktur: die komplette Probe&#8209;Lektion</h3>
+        <p class="sub" style="max-width:none">Eine echte Kapitel&#8209;Lektion aus der OFIN&#8209;Vorbereitung, sofort und ohne Anmeldung spielbar: Einstieg, Rechenweg, durchgerechnetes Beispiel und ein adaptiver Selbsttest mit 16 Fragen.</p>
+        <div class="gratis-chips">
+          <span class="chip">Laplace</span><span class="chip">Bedingte WK</span><span class="chip">Unabhängigkeit</span><span class="chip">Satz von Bayes</span><span class="chip">Vierfeldertafel</span>
+        </div>
+      </div>
+      <a class="btn btn-primary" href="ofin-kap03-anleihen.html">Kostenlos starten</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KAPITEL-SWIPE (V2, Selbsteinschaetzung) ============ -->
+<section id="kapitel">
+  <div class="wrap">
+    <span class="kicker">Dein Selbstcheck</span>
+    <h2>Sitzt es — oder wackelt es?</h2>
+    <div class="v2-rail" id="kapRail"></div>
+    <div class="v2-profil" id="v2Profil" hidden>
+      <div class="v2-profil-bars num" id="v2ProfilBars" role="img" aria-label="Dein Kapitel-Profil"></div>
+      <p class="v2-profil-leg">Dein Klausur-Profil: <span class="v2-lg v2-lg-ok">sitzt</span> · <span class="v2-lg v2-lg-no">wackelt</span> · <span class="v2-lg v2-lg-off">offen</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- V2: Sektion 'weiter' entfernt (redundant zu gratis/preise) -->
+
+<!-- ============ ANGEBOTS-STREIFEN (Live-Countdown) ============ -->
+<div class="offerstrip" id="offerstrip">
+  <div class="wrap">
+    <div class="os-txt">Online&#8209;Vorteil bis 28.&nbsp;Juli 2026: <b>Komplettpaket</b> für <span class="os-price num">49,90&nbsp;€</span> statt <span class="num">80,10&nbsp;€</span> im Einzelkauf <span class="num">(9&nbsp;×&nbsp;8,90&nbsp;€)</span>.</div>
+    <span class="os-clock num" id="osClock" aria-live="off">…</span>
+    <a class="btn btn-primary" href="#preise">Zu den Preisen</a>
+  </div>
+</div>
+
+<!-- ============ SO FUNKTIONIERT'S ============ -->
+<section id="sofunktionierts">
+  <div class="wrap">
+    <span class="kicker">So läuft's</span>
+    <h2>Testen, anmelden, in der App weiterlernen.</h2>
+    <p class="sub">Dieser Kurs hat 9 Kapitel mit Rechenweg und adaptivem Selbsttest. Hier steigst du kostenlos ein! Alles Weitere erwartet dich in der App.</p>
+    <div class="steps v2-rail">
+      <div class="step"><span class="s-n num">1</span><h3>Gratis-Kapitel testen</h3><p>Kapitel&nbsp;3 „Anleihen, Renten &amp; Zinsstruktur" läuft sofort hier auf der Seite, ohne Anmeldung.</p></div>
+      <div class="step"><span class="s-n num">2</span><h3>Anmelden → Zugang zur App</h3><p>Nach der kostenlosen Anmeldung bekommst du deinen Zugang zur App per E-Mail – dazu das Handout zum Gratis-Kapitel als PDF.</p></div>
+      <div class="step"><span class="s-n num">3</span><h3>In der App weiter</h3><p>Alle 9 Kapitel, Selbsttests und Handouts schaltest du in der BWL&#8209;Kurse&#8209;App frei.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STIMMEN (Platzhalter, Testbetrieb) ============ -->
+<section id="stimmen">
+  <div class="wrap">
+    <span class="kicker">Stimmen aus dem Kurs</span>
+    <h2>Was Teilnehmende sagen.</h2>
+    <p class="sub">Der Kurs ist im Testbetrieb. Echte Stimmen sammeln wir gerade ein und veröffentlichen sie nur mit Einverständnis.</p>
+    <div class="voices">
+      <div class="voice" style="grid-column:1/-1;max-width:620px;margin-inline:auto">
+        <div class="vstars" aria-label="5 von 5 Sternen" style="color:var(--accent);letter-spacing:3px;font-size:15px;margin-bottom:8px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="vq">&bdquo;Ren&eacute; geht weit &uuml;ber den Lehrplan hinaus. Er hat mir nicht nur Fachwissen vermittelt, sondern beigebracht, Zusammenh&auml;nge zu erkennen.&ldquo;</p>
+        <div class="vwho">Matteo Seth &middot; Wirtschaftsstudent</div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTOR ============ -->
+<section id="autor" style="padding-top:0">
+  <div class="wrap">
+    <div class="premium-card author">
+      <img class="foto" src="rene-2026.jpg" loading="lazy" decoding="async" alt="René Flé, Diplom-Kaufmann" width="180" height="180">
+      <div>
+        <div class="pc-kicker">Wer dich vorbereitet</div>
+        <h2 style="color:var(--premium-ink)">René Flé <span style="font-size:.6em;font-weight:500;color:var(--premium-ink2)">(Dipl.&#8209;Kfm.)</span></h2>
+        <p>René Flé bereitet seit 1999 Frankfurter Studierende gezielt auf ihre Klausuren vor, passgenau zur jeweiligen Vorlesung.</p>
+        <div class="astats num">
+          <div class="astat"><b>seit 1999</b><span>Goethe-Uni</span></div>
+          <div class="astat"><b data-cnt="12000" data-pre="~">~12.000</b><span>zahlende Kunden</span></div>
+          <div class="astat"><b data-cnt="25000" data-suf="+ Std.">25.000+ Std.</b><span>universitäre Lehre</span></div>
+          <div class="astat"><b>seit 2012</b><span>Ausbilder Wirtschaftsprüfung</span></div>
+        </div>
+        <p class="aq">„Ich zeige dir Kapitel für Kapitel genau das, was in der OFIN&#8209;Klausur bei Prof.&nbsp;Schmeling wirklich zählt: klare Rechenwege und ein ehrlicher Blick auf typische Fehler. Kein Marketing&#8209;Zauber, sondern solide Vorbereitung."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VORMERKEN ============ -->
+<section id="vormerken" style="padding-top:0;scroll-margin-top:90px">
+  <div class="wrap">
+    <div class="card" style="max-width:640px">
+      <span class="kicker">Kostenlos anmelden</span>
+      <h2>Dein Zugang zur App.</h2>
+      <p class="sub" style="max-width:none">Meld dich <b>kostenlos</b> an — wir schicken dir deinen <b>Zugang zur App</b> und das <b>Handout zum Gratis-Kapitel</b>. <b>Keine Zahlungspflicht</b> &ndash; alles Weitere entscheidest du später in der App.</p>
+      <div class="fnote" id="vmPicked" style="display:none;background:var(--surface-2);border-radius:var(--r-sm);padding:10px 14px;box-shadow:inset 0 0 0 1px var(--hair);margin-bottom:6px"></div>
+      <form target="brevo_sink" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" id="vmForm">
+        <input type="hidden" name="locale" value="de">
+        <input type="hidden" name="html_type" value="simple">
+        <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-5000px!important;width:1px;height:1px;overflow:hidden">
+        <input type="hidden" name="form-name" value="vormerkung">
+        <input type="hidden" name="subject" value="Neue Vormerkung · BWL Kurse OFIN">
+        <input type="hidden" name="interesse" id="vmInteresse" value="">
+        <p hidden aria-hidden="true"><label>Bitte nicht ausfüllen: <input name="bot-field" tabindex="-1"></label></p>
+
+        <label class="f" for="vmVorname">Vorname *</label>
+        <input type="text" id="vmVorname" name="vorname" required autocomplete="given-name" placeholder="Dein Vorname">
+
+        <label class="f" for="vmEmail">E&#8209;Mail&#8209;Adresse *</label>
+        <input type="email" id="vmEmail" name="EMAIL" required autocomplete="email" placeholder="name@beispiel.de">
+        <div class="v2-more">
+        <p class="fnote">Ohne Telefonnummer senden wir dir die WhatsApp&#8209;Einladung datenschutzkonform an diese E&#8209;Mail&#8209;Adresse.</p>
+
+        <label class="f" for="vmTel">Handynummer <span style="font-weight:400;color:var(--text-2)">(optional)</span></label>
+        <input type="tel" id="vmTel" name="handynummer" autocomplete="tel" inputmode="tel" placeholder="z. B. 0151 23456789">
+        <p class="fnote">Falls du an einer Online&#8209;Q&amp;A&#8209;Station kurz vor der Klausur teilnehmen möchtest: Lass dich schon in unsere WhatsApp&#8209;Gruppe einladen. Handynummer optional.</p>
+        </div>
+
+        <label class="chk"><input type="checkbox" name="datenschutz_einverstaendnis" value="ja" required>
+          <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Vormerkung einverstanden.&nbsp;*</span></label>
+        <div class="v2-more"><label class="chk"><input type="checkbox" name="whatsapp_einverstaendnis" value="ja">
+          <span>Optional: Nehmt mich zur Planung des Kursbetriebs in die <b>WhatsApp&#8209;Gruppe</b> auf bzw. sendet mir den Beitrittslink an meine E&#8209;Mail&#8209;Adresse.</span></label></div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Vormerkung absenden</button>
+          <a class="btn btn-silver" href="ofin-kap03-anleihen.html">Erst Gratis&#8209;Lektion ansehen</a>
+        </div>
+        <div class="form-err" id="vmErr">Da ist etwas schiefgelaufen. Bitte versuch es erneut.</div>
+        <p class="fnote" style="margin-top:12px">* Pflichtfelder. Die Vormerkung ist kostenlos und unverbindlich.</p>
+      </form>
+      <div class="form-ok" id="vmOk"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREISE ============ -->
+<section id="preise" style="scroll-margin-top:70px">
+  <div class="wrap">
+    <span class="kicker">Alle Optionen &amp; Preise</span>
+    <h2>Preise wie in der App.</h2>
+    <p class="sub">Lektion und Handout gibt es immer zusammen — 8,90&nbsp;€ je Kapitel. Wer alles will, zahlt 49,90&nbsp;€ statt 80,10&nbsp;€ und bekommt die Live Q&amp;A dazu. Freigeschaltet wird in der App.</p>
+
+    <div class="ladder"><div class="tier feat"><span class="ribbon">Beliebteste Wahl</span><span class="rung">Komplettpaket</span><h3 style="color:var(--premium-ink)">OFIN Klausur-App + Workbook <span class="wb-sub">(alle Handouts)</span></h3><div class="price num"><span class="now">49,90&nbsp;€</span><span class="old">80,10&nbsp;€</span></div><p class="pd">Alle <b>9 Kapitel</b> als interaktive Lektionen · alle Handout-PDFs mit Aufgaben und Musterlösungen · Live Q&amp;A gratis dazu.</p><p class="cashback-hint">10&nbsp;€ Cashback für dein Feedback nach der Klausur.</p><a class="btn btn-primary" href="https://buy.stripe.com/5kQcN5e911U44mreLv8bS0n">Komplettpaket freischalten</a></div><div class="tier"><span class="rung">Einzelnes Kapitel</span><h3>Lektion + Handout</h3><div class="price num"><span class="now">8,90&nbsp;€</span></div><p class="pd">Ein Kapitel deiner Wahl — die Lektion in der App und das Handout als PDF. Beides zusammen, nicht einzeln erhältlich.</p><p class="pd" style="margin-top:-4px">Ab <b>6 Kapiteln</b> ist das Komplettpaket günstiger.</p><a class="btn btn-silver" href="https://buy.stripe.com/aFa9AT8OHdCM8CHbzj8bS0k">Kapitel wählen und freischalten</a></div><div class="tier"><span class="rung">Für Käufer</span><h3>Live Q&amp;A <span class="wb-sub">(online über Teams)</span></h3><div class="price num"><span class="now">im Paket gratis</span></div><p class="pd">120 Minuten vor der Klausur. Du sendest deine Aufgaben vorab ein, wir lösen sie ausführlich. Wer einzelne Kapitel gekauft hat, schaltet die Session in der App für 10,00&nbsp;€ frei.</p><p class="pd" style="margin-top:-4px">Den Termin stimmen wir in der WhatsApp-Gruppe ab.</p></div></div><div class="upsells"><div class="ups"><b>Kapitel 3</b><span class="up num" style="color:var(--done)">gratis</span><span class="ud">Anleihen, Renten &amp; Zinsstruktur, sofort ohne Anmeldung spielbar — Handout kommt per E-Mail dazu.</span></div></div><div class="garantie"><span>Lektion und Handout gehören zusammen · 8,90&nbsp;€ je Kapitel</span><span>Kapitel 3 gratis, ohne Anmeldung</span><span>Alle Preise umsatzsteuerfrei</span></div>
+  </section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <span class="kicker">Fragen &amp; Einwände</span>
+    <h2>Bevor du dich entscheidest.</h2>
+    <div class="faq">
+      <details>
+        <summary>Reicht die Zeit bis zur Klausur überhaupt noch?</summary>
+        <div class="fa"><p>Die Klausur ist am 29.&nbsp;Juli. Der Kurs ist genau für diese Phase gebaut: 10 in sich geschlossene Kapitel, jedes mit Rechenweg und Selbsttest. Du startest mit dem Kapitel, das dir am meisten bringt, die Reihenfolge ist frei.</p></div>
+      </details>
+      <details>
+        <summary>Was kostet mich die Vormerkung?</summary>
+        <div class="fa"><p>Nichts. Sie ist kostenlos und unverbindlich, es entsteht keine Zahlungspflicht. Die Zahlung folgt später in einem separaten Checkout, erst wenn du dich bewusst entscheidest.</p></div>
+      </details>
+      <details>
+        <summary>Ist das ein offizielles Angebot der Goethe&#8209;Uni?</summary>
+        <div class="fa"><p>Nein. BWL Kurse ist ein unabhängiges Vorbereitungsangebot und wird nicht von der Hochschule herausgegeben. Die Inhalte sind auf die Vorlesung von Prof.&nbsp;Schmeling im Sommersemester 2026 zugeschnitten, alle Aufgaben sind eigenständig formuliert oder abgewandelt.</p></div>
+      </details>
+      <details>
+        <summary>Brauche ich Vorwissen?</summary>
+        <div class="fa"><p>Du brauchst den Stoff deiner Vorlesung, mehr nicht. Jede Lektion beginnt mit einem Einstieg aus dem Alltag und baut den Rechenweg Schritt für Schritt auf. Starte im Zweifel mit der Gratis&#8209;Lektion und prüfe selbst, ob dir der Stil liegt.</p></div>
+      </details>
+      <details>
+        <summary>Warum nicht einfach YouTube und Altklausuren?</summary>
+        <div class="fa"><p>Kannst du zusätzlich nutzen. Der Unterschied: Dieser Kurs folgt der Vorlesung von Prof.&nbsp;Schmeling Kapitel für Kapitel, mit geprüften Lösungen und einem Selbsttest, der dir sofort zeigt, wo du stehst. So verzettelst du dich nicht in der Suche.</p></div>
+      </details>
+      <details>
+        <summary>Auf welchen Geräten läuft das?</summary>
+        <div class="fa"><p>Im Browser auf Handy, Tablet und Laptop, ohne Installation. Dein Lernfortschritt wird auf deinem Gerät gespeichert, Details stehen in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ============ APP AUFS HANDY ============ -->
+<section id="app-holen">
+  <div class="wrap">
+    <span class="kicker">App aufs Handy holen</span>
+    <h2>In unter einer Minute installiert.</h2>
+    <p class="sub">Kein App&#8209;Store, keine Anmeldung zum Ausprobieren. Du legst die Seite einmal auf den Startbildschirm, danach öffnet sie sich wie eine App.</p>
+    <div class="install-grid v2-rail">
+      <div class="card install">
+        <details class="dd"><summary class="ins-h"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2 1.6-3 1.7-3.1-.9-1.3-2.3-1.5-2.8-1.5-1.2-.1-2.3.7-2.9.7-.6 0-1.5-.7-2.5-.7-1.3 0-2.5.8-3.2 2-1.4 2.4-.3 5.9 1 7.8.6 1 1.4 2 2.4 2 .9-.1 1.3-.6 2.4-.6s1.4.6 2.5.6c1 0 1.7-.9 2.3-1.9.4-.6.6-1.2.8-1.9-.1 0-1.7-.6-1.8-2.4zM14.6 6.3c.5-.7.9-1.6.8-2.5-.8 0-1.7.5-2.2 1.2-.5.6-.9 1.5-.8 2.4.9.1 1.7-.4 2.2-1.1z"/></svg> iPhone / iPad (Safari)</summary><ol>
+          <li>Diese Seite in <b>Safari</b> öffnen.</li>
+          <li>Unten auf <b>Teilen</b> tippen (Viereck mit Pfeil nach oben).</li>
+          <li><b>Zum Home&#8209;Bildschirm</b> wählen.</li>
+          <li><b>Hinzufügen</b> tippen, dann App öffnen.</li>
+        </ol></details>
+      </div>
+      <div class="card install">
+        <details class="dd"><summary class="ins-h"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 8.5v10a1 1 0 0 0 1 1h1v3a1.4 1.4 0 0 0 2.8 0v-3h2.4v3a1.4 1.4 0 0 0 2.8 0v-3h1a1 1 0 0 0 1-1v-10H6zM3.4 8.5A1.4 1.4 0 0 0 2 9.9v5.4a1.4 1.4 0 0 0 2.8 0V9.9a1.4 1.4 0 0 0-1.4-1.4zm17.2 0a1.4 1.4 0 0 0-1.4 1.4v5.4a1.4 1.4 0 0 0 2.8 0V9.9a1.4 1.4 0 0 0-1.4-1.4zM15.6 2.7l1.2-1.2a.35.35 0 0 0-.5-.5l-1.4 1.4c-.85-.4-1.8-.5-2.9-.5s-2 .1-2.9.5L7.7 1a.35.35 0 0 0-.5.5l1.2 1.2A5.3 5.3 0 0 0 6.2 7h11.6a5.3 5.3 0 0 0-2.2-4.3zM9.5 5.1a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm5 0a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3z"/></svg> Android (Chrome)</summary><ol>
+          <li>Diese Seite in <b>Chrome</b> öffnen.</li>
+          <li>Oben rechts auf die <b>drei Punkte</b> tippen.</li>
+          <li><b>Zum Startbildschirm hinzufügen</b> wählen.</li>
+          <li><b>Hinzufügen</b> tippen, dann App öffnen.</li>
+        </ol></details>
+      </div>
+    </div>
+    <p class="fnote" style="margin-top:16px">Lieber ohne Installation? Die Gratis&#8209;Lektion läuft auch direkt hier auf der Seite.</p>
+  </div>
+</section>
+
+<!-- V2: Abschluss-Karte entfernt (redundant zu vormerken/gratis/offerstrip) -->
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fbrand">
+      <span class="mark sm" aria-hidden="true"><img class="lg-l" src="data:image/png;base64,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" alt=""><img class="lg-d" src="data:image/png;base64,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" alt=""></span>
+      <b>BWL Kurse</b>
+    </div>
+    Deine Klausurvorbereitung an der Goethe&#8209;Uni. Seit 1999, passgenau zu deiner Vorlesung. · René Flé<br>
+    <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+    <p class="disclaimer">Unabhängiges Vorbereitungsangebot, nicht von der Goethe&#8209;Universität Frankfurt herausgegeben. Aufgaben sind eigenständig formuliert oder abgewandelt.</p>
+  </div>
+</footer>
+
+<!-- ============ BUCHUNGS-MODAL ============ -->
+<div id="bkModal" class="bk-modal" hidden role="presentation">
+  <div class="bk-dialog" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+    <button type="button" class="bk-close" aria-label="Schließen" onclick="closeBk()">&times;</button>
+    <div id="bkContent"></div>
+  </div>
+</div>
+
+<!-- Netlify-Registrierung Fortschritts-Formular (POST kommt aus den Lektionsseiten) -->
+<form name="fortschritt" data-netlify="true" hidden>
+  <input type="text" name="sid"><input type="text" name="kapitel"><input type="text" name="prozent"><input type="email" name="email">
+</form>
+
+<script>
+/* ============ Transfer-Konstanten (Platzhalter, siehe Dateikopf) ============ */
+var CHECKOUT_URL = "{{CHECKOUT_URL}}";
+var GRATIS_URL   = "ofin-kap03-anleihen.html";
+var KLAUSUR_URL  = "{{KLAUSUR_URL}}";
+var FRIST_ISO    = "2026-07-27";
+
+/* ============ Theme-Umschalter (Hell = Standard) ============ */
+(function(){
+  "use strict";
+  var KEY = "bwlk-theme";
+  var btn = document.getElementById("themeBtn");
+  function apply(mode){
+    if(mode === "dark"){ document.documentElement.setAttribute("data-theme","dark"); }
+    else { document.documentElement.removeAttribute("data-theme"); }
+    if(btn){
+      btn.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
+      btn.setAttribute("aria-label", mode === "dark" ? "Hellmodus einschalten" : "Dunkelmodus einschalten");
+    }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  var q = null;
+  try { q = new URLSearchParams(location.search).get("theme"); } catch(e){}
+  apply(q === "dark" || (q !== "light" && saved === "dark") ? "dark" : "light");
+  if(btn) btn.addEventListener("click", function(){
+    var dark = document.documentElement.getAttribute("data-theme") === "dark";
+    var next = dark ? "light" : "dark";
+    apply(next);
+    try { localStorage.setItem(KEY, next); } catch(e){}
+    drawRails();
+  });
+})();
+
+/* ============ Countdown (Fruehbucher bis 27.07.2026, 23:59) ============ */
+(function(){
+  "use strict";
+  var end = new Date(FRIST_ISO + "T23:59:59");
+  var clock = document.getElementById("osClock");
+  var pill  = document.getElementById("pillCount");
+  var strip = document.getElementById("offerstrip");
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function tick(){
+    var ms = end.getTime() - Date.now();
+    if(isNaN(end.getTime())) return;
+    if(ms <= 0){
+      if(strip) strip.style.display = "none";
+      if(pill)  pill.style.display  = "none";
+      return;
+    }
+    var s = Math.floor(ms/1000);
+    var d = Math.floor(s/86400), h = Math.floor(s%86400/3600), m = Math.floor(s%3600/60), sec = s%60;
+    var txt = d + " T " + pad(h) + ":" + pad(m) + ":" + pad(sec);
+    if(clock) clock.textContent = "endet in " + txt;
+    if(pill)  pill.innerHTML = "Online&#8209;Vorteil endet in <b>" + txt + "</b>";
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ============ Lernpfad: geschwungene Schiene durch die Orbs ============ */
+function drawRails(){
+  "use strict";
+  ["pathZone1","pathZone2"].forEach(function(id){
+    var zone = document.getElementById(id);
+    if(!zone) return;
+    var svg = zone.querySelector(".path-rail");
+    var path = svg ? svg.querySelector("path") : null;
+    var orbs = zone.querySelectorAll(".porb");
+    if(!svg || !path || orbs.length < 2) return;
+    var zr = zone.getBoundingClientRect();
+    svg.setAttribute("viewBox","0 0 " + zr.width + " " + zr.height);
+    var pts = [];
+    orbs.forEach(function(o){
+      var r = o.getBoundingClientRect();
+      pts.push({x:r.left - zr.left + r.width/2, y:r.top - zr.top + r.height/2});
+    });
+    var d = "M " + pts[0].x + " " + pts[0].y;
+    for(var i = 1; i < pts.length; i++){
+      var p0 = pts[i-1], p1 = pts[i], my = (p0.y + p1.y)/2;
+      d += " C " + p0.x + " " + my + " " + p1.x + " " + my + " " + p1.x + " " + p1.y;
+    }
+    path.setAttribute("d", d);
+  });
+}
+window.addEventListener("load", drawRails);
+window.addEventListener("resize", drawRails);
+
+/* ============ Klausurcheck (rein lokal) ============ */
+(function(){
+  "use strict";
+  var CORRECT = [2, 1];
+  var picked = [null, null];
+  var done = false;
+  var opts = document.querySelectorAll("#klausurcheck .sc-opt");
+  var evalBtn = document.getElementById("scEval");
+  var retryBtn = document.getElementById("scRetry");
+  var optin = document.getElementById("scOptin");
+
+  Array.prototype.forEach.call(opts, function(btn){
+    btn.addEventListener("click", function(){
+      if(done) return;
+      var q = parseInt(btn.getAttribute("data-q"), 10);
+      picked[q] = parseInt(btn.getAttribute("data-i"), 10);
+      var group = document.querySelectorAll('#klausurcheck .sc-opt[data-q="' + q + '"]');
+      Array.prototype.forEach.call(group, function(b){ b.classList.remove("sel"); });
+      btn.classList.add("sel");
+      if(picked[0] !== null && picked[1] !== null) evalBtn.disabled = false;
+    });
+  });
+
+  evalBtn.addEventListener("click", function(){
+    if(done || picked[0] === null || picked[1] === null) return;
+    done = true;
+    var score = 0;
+    [0, 1].forEach(function(q){
+      if(picked[q] === CORRECT[q]) score++;
+      var group = document.querySelectorAll('#klausurcheck .sc-opt[data-q="' + q + '"]');
+      Array.prototype.forEach.call(group, function(b){
+        var i = parseInt(b.getAttribute("data-i"), 10);
+        b.disabled = true;
+        if(i === CORRECT[q]) b.classList.add("ok");
+        else if(i === picked[q]) b.classList.add("bad");
+      });
+      document.getElementById("scFb" + q).style.display = "block";
+    });
+    evalBtn.style.display = "none";
+    var panel = document.getElementById("scR" + score);
+    if(panel){
+      panel.classList.add("show");
+      panel.scrollIntoView({behavior:"smooth", block:"nearest"});
+    }
+    if(optin){
+      optin.hidden = false;
+      var intr = document.getElementById("scInteresse");
+      if(intr) intr.value = "Klausurcheck OFIN: " + score + " von 2 richtig";
+    }
+    retryBtn.style.display = "inline-block";
+  });
+
+  retryBtn.addEventListener("click", function(){
+    done = false;
+    picked = [null, null];
+    Array.prototype.forEach.call(opts, function(b){
+      b.disabled = false;
+      b.classList.remove("sel","ok","bad");
+    });
+    [0,1].forEach(function(q){ document.getElementById("scFb" + q).style.display = "none"; });
+    [0,1,2].forEach(function(s){ document.getElementById("scR" + s).classList.remove("show"); });
+    if(optin) optin.hidden = true;
+    evalBtn.style.display = "";
+    evalBtn.disabled = true;
+    retryBtn.style.display = "none";
+  });
+
+  /* Inline-Opt-in absenden (Netlify Forms, AJAX) */
+  var scForm = document.getElementById("scForm");
+  if(scForm) scForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!scForm.checkValidity()){ scForm.reportValidity(); return; }
+    var data = new FormData(scForm);
+    var name = (data.get("vorname") || "").replace(/[<>]/g,"");
+    var body = new URLSearchParams();
+    body.append("EMAIL", (data.get("EMAIL") || "").trim());
+    body.append("email_address_check", "");
+    body.append("locale", "de");
+    body.append("html_type", "simple");
+    fetch(scForm.getAttribute("action"), {method:"POST", mode:"no-cors", body: body})
+      .then(function(){
+        document.getElementById("scErr").style.display = "none";
+        scForm.style.display = "none";
+        var ok = document.getElementById("scOk");
+        ok.innerHTML = "<b>Fast geschafft" + (name ? ", " + name : "") + "!</b> Wir haben dir eine E-Mail geschickt. Bestätige kurz den Link, dann geht es los.";
+        ok.style.display = "block";
+      })
+      .catch(function(){ document.getElementById("scErr").style.display = "block"; });
+  });
+})();
+
+/* ============ merken() + Vormerk-Formular ============ */
+(function(){
+  "use strict";
+  function $(id){ return document.getElementById(id); }
+
+  window.merken = function(text){
+    var f = $("vmInteresse");
+    if(f) f.value = text || "";
+    var picked = $("vmPicked");
+    if(picked){
+      if(text){
+        picked.innerHTML = "Dein Interesse: <b>" + String(text).replace(/[<>]/g,"") + "</b>. Trag dich unten ein, wir merken dich vor.";
+        picked.style.display = "block";
+      } else picked.style.display = "none";
+    }
+    var t = $("vormerken");
+    if(t) t.scrollIntoView({behavior:"smooth", block:"start"});
+    var v = $("vmVorname");
+    if(v) setTimeout(function(){ try{ v.focus({preventScroll:true}); }catch(e){ v.focus(); } }, 450);
+  };
+
+  /* Delegation: alle data-merken-Elemente (Pfad, Preise) */
+  document.addEventListener("click", function(e){
+    var el = e.target.closest ? e.target.closest("[data-merken]") : null;
+    if(el){
+      e.preventDefault();
+      window.merken(el.getAttribute("data-merken"));
+    }
+  });
+
+  var f = $("vmForm");
+  if(f) f.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){ f.reportValidity(); return; }
+    var data = new FormData(f);
+    var name = (data.get("vorname") || "").replace(/[<>]/g,"");
+    var body = new URLSearchParams();
+    body.append("EMAIL", (data.get("EMAIL") || "").trim());
+    body.append("email_address_check", "");
+    body.append("locale", "de");
+    body.append("html_type", "simple");
+    var _vn = (data.get("vorname") || "").replace(/[<>]/g,"").trim();
+    if(_vn) body.append("VORNAME", _vn);
+    var _tel = (data.get("handynummer") || "").replace(/[<>]/g,"").trim();
+    if(_tel) body.append("HANDY", _tel);
+    body.append("WHATSAPP", data.get("whatsapp_einverstaendnis") ? "ja" : "nein");
+    body.append("FACH", "ofin");
+    try{ localStorage.setItem("bwlk-signup", JSON.stringify({email:(data.get("EMAIL")||"").trim().toLowerCase(), vorname:(data.get("vorname")||"").replace(/[<>]/g,"").trim(), fach:"ofin", t:Date.now()})); }catch(e){}
+    fetch(f.getAttribute("action"), {method:"POST", mode:"no-cors", body: body})
+      .then(function(){
+        $("vmErr").style.display = "none";
+        f.style.display = "none";
+        var ok = $("vmOk");
+        ok.innerHTML = "<b>Geschafft" + (name ? ", " + name : "") + "!</b><br>Deine Gratis-Lektion wartet. Wir haben dir eine E-Mail geschickt \u2013 best\u00e4tige kurz den Link, dann geht\u2019s direkt los.";
+        ok.style.display = "block";
+        ok.scrollIntoView({behavior:"smooth", block:"center"});
+      })
+      .catch(function(){ $("vmErr").style.display = "block"; });
+  });
+})();
+
+/* ============ Buchungs-Overlays (datengetrieben) ============ */
+window.BK_DATA = {
+  kursKuerzel: "OFIN",
+  bundlePreis: "8,90 €",   /* Lektion + Handout, untrennbar */
+  paketPreis:  "49,90 €",  /* App + Workbook, Live Q&A gratis */
+  qaPreis:     "10,00 €",  /* nur fuer Bundle-Kaeufer */
+  anker:       "80,10 €",  /* 9 x 8,90 */
+  cashback:    "10 €",     /* nach Klausur-Feedback ueber WhatsApp */
+  lektionen: [{"n":1,"thema":"Arbitrage & Barwert","gratis":false,"slug":"ofin-kap01-arbitrage-barwert","keywords":["Arbitragefreiheit","Barwert","Kapitalwert","Fisher-Separation"]},{"n":2,"thema":"Aktienbewertung","gratis":false,"slug":"ofin-kap02-aktienbewertung","keywords":["Dividendenbarwertmodell","Gordon-Growth","Kurs-Gewinn-Verhältnis"]},{"n":3,"thema":"Anleihen, Renten & Zinsstruktur","gratis":true,"slug":"ofin-kap03-anleihen","keywords":["Barwert","Annuität","ewige Rente","Nullkupon","Effektivrendite"]},{"n":4,"thema":"Risiko & riskante Zahlungsströme","gratis":false,"slug":"ofin-kap04-risiko","keywords":["Erwartungswert","Varianz","Risikoprämie"]},{"n":5,"thema":"Portfoliotheorie & Diversifikation","gratis":false,"slug":"ofin-kap05-portfoliotheorie","keywords":["Diversifikation","Kovarianz","effizienter Rand"]},{"n":6,"thema":"CAPM & Kapitalkosten","gratis":false,"slug":"ofin-kap06-capm","keywords":["Beta","Marktrisikoprämie","Wertpapierlinie","Kapitalkosten"]},{"n":7,"thema":"Optionsbewertung","gratis":false,"slug":"ofin-kap07-optionsbewertung","keywords":["Call","Put","Binomialmodell","Put-Call-Parität"]},{"n":8,"thema":"Modigliani-Miller","gratis":false,"slug":"ofin-kap08-modigliani-miller","keywords":["Kapitalstruktur","Leverage","Steuervorteil"]},{"n":9,"thema":"Klausurtraining","gratis":false,"slug":"ofin-kap09-klausurtraining","keywords":["Aufgabentypen","Rechenwege","Musterlösungen","Prüfungsstrategie"]}],
+  faecher: [{"k":"OMIK","n":"Mikroökonomik 1"},{"k":"OFIN","n":"Statistik"},{"k":"OFIN","n":"Finanzen 1"},{"k":"BFIN","n":"Finanzen 2"}],
+  termine: [{"tag":"Fr 24.07.","zeit":"11:30","ausgebucht":true},{"tag":"Sa 25.07.","zeit":"10:00"},{"tag":"Fr 24.07.","zeit":"19:00"},{"tag":"Sa 25.07.","zeit":"19:00"},{"tag":"So 26.07.","zeit":"19:00"},{"tag":"Mo 27.07.","zeit":"18:00"}]
+};
+
+(function(){
+  "use strict";
+  var lastFocus = null;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function renderLektionen(d){
+    var rows = (d.lektionen || []).map(function(l){
+      var titel = "Kap " + esc(l.n) + " · " + esc(l.thema);
+      var right;
+      if(l.gratis){
+        right = '<a class="bk-badge" href="' + esc(l.slug) + '.html">gratis · ansehen</a>';
+      } else {
+        var merk = esc("Einzellektion Kap " + l.n + " · " + l.thema);
+        right = '<span class="bk-preis num">' + esc(d.einzel) + '</span>' +
+                '<button type="button" class="bk-btn" data-bk-merken="' + merk + '">Vormerken</button>';
+      }
+      return '<li class="bk-row"><span class="bk-row-t">' + titel + '</span><span class="bk-row-r">' + right + '</span></li>';
+    }).join("");
+    return '<h2 id="bkTitle" class="bk-h">Alle ' + esc(d.kursKuerzel) + '-Lektionen einzeln buchen</h2><ul class="bk-list">' + rows + '</ul>';
+  }
+
+  function renderFaecher(d){
+    return '<h2 id="bkTitle" class="bk-h">Fächer-Paket zusammenstellen</h2>' + window.BKBC.markup();
+  }
+
+  function renderTermine(d){
+    var termine = d.termine || [];
+    var order = [], groups = {};
+    termine.forEach(function(t){
+      var g = t.tag || "Termine";
+      if(!groups[g]){ groups[g] = []; order.push(g); }
+      groups[g].push(t);
+    });
+    var blocks = order.map(function(g){
+      var opts = groups[g].map(function(t){
+        var val = esc(t.tag + ", " + t.zeit + " Uhr");
+        if(t.ausgebucht){
+          return '<label class="bk-opt num bk-out"><input type="radio" name="bkTermin" value="' + val + '" disabled><span><s>' + esc(t.zeit) + ' Uhr</s> · ausgebucht</span></label>';
+        }
+        return '<label class="bk-opt num"><input type="radio" name="bkTermin" value="' + val + '"><span>' + esc(t.zeit) + ' Uhr</span></label>';
+      }).join("");
+      return '<div class="bk-tgroup"><h3 class="bk-tgroup-h">' + esc(g) + '</h3>' + opts + '</div>';
+    }).join("");
+    return '<h2 id="bkTitle" class="bk-h">Wähle deinen Termin: Live Q&A</h2>' + blocks +
+           '<p class="bk-need" hidden>Bitte wähle zuerst einen Termin aus.</p>' +
+           '<div class="bk-actionrow"><button type="button" class="bk-btn" data-bk-action="termin-submit">Diesen Termin vormerken</button></div>' +
+           '<p class="bk-foot">Alle Termine nach der letzten Vorlesung und vor der Klausur.</p>';
+  }
+
+  function renderHandouts(d){
+    var preis = esc(d.handout);
+    var rows = (d.lektionen || []).map(function(l){
+      var titel = "Kap " + esc(l.n) + " · " + esc(l.thema);
+      var merk = esc("Handout-PDF Kap " + l.n + " · " + l.thema);
+      var chips = (l.keywords || []).map(function(k){ return '<span class="chip">' + esc(k) + '</span>'; }).join("");
+      var details = chips ? '<details class="bk-details"><summary>Inhalt</summary><div class="bk-chips">' + chips + '</div></details>' : "";
+      return '<li class="bk-row"><span class="bk-row-t">' + titel + details + '</span>' +
+             '<span class="bk-row-r"><button type="button" class="bk-btn" data-bk-merken="' + merk + '">Vormerken (' + preis + ')</button></span></li>';
+    }).join("");
+    return '<h2 id="bkTitle" class="bk-h">Handout-PDFs je Kapitel (' + preis + ')</h2><ul class="bk-list">' + rows + '</ul>';
+  }
+
+  var RENDER = {lektionen:renderLektionen, faecher:renderFaecher, termine:renderTermine, handouts:renderHandouts};
+
+  function focusables(modal){
+    var sel = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    return Array.prototype.filter.call(modal.querySelectorAll(sel), function(el){
+      return el.offsetParent !== null || el === document.activeElement;
+    });
+  }
+  function onKey(e){
+    if(e.key === "Escape" || e.key === "Esc"){ closeBk(); return; }
+    if(e.key !== "Tab") return;
+    var modal = $("bkModal"); if(!modal) return;
+    var f = focusables(modal); if(!f.length) return;
+    var first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+
+  window.openBk = function(typ){
+    var modal = $("bkModal"), content = $("bkContent");
+    var render = RENDER[typ];
+    if(!modal || !content || !render) return;
+    content.innerHTML = render(window.BK_DATA || {});
+    if(typ === "faecher" && window.BKBC) window.BKBC.bind(content);
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+    var closeBtn = modal.querySelector(".bk-close");
+    if(closeBtn) closeBtn.focus();
+  };
+  window.closeBk = function(){
+    var modal = $("bkModal");
+    if(!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", onKey);
+    if(lastFocus && typeof lastFocus.focus === "function"){ try{ lastFocus.focus(); }catch(e){} }
+    lastFocus = null;
+  };
+
+  document.addEventListener("click", function(e){
+    var t = e.target.closest ? e.target.closest("[data-bk]") : null;
+    if(t){ window.openBk(t.getAttribute("data-bk")); }
+  });
+
+  var modal = $("bkModal"), content = $("bkContent");
+  if(modal) modal.addEventListener("click", function(e){ if(e.target === modal) closeBk(); });
+  if(content){
+    content.addEventListener("click", function(e){
+      var m = e.target.closest ? e.target.closest("[data-bk-merken]") : null;
+      if(m){
+        var txt = m.getAttribute("data-bk-merken");
+        closeBk();
+        window.merken(txt);
+        return;
+      }
+      var sub = e.target.closest ? e.target.closest('[data-bk-action="termin-submit"]') : null;
+      if(sub){
+        var sel = content.querySelector('input[name="bkTermin"]:checked');
+        if(!sel){
+          var need = content.querySelector(".bk-need");
+          if(need) need.hidden = false;
+          return;
+        }
+        closeBk();
+        window.merken("Live-Termin: " + sel.value);
+        return;
+      }
+    });
+    content.addEventListener("change", function(e){
+      if(e.target && e.target.name === "bkTermin"){
+        Array.prototype.forEach.call(content.querySelectorAll(".bk-opt"), function(o){
+          var r = o.querySelector("input");
+          o.classList.toggle("bk-sel", !!(r && r.checked));
+        });
+        var need = content.querySelector(".bk-need");
+        if(need) need.hidden = true;
+      }
+    });
+  }
+})();
+
+/* ---- BKBC-Konfigurator: Checkout-Hook an den bestehenden Merken-Flow ---- */
+window.bkbcOnCheckout = function(p){
+  var art = p.handouts ? "Klausur-Check + alle Handouts" : "Klausur-Check";
+  var txt = "Fächer-Paket: " + p.faecher.join(" + ") + " · " + art + " · " + window.BKBC.fmt(p.total);
+  if(typeof window.closeBk === "function") window.closeBk();
+  if(typeof window.merken === "function") window.merken(txt);
+};
+</script>
+<style id="v43-politur">
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none}}
+.btn{transition:transform .18s ease,box-shadow .2s ease,background-color .18s ease,filter .18s ease;will-change:transform}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary:hover{box-shadow:0 10px 26px rgba(232,118,10,.30)}
+.btn-silver:hover,.btn-app:hover{box-shadow:0 8px 20px rgba(32,35,42,.16)}
+h1,h2{letter-spacing:-.015em}
+.v43-price-note{margin:20px auto 0;max-width:860px;font-size:14.5px;line-height:1.65;color:var(--ink,#20232A);background:var(--bg,#fff);border:1px solid var(--hair,rgba(32,35,42,.12));border-radius:12px;padding:15px 17px}
+.v43-live{display:inline-flex;align-items:center;gap:8px;margin-top:4px;background:rgba(232,118,10,.10);color:#c96406;font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px}
+</style>
+<script id="v43-politur-js">
+(function(){
+  var pre=document.getElementById('preise');
+  if(false){ /* Mehrere-Kurse-Kasten entfernt 22.07.2026 (V3: keine Mengenrabatte) */
+    var root=pre.querySelector(':scope > .wrap')||pre;
+    var n=document.createElement('div');n.className='v43-price-note';
+    n.innerHTML='';
+    var lad=pre.querySelector('.ladder');
+    if(lad&&lad.parentNode){lad.parentNode.insertBefore(n, lad.nextSibling);} else {root.appendChild(n);}
+  }
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  function kids(root){var k=Array.prototype.filter.call(root.children,function(n){return n.nodeType===1;});while(k.length===1&&k[0].children.length>1){root=k[0];k=Array.prototype.filter.call(root.children,function(n){return n.nodeType===1;});}return k;}
+  function apply(root){var vh=window.innerHeight||800,i=0;kids(root).forEach(function(el){var t=el.tagName.toLowerCase();if(t==='script'||t==='style'||t==='link')return;var r=el.getBoundingClientRect();if(r.top<vh*0.85)return;el.classList.add('reveal');el.style.transitionDelay=Math.min(i*90,380)+'ms';i++;io.observe(el);});}
+  var hero=document.querySelector('.hero .wrap');if(hero)apply(hero);
+  ['klausurcheck','gratis','weiter','sofunktionierts','stimmen','autor','preise','faq','app-holen'].forEach(function(id){var s=document.getElementById(id);if(!s)return;apply(s.querySelector(':scope > .wrap')||s);});
+})();
+</script>
+<style id="v43-burger-css">
+.v43-burger{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;color:var(--text-2);cursor:pointer;border-radius:12px;flex:0 0 auto}
+.v43-burger:hover{background:var(--bg-2)}
+.v43-navwrap{position:fixed;inset:0;z-index:300;display:none}
+.v43-navwrap.open{display:block}
+.v43-navback{position:absolute;inset:0;background:rgba(15,17,20,.46)}
+.v43-nav{position:absolute;top:0;right:0;height:100%;width:min(87vw,344px);background:var(--surface);box-shadow:-10px 0 34px rgba(0,0,0,.24);padding:20px;overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
+.v43-navwrap.open .v43-nav{transform:none}
+.v43-navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.v43-navhead strong{font-family:var(--serif);font-size:18px;color:var(--text)}
+.v43-navclose{width:40px;height:40px;border:0;background:transparent;cursor:pointer;border-radius:10px;color:var(--text-2)}
+.v43-navclose:hover{background:var(--bg-2)}
+.v43-nav h3{font-size:11.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--text-3);margin:20px 0 6px}
+.v43-nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--text);font-weight:500;font-size:15.5px}
+.v43-nav a:hover{background:var(--bg-2)}
+.v43-nav a .nk{font-family:var(--serif);font-weight:600;color:var(--accent);min-width:52px}
+.v43-navcta{margin-top:22px !important;justify-content:center !important;background:var(--accent);color:#fff !important;font-weight:600;border-radius:999px !important}
+.v43-navcta:hover{background:var(--accent-deep) !important;color:#fff !important}
+</style>
+<script id="v43-burger-js">
+(function(){
+  var wrap=document.querySelector('.appbar .wrap'); if(!wrap||document.getElementById('v43NavWrap'))return;
+  var SEC=[['klausurcheck','Klausur-Check'],['gratis','Gratis-Lektion'],['sofunktionierts',"So funktioniert’s"],['stimmen','Stimmen'],['preise','Preise'],['faq','Fragen & Antworten'],['app-holen','App holen']];
+  var sl='';SEC.forEach(function(x){if(document.getElementById(x[0]))sl+='<a href="#'+x[0]+'" data-close>'+x[1]+'</a>';});
+  var nav=document.createElement('div');nav.className='v43-navwrap';nav.id='v43NavWrap';nav.setAttribute('aria-hidden','true');
+  nav.innerHTML='<div class="v43-navback" data-close></div><nav class="v43-nav" aria-label="Menü">'
+   +'<div class="v43-navhead"><strong>Menü</strong><button type="button" class="v43-navclose" data-close aria-label="Menü schließen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'
+   +'<h3>Auf dieser Seite</h3>'+sl
+   +'<h3>Kurse</h3>'
+   +'<a href="index.html"><span class="nk">⌂</span> Alle Kurse</a>'
+   +'<a href="osta.html"><span class="nk">OFIN</span> Finanzen&nbsp;1</a>'
+   +'<a href="omik.html"><span class="nk">OMIK</span> Mikroökonomik&nbsp;1</a>'
+   +'<a href="ofin.html"><span class="nk">OFIN</span> Finanzen&nbsp;1</a>'
+   +'<h3>Rechtliches</h3><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>'
+   +(document.getElementById('preise')?'<a class="v43-navcta" href="#preise" data-close>Zu den Preisen</a>':'')
+   +'</nav>';
+  document.body.appendChild(nav);
+  var b=document.createElement('button');b.type='button';b.className='v43-burger';
+  b.setAttribute('aria-label','Menü öffnen');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','v43NavWrap');
+  b.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  wrap.appendChild(b);
+  function op(){nav.classList.add('open');nav.setAttribute('aria-hidden','false');b.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function cl(){nav.classList.remove('open');nav.setAttribute('aria-hidden','true');b.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  b.addEventListener('click',op);
+  nav.addEventListener('click',function(e){var t=e.target;if(t.hasAttribute('data-close')||(t.closest&&t.closest('[data-close]')))cl();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open'))cl();});
+})();
+</script>
+<iframe name="brevo_sink" title="Anmeldung" aria-hidden="true" tabindex="-1" style="position:absolute;width:0;height:0;border:0;left:-9999px"></iframe>
+<script>
+/* Brevo-Lead-Verdrahtung: Lead-Formulare senden per verstecktem iFrame an Brevo (Double-Opt-in), Nutzer bleibt auf der Seite. */
+(function(){
+  document.addEventListener('submit', function(e){
+    var f = e.target;
+    if(!f || f.nodeName !== 'FORM') return;
+    if(!f.querySelector('input[name="EMAIL"]')) return;
+    if(f.checkValidity && !f.checkValidity()) return;
+    e.stopImmediatePropagation();
+    setTimeout(function(){
+      var box = f.parentNode.querySelector('.brevo-ok');
+      if(!box){
+        box = document.createElement('div');
+        box.className = 'brevo-ok';
+        box.setAttribute('role','status');
+        box.style.cssText = 'margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(46,125,50,.10);color:#1f5130;font-size:15px;line-height:1.5;border:1px solid rgba(46,125,50,.30)';
+        box.innerHTML = '<b>Fast geschafft!</b> Wir haben dir eine E-Mail geschickt, bitte bestätige den Link darin, dann schalten wir dich frei.';
+        f.parentNode.insertBefore(box, f.nextSibling);
+      }
+      box.style.display = 'block';
+      f.style.display = 'none';
+    }, 25);
+  }, true);
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  if(!window.BKBC || !window.BKBC.cfg) return;
+  window.BKBC.cfg.CTA_MODUS = "bestellen";
+  window.bkbcOnCheckout = function(p){
+    if(!p || p.widerrufsverzicht !== true) return;
+    /* Zugangs-Adresse VOR dem Bezahlen festlegen. Hier ist niemand angemeldet (anders als in
+       der App, wo der Kauf am Anmelde-Token haengt). Ohne diesen Schritt fragt Stripe die
+       Adresse frei ab — dann kann der Zugang auf einer zweiten, versehentlich getippten
+       Adresse landen (Fehler vom 22.07.). Mit Adresse ist das Feld bei Stripe fest. */
+    var vorbelegt = "";
+    try {
+      var sg = JSON.parse(localStorage.getItem("bwlk-signup") || "{}");
+      if (sg && sg.email) vorbelegt = sg.email;
+    } catch(e){}
+    var mail = (window.prompt(
+      "An welche E-Mail-Adresse soll dein Zugang gehen?\n\n" +
+      "Mit genau dieser Adresse meldest du dich danach in der App an.",
+      vorbelegt) || "").trim().toLowerCase();
+    var koerper = { typ:"bundle", faecher:p.faecher, handouts:p.handouts,
+      widerrufsverzicht:p.widerrufsverzicht, verzichtZeitpunkt:p.verzichtZeitpunkt };
+    if (mail.indexOf("@") > 0) koerper.email = mail;
+    fetch("https://adrfijztnbebzghumdxn.supabase.co/functions/v1/create-checkout", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(koerper)
+    }).then(function(r){ return r.json(); }).then(function(d){
+      if(d && d.url) location.href = d.url;
+      else alert(d && d.error ? d.error : "Fehler beim Start der Zahlung.");
+    }).catch(function(){ alert("Fehler beim Start der Zahlung."); });
+  };
+})();
+</script>
+
+<div id="v2Bar" aria-hidden="true"></div>
+<div class="scta" id="v2Scta"><a class="btn btn-primary" href="#vormerken">Schaffst du’s?</a></div>
+<style id="v2-mobil">
+/* ============================================================
+   V2-MOBIL-LAYER · Testseite ofin-v2.html · Stand 22.07. (V3 nach Simons Feedback)
+   Preise wie in der App (nichts wischen/verstecken) · wenige, gezielte
+   Aufklapper · kompakte Abstände · einheitlicher Hintergrund.
+   ============================================================ */
+
+/* ---------- Typo-Skala: 5 Stufen ---------- */
+:root{
+  --fs-hero:clamp(30px,8vw,44px);
+  --fs-h2:clamp(22px,5.5vw,30px);
+  --fs-lead:17px;
+  --fs-body:16px;
+  --fs-meta:13px;
+}
+h1{font-size:var(--fs-hero)!important;line-height:1.08}
+h2,.tier .price .now{font-size:var(--fs-h2)!important;line-height:1.15}
+h3,.hero .lead,.sc-q,.sc-result .head,.astat b,.gratis-card h3,.wcard b,
+.step h3,.ups .up,.install .ins-h{font-size:var(--fs-lead)!important;line-height:1.35}
+p,li,.sub,.sc-opt,.sc-fb,.sc-result p,.faq summary,.faq .fa,button,.btn,
+.form-err,.fnote,.os-txt,.voice .vq,.install ol,.v43-price-note,
+.tier .pd,.ups .ud,summary,.sc-note,.v43-nav a,label.f,label.f span,.v2-urne-stat,.v2-profil-leg,.disclaimer{font-size:var(--fs-body)!important;line-height:1.6}
+.author h2 span{font-size:var(--fs-meta)!important}
+.kicker,.chip,.trust,.gratis-badge,.tier .rung,.ribbon,.vwho,.astat span,
+.chk,.chk span,.os-clock,.garantie,.tier .price .old,
+.badge-demo,.ph-badge,.part-label,footer,.ups b,.v2-dots,
+.v2-kdays,.sc-retry{font-size:var(--fs-meta)!important;line-height:1.5}
+
+/* ---------- Header schlank ---------- */
+.appbar .wrap{min-height:44px;padding-top:4px;padding-bottom:4px;gap:8px}
+.brand{min-height:44px}
+.brand small{display:none}
+.brand b{font-size:var(--fs-body)!important}
+.count-pill{display:none!important}
+.appbar .btn{padding:8px 12px;min-height:44px;white-space:nowrap}
+.appbar .mark img{width:30px;height:30px}
+.v43-navwrap:not(.open){visibility:hidden}
+
+/* Reveals: schnell und ohne Staffelung — keine Leerflaechen beim Scrollen */
+.reveal{transition-duration:.32s,.32s!important;transition-delay:0s,0s!important}
+
+/* ---------- Scroll-Fortschrittsbalken ---------- */
+#v2Bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:80}
+
+/* ---------- Karussell-Schiene (Kapitel + App-Anleitung) ---------- */
+.v2-rail{display:grid;grid-auto-flow:column;grid-auto-columns:86%;gap:12px;
+  padding:4px 16px 8px;margin:12px -16px 0;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-padding-inline:16px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.v2-rail::-webkit-scrollbar{display:none}
+.v2-rail>*{scroll-snap-align:start;margin:0!important;min-width:0}
+.v2-dots{display:flex;justify-content:center;gap:6px;margin-top:8px;color:var(--text-3)}
+.v2-dots i{width:7px;height:7px;border-radius:50%;background:var(--hair);transition:background .2s,transform .2s}
+.v2-dots i.on{background:var(--accent);transform:scale(1.25)}
+@media(min-width:760px){
+  .v2-rail{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-auto-columns:auto;overflow:visible;scroll-snap-type:none;margin-inline:0;padding-inline:0}
+  .v2-dots{display:none}
+}
+#kapRail{grid-auto-columns:64%}
+.steps.v2-rail .step{height:100%}
+.steps.v2-rail{grid-auto-columns:78%}
+
+/* ---------- Sticky Bottom-CTA ---------- */
+.scta{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:var(--surface);border-top:1px solid var(--hair);
+  transform:translateY(120%);transition:transform .25s ease;
+  display:flex;gap:10px;align-items:center}
+.scta.on{transform:none}
+.scta .btn{flex:1;justify-content:center;text-align:center}
+@media(prefers-reduced-motion:reduce){.scta{transition:none}}
+@media(min-width:760px){.scta{display:none}}
+
+/* ---------- Aufklapper nur noch: FAQ + App-Anleitung ---------- */
+details.dd{margin-top:8px}
+details.dd>summary{cursor:pointer;list-style:none;display:flex;align-items:center;
+  gap:8px;min-height:44px;padding:10px 2px;font-weight:600;color:var(--text-2)}
+details.dd>summary::-webkit-details-marker{display:none}
+details.dd>summary::after{content:"";width:8px;height:8px;flex:none;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:rotate(45deg);transition:transform .2s;margin-left:auto}
+details.dd[open]>summary::after{transform:rotate(-135deg)}
+.faq summary{min-height:48px}
+.faq summary::-webkit-details-marker{display:none}
+
+/* ---------- Kompakter Fluss: Lücken schließen ---------- */
+main section{padding:32px 0}
+main section .wrap>h2{margin-bottom:8px}
+.hero .wrap{padding-top:26px;padding-bottom:0}
+.hero-cta{margin:16px 0 4px}
+.hero-cta .btn-primary{width:100%;justify-content:center;text-align:center}
+.v2-heroline{display:block;margin-top:10px}
+.v2-heroline a{color:var(--text-2);text-decoration:underline;text-underline-offset:3px}
+.v2-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.trust{margin-top:14px;padding-top:12px;gap:6px 14px}
+.v2-kdays{display:inline-flex;align-items:center;gap:8px;margin-top:12px;
+  background:var(--glow);color:var(--accent-deep);font-weight:700;
+  padding:8px 14px;border-radius:999px}
+#klausurcheck{padding-top:0}
+#klausurcheck .wrap{padding-top:0}
+#klausurcheck .card{padding:20px 18px}
+#gratis{padding-top:10px}
+.gratis-card{padding:18px 16px}
+.premium-card.author{padding:20px 16px}
+.author .aq{margin:10px 0 0}
+.author .foto{width:120px;height:120px}
+.astats{grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0 0}
+.astat{padding:10px 8px}
+.steps{gap:10px;margin-top:10px}
+.step{padding:14px 16px}
+.step p{margin:6px 0 0}
+.step h3{margin:2px 0 0}
+.tier{padding:18px 16px}
+.tier .pd{margin:6px 0 10px}
+.tier .price{margin:6px 0 2px}
+.ladder{gap:12px;margin-top:16px}
+.upsells{gap:8px;margin-top:12px}
+.ups{padding:12px 14px}
+.garantie{gap:4px 16px;padding:10px 14px;margin-top:12px}
+.v43-price-note{margin-top:12px!important;padding:12px 14px!important}
+.garantie svg{display:none}
+#vormerken .card{padding:22px 18px}
+.v2-more{display:none}
+#vormerken.v2-open2 .v2-more{display:block}
+.install-grid{gap:10px}
+.install-grid .card.install{padding:0 16px}
+.install-grid .ins-h{margin:0}
+footer{padding:26px 0 96px}
+.faq details{margin:8px 0}
+.faq summary{padding:14px 16px}
+.faq .fa{padding:0 16px 14px}
+.voice{padding:18px}
+
+/* Kontrast: Orange-Textrollen im Hellmodus auf lesbares Tieforange */
+.v2-kdays{color:#A04A00;background:rgba(232,118,10,.14)}
+#kapitel .kap-n{color:#A04A00}
+.v2-lg-no{color:#A04A00}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline-color:#A04A00!important}
+[data-theme="dark"] .v2-kdays{color:var(--accent-2);background:var(--glow)}
+[data-theme="dark"] #kapitel .kap-n{color:var(--accent-2)}
+[data-theme="dark"] .v2-lg-no{color:var(--accent-2)}
+[data-theme="dark"] a:focus-visible,[data-theme="dark"] button:focus-visible,
+[data-theme="dark"] summary:focus-visible,[data-theme="dark"] input:focus-visible{outline-color:var(--accent-2)!important}
+
+
+/* ---------- NEU 2 · Barwert-Schieber (Gesetz der großen Zahlen) ---------- */
+.v2-urne{background:var(--surface-2);border-radius:var(--r-md);
+  box-shadow:inset 0 0 0 1px var(--hair);padding:12px 14px;margin:12px 0 14px}
+.v2-urne-row{display:flex;align-items:center;gap:12px}
+.v2-urne-btn{display:inline-flex;align-items:center;gap:8px;flex:none;
+  min-height:44px;padding:8px 14px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--hair);background:var(--surface);color:var(--text);font-weight:700}
+.v2-urne-btn:active{transform:scale(.97)}
+.v2-urne-balls{display:flex;gap:5px;flex-wrap:wrap;min-height:18px;align-items:center}
+.v2-urne-balls i{width:14px;height:14px;border-radius:50%;flex:none;
+  transform:translateY(-8px) scale(.6);opacity:0;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .2s}
+.v2-urne-balls i.in{transform:none;opacity:1}
+.v2-urne-balls i.rot{background:var(--wrong)}
+.v2-urne-balls i.blau{background:#3E6DA6}
+.v2-urne-stat{margin:10px 0 0;color:var(--text-2)}
+@media(prefers-reduced-motion:reduce){
+  .v2-urne-balls i{transition:none;transform:none;opacity:1}
+}
+
+/* ---------- NEU 3 · Kapitel-Profil (persönliches Balkendiagramm) ---------- */
+.v2-profil{margin-top:14px}
+.v2-profil-bars{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;align-items:end;height:44px}
+.v2-profil-bars b{display:block;border-radius:4px 4px 0 0;background:var(--hair);
+  height:30%;transition:height .3s ease,background-color .3s ease}
+.v2-profil-bars b.ok{background:var(--done);height:100%}
+.v2-profil-bars b.no{background:var(--accent);height:62%}
+.v2-profil-leg{margin:8px 0 0;color:var(--text-2)}
+.v2-lg{font-weight:700}
+.v2-lg-ok{color:var(--done)}
+.v2-lg-no{color:var(--accent-deep)}
+.v2-lg-off{color:var(--text-3)}
+@media(prefers-reduced-motion:reduce){.v2-profil-bars b{transition:none}}
+
+/* ---------- Quiz-Gate + Q2-Progressive ---------- */
+.sc-body{display:none}
+#klausurcheck.v2-open .sc-body{display:block}
+#klausurcheck.v2-open .sc-gate{display:none}
+.sc-gate .btn{width:100%;justify-content:center;text-align:center;margin-top:4px}
+#klausurcheck.v2-q1 .v2-q2{display:none}
+#klausurcheck.v2-q1 .sc-eval{display:none}
+
+/* ---------- Kapitel-Swipe ---------- */
+#kapitel{padding-top:26px;padding-bottom:20px}
+#kapitel .kap-card{background:var(--surface);border-radius:var(--r-md);
+  padding:16px;box-shadow:var(--edge),0 0 0 1px var(--line-2),var(--sh-1);
+  display:flex;flex-direction:column;gap:8px}
+#kapitel .kap-n{font-family:var(--serif);font-weight:700;color:#A04A00}
+[data-theme="dark"] #kapitel .kap-n{color:var(--accent-2)}
+#kapitel .kap-t{font-weight:700}
+#kapitel .kap-btns{display:flex;gap:8px;margin-top:auto}
+#kapitel .kap-btns button{flex:1;min-height:44px;border-radius:var(--r-sm);
+  border:1px solid var(--hair);background:var(--surface-2);color:var(--text-2);
+  font-weight:700;cursor:pointer}
+#kapitel .kap-btns button.on-ok{background:var(--done-bg);color:var(--done);border-color:var(--done)}
+#kapitel .kap-btns button.on-no{background:var(--glow);color:var(--accent-deep);border-color:var(--accent)}
+#kapitel .kap-card.gratis .kap-btns a{flex:1;min-height:44px;display:inline-flex;
+  align-items:center;justify-content:center;border-radius:var(--r-sm);
+  background:var(--done-bg);color:var(--done);font-weight:700;text-decoration:none}
+#kapitel .kap-sum{background:linear-gradient(180deg,var(--premium-2),var(--premium));
+  color:var(--premium-ink);border-radius:var(--r-md);padding:18px;
+  display:flex;flex-direction:column;gap:10px}
+#kapitel .kap-sum .btn{justify-content:center;text-align:center}
+
+/* ---------- Touch-Ziele: Inline-Links auf 44 px ---------- */
+.fa a,.chk a,footer a,.fnote a,.v2-heroline a,.disclaimer a,.sub a{
+  display:inline-block;padding-block:13px;margin-block:-13px}
+
+/* ---------- Checkbox: 44px Tap-Fläche ---------- */
+.chk input[type=checkbox]{appearance:none;-webkit-appearance:none;width:44px;height:44px;
+  flex:none;margin:-9px 0 0 -9px;display:grid;place-content:center;background:none;border:0;cursor:pointer}
+.chk input[type=checkbox]::before{content:"";width:24px;height:24px;border-radius:7px;
+  background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--hair)}
+.chk input[type=checkbox]:checked::before{background:var(--accent);box-shadow:none;
+  content:"\2713";color:#fff;font-size:16px;font-weight:700;display:grid;place-content:center}
+.chk{display:flex;align-items:flex-start;gap:6px}
+
+
+.wb-sub{font-size:.72em;font-weight:500;opacity:.75;white-space:nowrap}
+.cashback-hint{font-size:14px;font-weight:600;color:var(--accent,#A04A00);margin:6px 0 2px}
+@media (prefers-color-scheme:dark){.cashback-hint{color:#F0902E}}
+
+.v2-bw-row{display:flex;flex-direction:column;gap:12px}
+.v2-bw-lab{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600}
+.v2-bw-lab output{font-weight:700}
+.v2-bw-lab input[type=range]{width:100%;accent-color:var(--accent,#E8760A);height:26px}
+</style>
+<script id="v2-mobil-js">
+/* ============================================================
+   V2-MOBIL-JS · Testseite ofin-v2.html · V3 nach Simons Feedback
+   Läuft NACH allen Original-Skripten. Nichts davon wird ersetzt.
+   ============================================================ */
+(function(){
+  "use strict";
+  var RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var KLAUSUR_TAG = "2026-07-28";
+
+  /* ---------- Scroll-Fortschrittsbalken ---------- */
+  var bar = document.getElementById("v2Bar");
+  function setBar(){
+    if(!bar) return;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? Math.min(100, window.scrollY / h * 100) : 0) + "%";
+  }
+  window.addEventListener("scroll", setBar, {passive:true});
+  window.addEventListener("resize", setBar);
+  setBar();
+
+  /* ---------- NEU 3a · Lernplan-Chip: Tage + Tagespensum ---------- */
+  var kapGesamt = (window.BK_DATA && window.BK_DATA.lektionen) ? window.BK_DATA.lektionen.length : 10;
+  function klausurTage(){
+    var heute = new Date();
+    heute.setHours(0, 0, 0, 0);
+    return Math.max(0, Math.round((new Date(KLAUSUR_TAG + "T00:00:00") - heute) / 86400000));
+  }
+  function planText(){
+    var d = klausurTage();
+    if(d === 0) return "Klausur ist heute";
+    if(d === 1) return "Morgen ist Klausur";
+    var offen = kapGesamt;
+    try{
+      var st = JSON.parse(localStorage.getItem("kc_ofin_selbstcheck") || "{}") || {};
+      var wack = Object.keys(st).filter(function(k){ return st[k] === "no"; }).length;
+      if(wack > 0) offen = wack;
+    }catch(e){}
+    var proTag = Math.ceil(offen / d);
+    var was = offen === kapGesamt ? kapGesamt + " Kapitel" : offen + " Wackel-Kapitel";
+    return "Noch " + d + " Tage · " + was + " = " + proTag + " pro Tag";
+  }
+  function planUpdate(){
+    var els = document.querySelectorAll("[data-kdays]");
+    var t = planText();
+    Array.prototype.forEach.call(els, function(e){ e.textContent = t; });
+  }
+  planUpdate();
+
+  /* ---------- NEU 2 · Barwert-Schieber: Zeit und Zins am Regler erleben ---------- */
+  (function(){
+    /* Barwert zum Anfassen: 100 EUR in N Jahren bei Z Prozent. Rechnet exakt. */
+    var z = document.getElementById("bwZins"), jr = document.getElementById("bwJahre");
+    if(!z || !jr) return;
+    var oz = document.getElementById("bwZ"), oj = document.getElementById("bwJ"),
+        out = document.getElementById("bwOut");
+    if(!oz || !oj || !out) return;
+    function fmt(n){ return n.toFixed(2).replace(".", ",") + "\u00a0\u20ac"; }
+    function upd(){
+      var zins = parseFloat(z.value), jahre = parseInt(jr.value, 10);
+      var bw = 100 / Math.pow(1 + zins/100, jahre);
+      oz.textContent = zins.toFixed(1).replace(".", ",") + "\u00a0%";
+      oj.textContent = jahre + (jahre === 1 ? " Jahr" : " Jahre");
+      out.textContent = fmt(bw);
+    }
+    z.addEventListener("input", upd); jr.addEventListener("input", upd); upd();
+  })();
+
+  /* ---------- Quiz: Gate + Frage 2 erst nach Antwort 1 ---------- */
+  (function(){
+    var sec = document.getElementById("klausurcheck");
+    if(!sec) return;
+    sec.classList.add("v2-q1");
+    var start = document.getElementById("scStart");
+    function openQuiz(){ sec.classList.add("v2-open"); }
+    if(start) start.addEventListener("click", openQuiz);
+    document.addEventListener("click", function(e){
+      var a = e.target.closest ? e.target.closest('a[href="#klausurcheck"]') : null;
+      if(a) openQuiz();
+    });
+    Array.prototype.forEach.call(sec.querySelectorAll('.sc-opt[data-q="0"]'), function(b){
+      b.addEventListener("click", function(){ sec.classList.remove("v2-q1"); });
+    });
+    var retry = document.getElementById("scRetry");
+    if(retry) retry.addEventListener("click", function(){ sec.classList.add("v2-q1"); });
+  })();
+
+  /* ---------- Kapitel-Swipe + NEU 3b · persönliches Kapitel-Profil ---------- */
+  (function(){
+    var rail = document.getElementById("kapRail");
+    var data = window.BK_DATA && window.BK_DATA.lektionen;
+    if(!rail || !data || !data.length) return;
+    var LS = "kc_ofin_selbstcheck";
+    var state = {};
+    try{ state = JSON.parse(localStorage.getItem(LS) || "{}") || {}; }catch(e){}
+    function kurz(t){
+      var i = t.indexOf(":");
+      return i > -1 ? t.slice(i + 1).trim() : t;
+    }
+    function save(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e){} }
+    function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+    var html = data.map(function(l){
+      if(l.gratis){
+        return '<div class="kap-card gratis"><span class="kap-n num">' + l.n + ' · gratis</span>' +
+          '<span class="kap-t">' + esc(kurz(l.thema)) + '</span>' +
+          '<div class="kap-btns"><a href="' + esc(l.slug) + '.html">ansehen</a></div></div>';
+      }
+      return '<div class="kap-card" data-n="' + l.n + '"><span class="kap-n num">' + l.n + '</span>' +
+        '<span class="kap-t">' + esc(kurz(l.thema)) + '</span>' +
+        '<div class="kap-btns">' +
+        '<button type="button" data-v="ok" aria-pressed="false">sitzt</button>' +
+        '<button type="button" data-v="no" aria-pressed="false">wackelt</button></div></div>';
+    }).join("") +
+    '<div class="kap-sum"><b class="kap-t" id="kapSumT">Bewerte alle 10 Kapitel.</b>' +
+    '<span id="kapSumS" class="chk"></span>' +
+    '<a class="btn btn-primary" href="#vormerken" id="kapSumBtn" data-merken="">Jetzt kostenlos anmelden</a></div>';
+    rail.innerHTML = html;
+
+    var profil = document.getElementById("v2Profil");
+    var bars = document.getElementById("v2ProfilBars");
+    if(bars){
+      bars.innerHTML = data.map(function(l){ return '<b data-p="' + l.n + '" title="Kap ' + l.n + '"></b>'; }).join("");
+    }
+
+    function paint(){
+      Array.prototype.forEach.call(rail.querySelectorAll(".kap-card[data-n]"), function(c){
+        var n = c.getAttribute("data-n"), v = state[n];
+        var ok = c.querySelector('[data-v="ok"]'), no = c.querySelector('[data-v="no"]');
+        ok.classList.toggle("on-ok", v === "ok");
+        no.classList.toggle("on-no", v === "no");
+        ok.setAttribute("aria-pressed", v === "ok" ? "true" : "false");
+        no.setAttribute("aria-pressed", v === "no" ? "true" : "false");
+      });
+      var wack = data.filter(function(l){ return state[l.n] === "no"; });
+      var sitzt = data.filter(function(l){ return state[l.n] === "ok"; });
+      if(bars){
+        Array.prototype.forEach.call(bars.children, function(b){
+          var v = state[b.getAttribute("data-p")];
+          b.className = v === "ok" ? "ok" : v === "no" ? "no" : "";
+        });
+      }
+      if(profil) profil.hidden = !(wack.length || sitzt.length);
+      if(bars) bars.setAttribute("aria-label", "Dein Kapitel-Profil: " + sitzt.length + " sitzen, " + wack.length + " wackeln, " + (data.length - sitzt.length - wack.length) + " offen");
+      var t = document.getElementById("kapSumT");
+      var s = document.getElementById("kapSumS");
+      var b = document.getElementById("kapSumBtn");
+      if(wack.length){
+        t.textContent = wack.length + "× wackelt · " + sitzt.length + "× sitzt";
+        s.textContent = "Wackelt bei: " + wack.map(function(l){ return "Kap " + l.n; }).join(", ");
+        b.setAttribute("data-merken", "Selbstcheck: wackelt bei " + wack.map(function(l){ return "Kap " + l.n + " " + kurz(l.thema); }).join(", "));
+        b.textContent = "Genau diese Kapitel angehen";
+      } else if(sitzt.length){
+        t.textContent = sitzt.length + " von " + data.length + " sitzen. Stark!";
+        s.textContent = "";
+        b.setAttribute("data-merken", "Selbstcheck: alles sitzt (" + sitzt.length + " bewertet)");
+        b.textContent = "Jetzt kostenlos anmelden";
+      }
+      planUpdate();
+    }
+    rail.addEventListener("click", function(e){
+      var btn = e.target.closest ? e.target.closest("button[data-v]") : null;
+      if(!btn) return;
+      var card = btn.closest(".kap-card");
+      var n = card.getAttribute("data-n");
+      var v = btn.getAttribute("data-v") === "ok" ? "ok" : "no";
+      state[n] = state[n] === v ? undefined : v;
+      save(); paint();
+    });
+    paint();
+  })();
+
+  /* ---------- Punkt-Anzeige unter jeder Schiene ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".v2-rail"), function(rail){
+    var dots = document.createElement("div");
+    dots.className = "v2-dots";
+    dots.setAttribute("aria-hidden", "true");
+    var n = rail.children.length;
+    for(var i = 0; i < n; i++) dots.appendChild(document.createElement("i"));
+    rail.parentNode.insertBefore(dots, rail.nextSibling);
+    function upd(){
+      var card = rail.children[0];
+      if(!card) return;
+      var w = card.getBoundingClientRect().width + 12;
+      var idx = Math.min(n - 1, Math.max(0, Math.round(rail.scrollLeft / w)));
+      Array.prototype.forEach.call(dots.children, function(d, i){
+        d.classList.toggle("on", i === idx);
+      });
+    }
+    rail.addEventListener("scroll", upd, {passive:true});
+    upd();
+  });
+
+  /* ---------- Sticky Bottom-CTA (scroll-basiert) ---------- */
+  (function(){
+    var scta = document.getElementById("v2Scta");
+    var heroCta = document.querySelector(".hero-cta");
+    if(!scta || !heroCta) return;
+    function inView(el, marge){
+      var r = el.getBoundingClientRect();
+      return r.bottom > (marge || 0) && r.top < window.innerHeight - (marge || 0);
+    }
+    function upd(){
+      var heroVis = inView(heroCta);
+      var formVis = false;
+      ["vormerken", "preise"].forEach(function(id){
+        var el = document.getElementById(id);
+        if(el && inView(el, 40)) formVis = true;
+      });
+      scta.classList.toggle("on", !heroVis && !formVis);
+    }
+    window.addEventListener("scroll", upd, {passive:true});
+    window.addEventListener("resize", upd);
+    upd();
+  })();
+
+  /* ---------- Zählanimation der Autor-Zahlen (mit Fallback) ---------- */
+  (function(){
+    var els = document.querySelectorAll("[data-cnt]");
+    if(!els.length) return;
+    function run(el){
+      var end = parseInt(el.getAttribute("data-cnt"), 10);
+      var pre = el.getAttribute("data-pre") || "";
+      var suf = el.getAttribute("data-suf") || "";
+      if(RM){
+        el.textContent = pre + end.toLocaleString("de-DE") + suf;
+        return;
+      }
+      var t0 = null;
+      function step(t){
+        if(!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / 900);
+        var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+        el.textContent = pre + v.toLocaleString("de-DE") + suf;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    var done = {};
+    function runOnce(el){
+      var k = el.getAttribute("data-cnt");
+      if(!done[k]){ done[k] = true; run(el); }
+    }
+    if(RM || !("IntersectionObserver" in window)){
+      Array.prototype.forEach.call(els, runOnce);
+      return;
+    }
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        if(e.isIntersecting){ runOnce(e.target); io.unobserve(e.target); }
+      });
+    }, {threshold:0.4});
+    Array.prototype.forEach.call(els, function(el){ io.observe(el); });
+    setTimeout(function(){ Array.prototype.forEach.call(els, runOnce); }, 3000);
+  })();
+
+  /* ---------- Formular: weitere Felder nach E-Mail-Eingabe ---------- */
+  (function(){
+    var sec = document.getElementById("vormerken");
+    var mail = document.getElementById("vmEmail");
+    if(!sec || !mail) return;
+    function open2(){ sec.classList.add("v2-open2"); }
+    mail.addEventListener("input", function(){ if(mail.value.length > 2) open2(); });
+    mail.addEventListener("focus", function(){ if(mail.value.length > 2) open2(); });
+  })();
+
+  /* ---------- Reveals früher + schneller (gegen Leerflächen beim Scrollen) ---------- */
+  (function(){
+    if(RM || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {rootMargin:"0px 0px 22% 0px", threshold:0});
+    Array.prototype.forEach.call(document.querySelectorAll(".reveal:not(.in)"), function(el){ io.observe(el); });
+  })();
+
+  /* ---------- Theme-Umschalter ins Burger-Menü ---------- */
+  (function(){
+    var btn = document.getElementById("themeBtn");
+    var head = document.querySelector(".v43-navhead");
+    if(btn && head) head.insertBefore(btn, head.lastElementChild);
+  })();
+})();
+
+</script>
+</body>
+</html>

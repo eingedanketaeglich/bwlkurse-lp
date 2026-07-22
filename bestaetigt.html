@@ -56,6 +56,16 @@
   var fachParam=(q.get("fach")||q.get("FACH")||"").trim().toLowerCase();
   var txt=document.getElementById("zgTxt"), form=document.getElementById("zgForm"), inp=document.getElementById("zgMail");
   var gesendet=false;
+  if(!email){
+    try{
+      var s=JSON.parse(localStorage.getItem("bwlk-signup")||"null");
+      if(s && s.email && String(s.email).indexOf("@")>0 && Date.now()-(s.t||0) < 86400000){
+        email=String(s.email).toLowerCase();
+        if(!vorname) vorname=s.vorname||"";
+        if(!fachParam) fachParam=String(s.fach||"").toLowerCase();
+      }
+    }catch(e){}
+  }
   function esc(s){ return String(s).replace(/[<>&"]/g,""); }
   function zeigeFormular(msg){ txt.innerHTML=msg; form.style.display="block"; }
   function sende(mail, fach, still){

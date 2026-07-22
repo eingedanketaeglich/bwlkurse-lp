@@ -1350,6 +1350,7 @@ window.addEventListener("resize", drawRails);
     if(_tel) body.append("HANDY", _tel);
     body.append("WHATSAPP", data.get("whatsapp_einverstaendnis") ? "ja" : "nein");
     body.append("FACH", "osta");
+    try{ localStorage.setItem("bwlk-signup", JSON.stringify({email:(data.get("EMAIL")||"").trim().toLowerCase(), vorname:(data.get("vorname")||"").replace(/[<>]/g,"").trim(), fach:"osta", t:Date.now()})); }catch(e){}
     fetch(f.getAttribute("action"), {method:"POST", mode:"no-cors", body: body})
       .then(function(){
         $("vmErr").style.display = "none";

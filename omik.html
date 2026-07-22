@@ -1284,6 +1284,7 @@ window.addEventListener("resize", drawRails);
     if(_tel) body.append("HANDY", _tel);
     body.append("WHATSAPP", data.get("whatsapp_einverstaendnis") ? "ja" : "nein");
     body.append("FACH", "omik");
+    try{ localStorage.setItem("bwlk-signup", JSON.stringify({email:(data.get("EMAIL")||"").trim().toLowerCase(), vorname:(data.get("vorname")||"").replace(/[<>]/g,"").trim(), fach:"omik", t:Date.now()})); }catch(e){}
     fetch(scForm.getAttribute("action"), {method:"POST", mode:"no-cors", body: body})
       .then(function(){
         document.getElementById("scErr").style.display = "none";

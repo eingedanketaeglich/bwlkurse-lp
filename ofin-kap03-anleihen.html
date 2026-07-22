@@ -402,6 +402,20 @@ ul.check li.off:before{content:"\2013";color:var(--grey, #586a80)}
   .bk-row-r{ margin-left:0; }
 }
 </style>
+<style id="bk-cashback-css">.bk-cashback{font-size:16px;font-weight:600;color:#C25A00;margin:10px 0 4px;line-height:1.45}</style>
+
+<style id="bk-sticky-kauf">
+  .bkstick{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:10px;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:#F8F7F4;border-top:1px solid #D9D5CC}
+  .bkstick a{flex:1;min-height:48px;display:inline-flex;align-items:center;
+    justify-content:center;border-radius:12px;font-weight:700;font-size:14.5px;
+    text-decoration:none;text-align:center;line-height:1.2;padding:0 8px}
+  .bkstick .frei{background:#E8760A;color:#FFFFFF}
+  .bkstick .kauf{background:#14304A;color:#FFFFFF}
+  @media(min-width:900px){.bkstick{display:none}}
+  body{padding-bottom:78px}
+</style>
 </head>
 <body data-fach="OFIN" data-kapitel-slug="ofin-kap03-anleihen">
 
@@ -686,7 +700,7 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
     <p class="note" style="margin:.2rem 0 1rem">Preise wie in der App. Lektion und Handout gibt es immer zusammen: 8,90&nbsp;&euro; je Kapitel. Wer alles will, zahlt 49,90&nbsp;&euro; statt 80,10&nbsp;&euro; und bekommt die Live Q&amp;A dazu. Freigeschaltet wird in der App.</p>
 
     <div class="pgroup">Pakete &middot; das Rundum-Sorglos</div>
-    <div class="pk feat"><span class="pkrb">Beliebteste Wahl</span><h4>Komplettpaket OFIN</h4><small>Klausur-App + Workbook (alle Handouts)</small><div class="pkpr">49,90 &euro;<s>80,10 &euro;</s></div><div class="pksub">Alle 9 Kapitel als interaktive Lektionen &middot; alle Handout-PDFs mit Aufgaben und Musterl&ouml;sungen &middot; Live Q&amp;A gratis dazu.<br>10&nbsp;&euro; Cashback f&uuml;r dein Feedback nach der Klausur.</div><a class="bk-btn pkbtn" style="min-height:44px;display:inline-flex;align-items:center;justify-content:center" href="https://buy.stripe.com/5kQcN5e911U44mreLv8bS0n">Komplettpaket freischalten</a></div>
+    <div class="pk feat"><span class="pkrb">Beliebteste Wahl</span><h4>Komplettpaket OFIN</h4><small>Klausur-App + Workbook (alle Handouts)</small><div class="pkpr">49,90 &euro;<s>80,10 &euro;</s></div><div class="pksub">Alle 9 Kapitel als interaktive Lektionen &middot; alle Handout-PDFs mit Aufgaben und Musterl&ouml;sungen &middot; Live Q&amp;A gratis dazu.</div><p class="bk-cashback">10&nbsp;&euro; Cashback f&uuml;r dein Feedback nach der Klausur.</p><div class="pksub" style="display:none"></div><a class="bk-btn pkbtn" style="min-height:44px;display:inline-flex;align-items:center;justify-content:center" href="https://buy.stripe.com/5kQcN5e911U44mreLv8bS0n">Komplettpaket freischalten</a></div>
 
     <div class="pgroup k2">Einzeln buchbar</div>
     <div class="ez"><span class="ezn">Einzelnes Kapitel<small>Ein Kapitel deiner Wahl: die Lektion in der App und das Handout als PDF, sofort per E-Mail. Beides zusammen, nicht einzeln erh&auml;ltlich. Ab 6 Kapiteln ist das Komplettpaket g&uuml;nstiger.</small></span><span class="ezr"><span class="ezp">8,90 &euro;</span><a class="bk-btn pkbtn" style="min-height:44px;display:inline-flex;align-items:center;justify-content:center" href="https://buy.stripe.com/aFa9AT8OHdCM8CHbzj8bS0k">Kapitel w&auml;hlen</a></span></div>
@@ -1328,5 +1342,10 @@ function vmClose(){var o=document.getElementById('vmOv');if(o){o.classList.remov
   }, true);
 })();
 </script>
+
+<div class="bkstick" role="region" aria-label="Schnellzugriff">
+  <a class="frei" href="#angebot" onclick="try{vmOpen();return false;}catch(e){}">unverbindlich testen</a>
+  <a class="kauf" href="#angebot">Ab 8,90&nbsp;&euro;</a>
+</div>
 </body>
 </html>

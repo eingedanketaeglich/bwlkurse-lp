@@ -1645,10 +1645,25 @@ h1,h2{letter-spacing:-.015em}
   window.BKBC.cfg.CTA_MODUS = "bestellen";
   window.bkbcOnCheckout = function(p){
     if(!p || p.widerrufsverzicht !== true) return;
+    /* Zugangs-Adresse VOR dem Bezahlen festlegen. Hier ist niemand angemeldet (anders als in
+       der App, wo der Kauf am Anmelde-Token haengt). Ohne diesen Schritt fragt Stripe die
+       Adresse frei ab — dann kann der Zugang auf einer zweiten, versehentlich getippten
+       Adresse landen (Fehler vom 22.07.). Mit Adresse ist das Feld bei Stripe fest. */
+    var vorbelegt = "";
+    try {
+      var sg = JSON.parse(localStorage.getItem("bwlk-signup") || "{}");
+      if (sg && sg.email) vorbelegt = sg.email;
+    } catch(e){}
+    var mail = (window.prompt(
+      "An welche E-Mail-Adresse soll dein Zugang gehen?\n\n" +
+      "Mit genau dieser Adresse meldest du dich danach in der App an.",
+      vorbelegt) || "").trim().toLowerCase();
+    var koerper = { typ:"bundle", faecher:p.faecher, handouts:p.handouts,
+      widerrufsverzicht:p.widerrufsverzicht, verzichtZeitpunkt:p.verzichtZeitpunkt };
+    if (mail.indexOf("@") > 0) koerper.email = mail;
     fetch("https://adrfijztnbebzghumdxn.supabase.co/functions/v1/create-checkout", {
       method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ typ:"bundle", faecher:p.faecher, handouts:p.handouts,
-        widerrufsverzicht:p.widerrufsverzicht, verzichtZeitpunkt:p.verzichtZeitpunkt })
+      body: JSON.stringify(koerper)
     }).then(function(r){ return r.json(); }).then(function(d){
       if(d && d.url) location.href = d.url;
       else alert(d && d.error ? d.error : "Fehler beim Start der Zahlung.");

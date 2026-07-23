@@ -1016,7 +1016,7 @@ window.BKBC = (function(){
     <div class="faq">
       <details>
         <summary>Reicht die Zeit bis zur Klausur überhaupt noch?</summary>
-        <div class="fa"><p>Die Klausur ist am 22.&nbsp;Juli. Der Kurs ist genau für diese Phase gebaut: 10 in sich geschlossene Kapitel, jedes mit Rechenweg und Selbsttest. Du startest mit dem Kapitel, das dir am meisten bringt, die Reihenfolge ist frei.</p></div>
+        <div class="fa"><p>Der Kurs ist genau für die Klausurphase gebaut: 10 in sich geschlossene Kapitel, jedes mit Rechenweg und Selbsttest. Du startest mit dem Kapitel, das dir am meisten bringt, die Reihenfolge ist frei.</p></div>
       </details>
       <details>
         <summary>Was kostet mich die Vormerkung?</summary>
@@ -1650,7 +1650,7 @@ h1,h2{letter-spacing:-.015em}
 </script>
 
 <div id="v2Bar" aria-hidden="true"></div>
-<div class="scta" id="v2Scta"><a class="btn btn-primary" href="#vormerken">Schaffst du’s?</a><a class="btn btn-kauf" href="preise.html">Ab&nbsp;8,90&nbsp;&euro;</a></div>
+<div class="scta" id="v2Scta"><a class="btn btn-primary" href="#vormerken">Schaffst du’s?</a></div>
 <style id="v2-mobil">
 /* ============================================================
    V2-MOBIL-LAYER · omik.html (Livegang 22.07., V3) · Stand 22.07. (V3 nach Simons Feedback)
@@ -2201,7 +2201,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
   var ZIEL = document.body.getAttribute("data-preisziel") || "#preise";
 
   function istKaufwelt(){
-    try { return localStorage.getItem(KEY) === "kauf"; } catch(e){ return false; }
+    return false; /* OMIK = Gratis-Showroom: keine Kauf-Welt */
   }
   function merkeKaufwelt(){
     try { localStorage.setItem(KEY, "kauf"); } catch(e){}

@@ -519,6 +519,17 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
 .ez .ezr{display:flex;align-items:center;gap:10px;white-space:nowrap}
 .ez .ezp{font-weight:600}
 .bk-btn.pkbtn{font-size:.8rem;padding:.35rem .8rem;white-space:nowrap}
+/* Kapitel-Akkordeon (Simon 23.07.): blau + ausklappbar wie Kursseite */
+.pl-akk{margin:.55rem 0 0}
+.pl-akk>summary{display:flex;width:100%;justify-content:center;align-items:center;cursor:pointer;list-style:none;background:#16273f;color:#fff;padding:.75rem 1.1rem;border-radius:8px;font-weight:700;min-height:44px;box-sizing:border-box;transition:.15s}
+.pl-akk>summary:hover{background:#22344f}
+.pl-akk>summary::-webkit-details-marker{display:none}
+.pl-akk>summary::after{content:"\25BE";margin-left:8px;font-size:.85em;opacity:.9}
+.pl-akk[open]>summary::after{content:"\25B4"}
+.pl-akk-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.pl-akk-list a{display:flex;gap:8px;align-items:baseline;padding:11px 14px;border-radius:10px;background:#fff;border:1px solid rgba(58,74,94,.22);color:#1b2733;text-decoration:none;font-weight:600;font-size:.9rem;line-height:1.3}
+.pl-akk-list a:hover{background:#eef2f7}
+.pl-akk-list a .kn{color:#3d5d7d;font-variant-numeric:tabular-nums;flex:none}
 .pv-head{display:flex;gap:16px;align-items:center;margin-bottom:14px}
 .pv-head .mono{width:100px;height:100px;flex:0 0 auto}
 .pv-head h3{font-family:var(--se);font-size:1.35rem;margin:0}
@@ -691,7 +702,8 @@ h1,h2,h3,h4{overflow-wrap:break-word;word-break:normal;hyphens:auto}
     <div class="pk feat"><span class="pkrb">Beliebteste Wahl</span><h4>Komplettpaket OSTA</h4><small>Klausur-App + Workbook (alle Handouts)</small><div class="pkpr">49,90 &euro;<s>89,00 &euro;</s></div><div class="pksub">Alle 10 Kapitel als interaktive Lektionen &middot; alle Handout-PDFs mit Aufgaben und Musterl&ouml;sungen &middot; Live Q&amp;A gratis dazu.</div><p class="bk-cashback">10&nbsp;&euro; Cashback f&uuml;r dein Feedback nach der Klausur.</p><div class="pksub" style="display:none"></div><a class="bk-btn pkbtn" style="min-height:44px;display:inline-flex;align-items:center;justify-content:center" href="https://buy.stripe.com/3cIdR99SL56g06bcDn8bS0l">Komplettpaket freischalten</a></div>
 
     <div class="pgroup k2">Einzeln buchbar</div>
-    <div class="ez"><span class="ezn">Einzelnes Kapitel<small>Ein Kapitel deiner Wahl: die Lektion in der App und das Handout als PDF, innerhalb von 15 Minuten per E-Mail. Beides zusammen, nicht einzeln erh&auml;ltlich. Ab 6 Kapiteln ist das Komplettpaket g&uuml;nstiger.</small></span><span class="ezr"><span class="ezp">8,90 &euro;</span><a class="bk-btn pkbtn" style="min-height:44px;display:inline-flex;align-items:center;justify-content:center" href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j">Kapitel w&auml;hlen</a></span></div>
+    <div class="ez"><span class="ezn">Einzelnes Kapitel<small>Ein Kapitel deiner Wahl: die Lektion in der App und das Handout als PDF, innerhalb von 15 Minuten per E-Mail. Beides zusammen, nicht einzeln erh&auml;ltlich. Ab 6 Kapiteln ist das Komplettpaket g&uuml;nstiger.</small></span><span class="ezr"><span class="ezp">8,90 &euro;</span></span></div>
+    <details class="pl-akk"><summary>Kapitel w&auml;hlen und freischalten</summary><div class="pl-akk-list"><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;01</span> Deskriptive Statistik I: Lage &amp; Streuung</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;02</span> Deskriptive Statistik II: Zusammenhang &amp; Regression</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;03</span> Wahrscheinlich&shy;keits&shy;rechnung</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;04</span> Zufallsvariablen</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;05</span> Verteilungsmodelle: Binomial &amp; Poisson</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;06</span> Normalverteilung &amp; Stichprobenmittel</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;07</span> Schätzen: Punktschätzer &amp; Maximum Likelihood</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;08</span> Konfidenzintervalle</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;09</span> Testen I: Testprinzip &amp; Gauß-Test</a><a href="https://buy.stripe.com/9B69AT1mfdCM8CH7j38bS0j"><span class="kn">Kap.&nbsp;10</span> Testen II: t-Test &amp; Chi-Quadrat</a></div></details>
     <div class="ez"><span class="ezn">Live Q&amp;A<small>Dauer: 120 Minuten! In den Tagen vor der Klausur. Du sendest deine schwierigsten Aufgaben vorab ein. Wir l&ouml;sen Sie ausf&uuml;hrlich und beantworten Fragen! Im Komplettpaket ist die Live Q&amp;A Session gratis enthalten! Den Termin stimmen wir in der WhatsApp-Gruppe ab.</small></span><span class="ezr"></span></div>
     <p class="note">Die hier genannten Leistungen sind nach § 4 Nr. 21 Buchstabe b UStG umsatzsteuerbefreit. Freigeschaltet wird in deinem Konto in der App.</p>
   </div>

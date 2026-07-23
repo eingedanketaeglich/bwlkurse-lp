@@ -1637,7 +1637,7 @@ h1,h2{letter-spacing:-.015em}
       box.innerHTML = '<b>Fast geschafft' + (vn ? ', ' + vn : '') + '!</b> Wir haben dir eine E-Mail geschickt \u2013 best\u00e4tige kurz den Link darin, dann geht\u2019s direkt los. Schau auch im Spam-Ordner nach.';
       box.style.display = 'block';
       f.style.display = 'none';
-      if(box.scrollIntoView) box.scrollIntoView({behavior:'smooth', block:'center'});
+      /* Auto-Scroll nach Anmeldung entfernt (Simon 23.07.): Seite bleibt an der Position */
     }
     fetch(AN, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email:email, vorname:vorname, fach:FACH, handy:handy})})
       .then(function(r){ return r.json().catch(function(){ return {}; }); })

@@ -37,10 +37,6 @@
     <p class="sub">Danke! Deine E-Mail ist bestätigt. Deine Zugangsdaten kommen jetzt per E-Mail — damit kommst du in alle drei Kurse.</p>
     <div class="hint" id="zgBox">
       <span id="zgTxt">Dein App-Zugang wird eingerichtet &hellip;</span>
-      <form id="zgForm" style="display:none;margin-top:10px">
-        <input id="zgMail" type="email" required placeholder="deine@email.de" style="width:100%;padding:12px;border:1px solid #d9d5cc;border-radius:10px;font-size:15px;margin-bottom:8px;font-family:inherit">
-        <button type="submit" style="width:100%;background:var(--accent);color:#fff;border:none;font-weight:700;font-size:15px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit">Zugangsdaten per E-Mail anfordern</button>
-      </form>
     </div>
     <div class="waehle">Alle drei mit einem Login</div>
     <div class="fachinfo">OSTA · Statistik 1<small>Dein Statistik-Kurs</small></div>
@@ -55,12 +51,14 @@
   "use strict";
   var FN="https://adrfijztnbebzghumdxn.supabase.co/functions/v1/free-signup";
   var q=new URLSearchParams(location.search);
+  var token=(q.get("t")||q.get("T")||"").trim();
   var email=(q.get("email")||q.get("EMAIL")||"").trim().toLowerCase();
   var vorname=(q.get("vorname")||q.get("VORNAME")||"").trim();
   var fachParam=(q.get("fach")||q.get("FACH")||"").trim().toLowerCase();
-  var txt=document.getElementById("zgTxt"), form=document.getElementById("zgForm"), inp=document.getElementById("zgMail");
+  var txt=document.getElementById("zgTxt");
   var gesendet=false;
-  if(!email){
+  // localStorage-Fallback (alter Same-Device-Weg) nur wenn WEDER Token NOCH E-Mail in der URL
+  if(!token && !email){
     try{
       var s=JSON.parse(localStorage.getItem("bwlk-signup")||"null");
       if(s && s.email && String(s.email).indexOf("@")>0 && Date.now()-(s.t||0) < 86400000){
@@ -71,29 +69,26 @@
     }catch(e){}
   }
   function esc(s){ return String(s).replace(/[<>&"]/g,""); }
-  function zeigeFormular(msg){ txt.innerHTML=msg; form.style.display="block"; }
-  function sende(mail, fach, still){
+  var M_EXISTS="<b>Du hast schon einen Zugang.</b> Dein Passwort steht in deiner ersten Zugangsmail. Melde dich damit in der App an \u2013 oder nutze dort \u201ePasswort vergessen?\u201c.";
+  var M_UNSICHER="<b>Alles gut \u2013 dein Zugang ist da oder unterwegs.</b> Schau in deine E-Mails (auch im Spam-Ordner). Hast du schon Zugangsdaten, melde dich direkt in der App an.";
+  function handle(d, mail){
+    if(d && d.status==="created"){
+      var an = mail ? " an "+esc(mail) : "";
+      txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs"+an+".</b> Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach. Dein Login gilt f\u00fcr alle drei Kurse.";
+    } else if(d && d.status==="exists"){ txt.innerHTML=M_EXISTS; }
+    else { txt.innerHTML=M_UNSICHER; }   // 400 (Doppelklick/abgelaufen) oder Fehler -> immer freundlich
+  }
+  function post(payload, mail){
     if(gesendet) return; gesendet=true;
-    var body=JSON.stringify({email:mail,vorname:vorname,fach:fach||""});
-    fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:body,keepalive:true})
-      .then(function(r){ return r.json(); })
-      .then(function(d){
-        if(still) return;
-        if(d && d.status==="created"){ txt.innerHTML="<b>Deine Zugangsdaten sind unterwegs an "+esc(mail)+".</b> Sie gelten f\u00fcr alle drei Kurse. Benutzername ist deine E-Mail-Adresse, das Einmalpasswort steht in der Mail \u2013 schau auch im Spam-Ordner nach."; }
-        else if(d && d.status==="exists"){ txt.innerHTML="F\u00fcr <b>"+esc(mail)+"</b> gibt es schon einen Zugang \u2013 dein Passwort steht in deiner ersten Zugangsmail. Schau unten schon in deine Kurse rein."; }
-        else { gesendet=false; zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); }
-      })
-      .catch(function(){ if(!still){ gesendet=false; zeigeFormular("Das hat leider nicht geklappt. Fordere deine Zugangsdaten hier an:"); } });
+    txt.textContent="Dein Zugang wird eingerichtet \u2026";
+    fetch(FN,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true})
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(d){ handle(d, mail); })
+      .catch(function(){ txt.innerHTML=M_UNSICHER; });
   }
-  var btns=document.querySelectorAll("a.btn[data-fach]");
-  for(var i=0;i<btns.length;i++){
-    btns[i].addEventListener("click", function(){
-      if(email && !gesendet){ sende(email, this.getAttribute("data-fach"), true); }
-    });
-  }
-  if(form) form.addEventListener("submit",function(e){ e.preventDefault(); var m=(inp.value||"").trim().toLowerCase(); if(m.indexOf("@")>0){ email=m; sende(m, fachParam, false); form.style.display="none"; txt.textContent="Dein App-Zugang wird eingerichtet \u2026"; } });
-  if(email){ sende(email, fachParam, false); txt.textContent="Dein Zugang wird eingerichtet \u2026"; }
-  else { zeigeFormular("Fast geschafft: Trag hier kurz deine best\u00e4tigte E-Mail-Adresse ein, dann schicken wir dir die Zugangsdaten \u2013 sie gelten f\u00fcr alle drei Kurse:"); }
+  if(token){ post({token:token}, ""); }
+  else if(email){ post({email:email,vorname:vorname,fach:fachParam||""}, email); }
+  else { txt.innerHTML="Fast geschafft: In deiner E-Mail ist der Best\u00e4tigungslink \u2013 ein Klick, und dein Zugang ist da. Schau auch im Spam-Ordner nach."; }
 })();
 </script>
 </body>

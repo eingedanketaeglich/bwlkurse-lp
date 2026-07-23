@@ -870,7 +870,7 @@ window.BKBC = (function(){
       <div class="sc-optin" id="scOptin" hidden>
         <b>Ein Fach komplett gratis – kostenlos und unverbindlich!</b>
         <p class="fnote" style="margin:4px 0 12px">Mit deiner Anmeldung schaltest du Mikroökonomik in der App vollständig frei.</p>
-        <form target="brevo_sink" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" id="scForm">
+        <form target="brevo_sink" method="POST" action="https://adrfijztnbebzghumdxn.supabase.co/functions/v1/anmeldung" id="scForm">
           <input type="hidden" name="locale" value="de">
           <input type="hidden" name="html_type" value="simple">
           <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-5000px!important;width:1px;height:1px;overflow:hidden">
@@ -997,7 +997,7 @@ window.BKBC = (function(){
       <h2>Dein Zugang zur App.</h2>
       <p class="sub" style="max-width:none">Meld dich <b>kostenlos</b> an — wir schicken dir deinen <b>Zugang zur App</b> und das <b>Handout zum Gratis-Kapitel</b>. <b>Keine Zahlungspflicht</b> &ndash; alles Weitere entscheidest du später in der App.</p>
       <div class="fnote" id="vmPicked" style="display:none;background:var(--surface-2);border-radius:var(--r-sm);padding:10px 14px;box-shadow:inset 0 0 0 1px var(--hair);margin-bottom:6px"></div>
-      <form target="brevo_sink" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" id="vmForm">
+      <form target="brevo_sink" method="POST" action="https://adrfijztnbebzghumdxn.supabase.co/functions/v1/anmeldung" id="vmForm">
         <input type="hidden" name="locale" value="de">
         <input type="hidden" name="html_type" value="simple">
         <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute!important;left:-5000px!important;width:1px;height:1px;overflow:hidden">
@@ -1631,27 +1631,48 @@ h1,h2{letter-spacing:-.015em}
 </script>
 <iframe name="brevo_sink" title="Anmeldung" aria-hidden="true" tabindex="-1" style="position:absolute;width:0;height:0;border:0;left:-9999px"></iframe>
 <script>
-/* Brevo-Lead-Verdrahtung: Lead-Formulare senden per verstecktem iFrame an Brevo (Double-Opt-in), Nutzer bleibt auf der Seite. */
+/* Anmeldung (23.07.): Lead-Formulare posten an unsere anmeldung-Function (eigener Double-Opt-in
+   mit Instant-Token) statt an Brevo. preventDefault unterbindet das alte sibforms-Post. */
 (function(){
+  var FACH = (location.pathname.match(/(osta|omik|ofin)/) || [])[1] || "osta";
+  var AN = "https://adrfijztnbebzghumdxn.supabase.co/functions/v1/anmeldung";
   document.addEventListener('submit', function(e){
     var f = e.target;
     if(!f || f.nodeName !== 'FORM') return;
     if(!f.querySelector('input[name="EMAIL"]')) return;
-    if(f.checkValidity && !f.checkValidity()) return;
+    e.preventDefault();
     e.stopImmediatePropagation();
-    setTimeout(function(){
+    if(f.checkValidity && !f.checkValidity()){ if(f.reportValidity) f.reportValidity(); return; }
+    var hp1 = f.querySelector('input[name="email_address_check"]');
+    var hp2 = f.querySelector('input[name="bot-field"]');
+    if((hp1 && hp1.value) || (hp2 && hp2.value)) return;
+    var data = new FormData(f);
+    var email = (data.get("EMAIL") || "").trim().toLowerCase();
+    var vorname = (data.get("vorname") || "").replace(/[<>]/g, "").trim();
+    var handy = (data.get("handynummer") || "").replace(/[<>]/g, "").trim();
+    if(email.indexOf("@") < 1) return;
+    try{ localStorage.setItem("bwlk-signup", JSON.stringify({email:email, vorname:vorname, fach:FACH, t:Date.now()})); }catch(_e){}
+    var errBox = f.querySelector('.form-err');
+    if(errBox) errBox.style.display = "none";
+    function zeigeOk(){
       var box = f.parentNode.querySelector('.brevo-ok');
       if(!box){
         box = document.createElement('div');
         box.className = 'brevo-ok';
-        box.setAttribute('role','status');
+        box.setAttribute('role', 'status');
         box.style.cssText = 'margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(46,125,50,.10);color:#1f5130;font-size:15px;line-height:1.5;border:1px solid rgba(46,125,50,.30)';
-        box.innerHTML = '<b>Fast geschafft!</b> Wir haben dir eine E-Mail geschickt, bitte bestätige den Link darin, dann schalten wir dich frei.';
         f.parentNode.insertBefore(box, f.nextSibling);
       }
+      var vn = vorname.replace(/[<&>"]/g, "");
+      box.innerHTML = '<b>Fast geschafft' + (vn ? ', ' + vn : '') + '!</b> Wir haben dir eine E-Mail geschickt \u2013 best\u00e4tige kurz den Link darin, dann geht\u2019s direkt los. Schau auch im Spam-Ordner nach.';
       box.style.display = 'block';
       f.style.display = 'none';
-    }, 25);
+      if(box.scrollIntoView) box.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    fetch(AN, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email:email, vorname:vorname, fach:FACH, handy:handy})})
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(d){ if(d && d.error && errBox){ errBox.style.display = 'block'; } else { zeigeOk(); } })
+      .catch(function(){ if(errBox){ errBox.style.display = 'block'; } else { zeigeOk(); } });
   }, true);
 })();
 </script>

@@ -1217,7 +1217,7 @@ window.BK_DATA = {
     <button type="button" class="vm-x" aria-label="Schließen" onclick="vmClose()">&times;</button>
     <h3 id="vmT">Unverbindlich vormerken</h3>
     <p class="vm-intro">So funktioniert's: Mit der Vormerkung schalten wir dir die <b>Probe-Lektionen</b> frei. Schau sie dir in Ruhe an, <b>danach entscheidest du</b>, ob du teilnehmen möchtest. Zur Planung des Kursbetriebs nehmen wir dich, mit deinem Einverständnis, in unsere <b>WhatsApp-Gruppe</b> auf (Beitrittslink kommt per E-Mail).</p>
-    <form id="vmForm" method="POST" action="https://ce6de19f.sibforms.com/serve/MUIFAGGjQc4NFRvY6389SmeJj67TZ7ltDGKbmz5rYqgWUDn2gRtukxZSjHsi-JMYw1Kxwc5JyQ4ODKspkw2wM7ByeMC1pN3lMNLWF8weZS8d7i6OikCC2CDrzzEctS_coNUX6lE3nOTQFic269UtXz2tkO5l4Xj5djtRaxYpi_hPCg9RBkqAAhkvI8YpRoEoDM7a7j29Y6swTUWdAg==" target="brevo_sink"><input type="hidden" name="email_address_check" value=""><input type="hidden" name="locale" value="de">
+    <form id="vmForm" method="POST" action="https://adrfijztnbebzghumdxn.supabase.co/functions/v1/anmeldung" target="brevo_sink"><input type="hidden" name="email_address_check" value=""><input type="hidden" name="locale" value="de">
       <input type="hidden" name="form-name" value="vormerkung">
       <input type="hidden" name="subject" value="Neue Vormerkung, BWL Kurse">
       <p hidden><label>Bitte nicht ausfüllen: <input name="bot-field"></label></p>
@@ -1317,28 +1317,48 @@ function vmClose(){var o=document.getElementById('vmOv');if(o){o.classList.remov
 </script>
 <iframe name="brevo_sink" title="Anmeldung" aria-hidden="true" tabindex="-1" style="position:absolute;width:0;height:0;border:0;left:-9999px"></iframe>
 <script>
-/* Brevo-Lead-Verdrahtung: Lead-Formulare senden per verstecktem iFrame an Brevo (Double-Opt-in), Nutzer bleibt auf der Seite. */
+/* Anmeldung (23.07.): Lead-Formulare posten an unsere anmeldung-Function (eigener Double-Opt-in
+   mit Instant-Token) statt an Brevo. preventDefault unterbindet das alte sibforms-Post. */
 (function(){
+  var FACH = (location.pathname.match(/(osta|omik|ofin)/) || [])[1] || "osta";
+  var AN = "https://adrfijztnbebzghumdxn.supabase.co/functions/v1/anmeldung";
   document.addEventListener('submit', function(e){
     var f = e.target;
     if(!f || f.nodeName !== 'FORM') return;
     if(!f.querySelector('input[name="EMAIL"]')) return;
-    if(f.checkValidity && !f.checkValidity()) return;
+    e.preventDefault();
     e.stopImmediatePropagation();
-    setTimeout(function(){
+    if(f.checkValidity && !f.checkValidity()){ if(f.reportValidity) f.reportValidity(); return; }
+    var hp1 = f.querySelector('input[name="email_address_check"]');
+    var hp2 = f.querySelector('input[name="bot-field"]');
+    if((hp1 && hp1.value) || (hp2 && hp2.value)) return;
+    var data = new FormData(f);
+    var email = (data.get("EMAIL") || "").trim().toLowerCase();
+    var vorname = (data.get("vorname") || "").replace(/[<>]/g, "").trim();
+    var handy = (data.get("handynummer") || "").replace(/[<>]/g, "").trim();
+    if(email.indexOf("@") < 1) return;
+    try{ localStorage.setItem("bwlk-signup", JSON.stringify({email:email, vorname:vorname, fach:FACH, t:Date.now()})); }catch(_e){}
+    var errBox = f.querySelector('.form-err');
+    if(errBox) errBox.style.display = "none";
+    function zeigeOk(){
       var box = f.parentNode.querySelector('.brevo-ok');
       if(!box){
         box = document.createElement('div');
         box.className = 'brevo-ok';
-        box.setAttribute('role','status');
+        box.setAttribute('role', 'status');
         box.style.cssText = 'margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(46,125,50,.10);color:#1f5130;font-size:15px;line-height:1.5;border:1px solid rgba(46,125,50,.30)';
-        box.innerHTML = '<b>Fast geschafft!</b> Wir haben dir eine E-Mail geschickt, bitte bestätige den Link darin, dann schalten wir dich frei.';
         f.parentNode.insertBefore(box, f.nextSibling);
       }
+      var vn = vorname.replace(/[<&>"]/g, "");
+      box.innerHTML = '<b>Fast geschafft' + (vn ? ', ' + vn : '') + '!</b> Wir haben dir eine E-Mail geschickt \u2013 best\u00e4tige kurz den Link darin, dann geht\u2019s direkt los. Schau auch im Spam-Ordner nach.';
       box.style.display = 'block';
-      var sb=f.querySelector('button[type="submit"]'); if(sb){ sb.disabled=true; }
-      if(box.scrollIntoView) box.scrollIntoView({block:'nearest',behavior:'smooth'});
-    }, 25);
+      f.style.display = 'none';
+      if(box.scrollIntoView) box.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    fetch(AN, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email:email, vorname:vorname, fach:FACH, handy:handy})})
+      .then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(d){ if(d && d.error && errBox){ errBox.style.display = 'block'; } else { zeigeOk(); } })
+      .catch(function(){ if(errBox){ errBox.style.display = 'block'; } else { zeigeOk(); } });
   }, true);
 })();
 </script>

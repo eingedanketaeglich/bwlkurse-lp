@@ -1255,8 +1255,8 @@ window.BK_DATA = {
 <div class="vm-ov" id="vmOv" role="dialog" aria-modal="true" aria-labelledby="vmT">
   <div class="vm-box">
     <button type="button" class="vm-x" aria-label="Schließen" onclick="vmClose()">&times;</button>
-    <h3 id="vmT">Unverbindlich vormerken</h3>
-    <p class="vm-intro">So funktioniert's: Mit der Vormerkung schalten wir dir die <b>Probe-Lektionen</b> frei. Schau sie dir in Ruhe an &ndash; <b>danach entscheidest du</b>, ob du teilnehmen möchtest. Zur Planung des Kursbetriebs nehmen wir dich &ndash; mit deinem Einverständnis &ndash; in unsere <b>WhatsApp-Gruppe</b> auf (Beitrittslink kommt per E-Mail).</p>
+    <h3 id="vmT">Dein Zugang zur App.</h3>
+    <p class="vm-intro">Melde dich kostenlos an, deine Zugangsdaten kommen per Mail. Die Nutzung der App ist kostenfrei. Unsere Kursbausteine machen Dich zum Klausurchecker!</p>
     <form id="vmForm" method="POST" target="brevo_sink" action="https://adrfijztnbebzghumdxn.supabase.co/functions/v1/anmeldung"><input type="hidden" name="email_address_check" value=""><input type="hidden" name="locale" value="de">
       <input type="hidden" name="form-name" value="vormerkung">
       <input type="hidden" name="subject" value="Neue Vormerkung &ndash; BWL Kurse">
@@ -1274,7 +1274,7 @@ window.BK_DATA = {
       <label class="vm-chk"><input type="checkbox" name="whatsapp_einverstaendnis" value="ja">
         <span>Optional: Nehmt mich zur Planung des Kursbetriebs in die WhatsApp&#8209;Gruppe auf bzw. sendet mir den Beitrittslink an meine E&#8209;Mail&#8209;Adresse.</span></label>
       <div class="vm-act">
-        <button type="submit" class="vm-btn gold">Vormerkung absenden</button>
+        <button type="submit" class="vm-btn gold">App-Zugang erhalten</button>
         <button type="button" class="vm-btn gh" onclick="vmClose()">Abbrechen</button>
       </div>
       <div class="vm-err" id="vmErr">Da ist etwas schiefgelaufen. Bitte versuch es erneut.</div>

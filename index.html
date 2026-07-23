@@ -590,6 +590,14 @@ footer .fbrand b{font-family:var(--serif)}
 .course .c-cta{margin-top:10px;font-weight:700;color:var(--accent-deep);font-size:14.5px}
 [data-theme="dark"] .course .c-cta{color:var(--accent-2)}
 .course.here .c-cta::before{content:"Dein Kurs · ";color:var(--text-2);font-weight:600}
+/* In-Kachel-Buttons (Simon 23.07.) — optisch Button, ganze Kachel bleibt der Link */
+.course .c-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;min-height:46px;padding:11px 16px;border-radius:12px;font-weight:700;font-size:15.5px;line-height:1.2}
+.course .c-btn-orange{background:linear-gradient(180deg,var(--accent-2),var(--accent));color:#2A1500}
+.course .c-btn-orange .c-btn-cap{font-size:12.5px;font-weight:600;color:#5a3200}
+[data-theme="dark"] .course .c-btn-orange .c-btn-cap{color:#3a2200}
+.course .c-btn-navy{flex-direction:column;gap:1px;background:#1b3a6b;color:#fff}
+.course .c-btn-navy .c-btn-sub{font-size:14px;font-weight:700;color:var(--accent-2)}
+[data-theme="dark"] .course .c-btn-navy{background:#2d5490}
 /* ==== So funktioniert's ==== */
 .steps{display:grid;gap:14px;margin-top:8px}
 @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
@@ -789,9 +797,9 @@ window.BKBC = (function(){
 <h1 style="max-width:18ch">Schaffst Du den Klausurcheck?</h1>
 <p class="lead" style="max-width:60ch">Wähle dein Gratis-Kapitel oder komm direkt ins Showroom:</p>
 <div class="courses">
-<a class="course here" href="osta.html"><div class="c-k">OSTA</div><div class="c-n">Statistik 1 · Prof. Hassler</div><div class="c-meta"><span class="c-date num">Klausur 28.07.</span><span class="c-free">gratis: Kapitel 3</span></div><span class="c-cta">Gratis testen &rarr;</span></a>
-<a class="course" href="omik.html"><div class="c-k">OMIK</div><div class="c-n">Mikroökonomik 1 · Prof. Blonski</div><div class="c-meta"><span class="c-date num">Gratis-Showroom</span><span class="c-free">kompletter Kurs gratis</span></div><span class="c-cta">Gratis ansehen &rarr;</span></a>
-<a class="course" href="ofin.html"><div class="c-k">OFIN</div><div class="c-n">Finanzen 1 · Prof. Schmeling</div><div class="c-meta"><span class="c-date num">Klausur 29.07.</span><span class="c-free">gratis: Kapitel 3</span></div><span class="c-cta">Gratis testen &rarr;</span></a>
+<a class="course here" href="osta.html"><div class="c-k">OSTA</div><div class="c-n">Statistik · Prof. Hassler</div><div class="c-meta"><span class="c-date num">Klausur 28.07.</span></div><div class="c-btn c-btn-orange">GRATIS ausprobieren<span class="c-btn-cap">Kapitel 3</span></div></a>
+<a class="course" href="omik.html"><div class="c-k">OMIK</div><div class="c-n">Mikroökonomie · Prof. Blonski</div><div class="c-btn c-btn-navy">GRATIS Showroom<span class="c-btn-sub">kompletter Kurs</span></div></a>
+<a class="course" href="ofin.html"><div class="c-k">OFIN</div><div class="c-n">Finanzen · Prof. Schmeling</div><div class="c-meta"><span class="c-date num">Klausur 29.07.</span></div><div class="c-btn c-btn-orange">GRATIS ausprobieren<span class="c-btn-cap">Kapitel 3</span></div></a>
 </div>
 </div>
 </section>
